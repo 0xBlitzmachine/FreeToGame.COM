@@ -2,4 +2,29 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primary">#3a3f44</color>
+    <color name="secondary">#7a8288</color>
+
+    // FreeToGame.Com Website used colors of root kit.
+    <color name="danger">#ee5f5b</color>
+    <color name="red">#ee5f5b</color>
+    <color name="dark">#272b30</color>
+    <color name="grey">#7a8288</color>
+    <color name="grey_dark">#3a3f44</color>
+
+    <color name="success">#62c462</color>
+    <color name="green">#62c462</color>
+    <color name="teal">#20c997</color>
+    <color name="indigo">#6610f2</color>
+
+    <color name="info">#5bc0de</color>
+    <color name="cyan">#5bc0de</color>
+
+    <color name="warning">#f89406</color>
+    <color name="yellow">#f89406</color>
+
+    <color name="light">#e9ecef</color>
+    <color name="ping">#e83e8c</color>
+    <color name="purple">#6f42c1</color>
 </resources>

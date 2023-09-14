@@ -2,6 +2,8 @@ package com.blitzmachine.freetogamecom
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.window.SplashScreen
+import android.window.SplashScreenView
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,5 +15,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(activityBinding.root)
 
         // Pass Frag Nav to Bottom Nav
+
     }
 }
