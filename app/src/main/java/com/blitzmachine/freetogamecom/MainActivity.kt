@@ -2,10 +2,14 @@ package com.blitzmachine.freetogamecom
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val activityBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(activityBinding.root)
     }
 }
