@@ -11,5 +11,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityBinding.root)
+
+        // Pass Frag Nav to Bottom Nav
     }
 }
