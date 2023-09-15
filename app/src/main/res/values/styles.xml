@@ -10,4 +10,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="CustomToolbar" parent="Widget.Material3.Toolbar">
+        <item name="logo">@drawable/freetogame_logo</item>
+        <item name="background">@color/danger</item>
+    </style>
 </resources>
