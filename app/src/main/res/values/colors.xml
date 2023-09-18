@@ -3,7 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFF</color>
 
-    <color name="primary">#3a3f44</color>
+    <color name="primary">#ff367cc2</color>
+    <color name="primary_dark">#3a3f44</color>
     <color name="secondary">#7a8288</color>
 
     // FreeToGame.Com Website used colors of root kit.
@@ -21,6 +22,7 @@
     <color name="info">#5bc0de</color>
     <color name="cyan">#5bc0de</color>
     <color name="blue">#007bff</color>
+    <color name="blue_main">#ff367cc2</color>
 
     <color name="warning">#f89406</color>
     <color name="yellow">#f89406</color>

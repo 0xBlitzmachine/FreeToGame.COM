@@ -11,8 +11,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="CustomToolbar" parent="Widget.Material3.Toolbar">
-        <item name="logo">@drawable/freetogame_logo</item>
-        <item name="background">@color/danger</item>
+    <style name="CustomBottomNavMenu" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="alpha">0.5</item>
+        <item name="itemIconTint">@color/primary</item>
+        <item name="itemTextColor">@color/white</item>
     </style>
 </resources>
