@@ -13,9 +13,8 @@
 
     <style name="CustomBottomNavMenu" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundTint">@android:color/transparent</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="alpha">0.5</item>
-        <item name="itemIconTint">@color/primary</item>
-        <item name="itemTextColor">@color/white</item>
+        <item name="itemIconTint">@color/bottom_menu_colorstate</item>
+        <item name="itemTextColor">@color/bottom_menu_colorstate</item>
     </style>
+
 </resources>

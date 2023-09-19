@@ -2,20 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FreeToGameCOM" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-
         <item name="colorError">@color/danger</item>
 
-
         <item name="checkboxStyle">@style/CustomCheckBox</item>
-        <item name="bottomNavigationStyle">@style/CustomBottomNavMenu</item>
 
         <item name="android:statusBarColor">@color/dark</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
 <!--        <item name="android:background">@color/dark</item>-->
         <item name="android:colorBackground">@color/dark</item>
-
     </style>
+
 
     <style name="Theme.FreeToGameCOM" parent="Base.Theme.FreeToGameCOM"/>
 </resources>
