@@ -44,5 +44,4 @@ class GameDiffUtil(): DiffUtil.ItemCallback<Game>() {
                 oldItem.short_description == newItem.short_description &&
                 oldItem.thumbnail == newItem.thumbnail
     }
-
 }
