@@ -6,17 +6,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_home"
-        android:title="Home" />
+        android:title="@string/startFragmentMenuText" />
     <item
         android:id="@+id/searchFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_search"
-        android:title="Search" />
+        android:title="@string/searchFragmentMenuText" />
     <item
         android:id="@+id/favoriteFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_favorite"
-        android:title="Favorites" />
+        android:title="@string/favoriteFragmentMenuText" />
 </menu>
