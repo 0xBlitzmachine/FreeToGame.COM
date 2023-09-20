@@ -15,7 +15,7 @@
     </style>
     -->
 
-    <style name="CustomBottomNavMenu" parent="Widget.Material3.BottomNavigationView">
+    <style name="CustomBottomNavMenuStyle" parent="Widget.Material3.BottomNavigationView">
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="itemIconTint">@color/bottom_menu_colorstate</item>
         <item name="itemTextColor">@color/bottom_menu_colorstate</item>
