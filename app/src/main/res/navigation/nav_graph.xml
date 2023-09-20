@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/startFragment">
-
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.blitzmachine.freetogamecom.fragments.StartFragment"
+        android:name="com.blitzmachine.freetogamecom.views.fragments.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" />
 </navigation>

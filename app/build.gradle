@@ -57,10 +57,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleDependenciesVersion"
     implementation "androidx.fragment:fragment-ktx:$fragmentDependenciesVersion"
 
-    //Retrofit for http(s) requests & Moshi to handle the JSON GET response
+    //Retrofit for http(s) requests & Moshi(GSON) to handle the JSON GET response
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
-    implementation 'com.squareup.moshi:moshi-kotlin:1.15.0'
+    //implementation 'com.squareup.moshi:moshi-kotlin:1.15.0' - Trying GSON
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
     // Coil for easy image handling when loading directly from another server
     implementation 'io.coil-kt:coil:2.4.0'

@@ -4,17 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.window.SplashScreen
 import android.window.SplashScreenView
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val activityBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val mainActivityLayoutBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(activityBinding.root)
+        setContentView(mainActivityLayoutBinding.root)
 
-        // Pass Frag Nav to Bottom Nav
-
+        val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
+        mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
     }
 }

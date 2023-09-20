@@ -19,6 +19,7 @@
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="itemIconTint">@color/bottom_menu_colorstate</item>
         <item name="itemTextColor">@color/bottom_menu_colorstate</item>
+        <item name="labelVisibilityMode">selected</item>
         <item name="itemActiveIndicatorStyle">@style/CustomBottomNavMenuActiveItemIndicator</item>
     </style>
 
