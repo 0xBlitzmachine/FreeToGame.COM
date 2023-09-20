@@ -30,6 +30,5 @@
     <color name="light">#e9ecef</color>
     <color name="ping">#e83e8c</color>
     <color name="purple">#6f42c1</color>
-    <color name="test">@color/bottom_menu_colorstate</color>
 </resources>
 

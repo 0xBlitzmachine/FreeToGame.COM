@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+
+    <!-- May use this as base style for other components and expend rest within the component?
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorSecondary">@color/secondary</item>
-    </style>-->
+    </style>
+    -->
 
-
+    <!-- Example of modifying views default set style
     <style name="CustomCheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
+    -->
 
-    <style name="CustomBottomNavMenu" parent="Widget.MaterialComponents.BottomNavigationView">
+    <style name="CustomBottomNavMenu" parent="Widget.Material3.BottomNavigationView">
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="itemIconTint">@color/bottom_menu_colorstate</item>
         <item name="itemTextColor">@color/bottom_menu_colorstate</item>
+        <item name="itemActiveIndicatorStyle">@style/CustomBottomNavMenuActiveItemIndicator</item>
+    </style>
+
+    <style name="CustomBottomNavMenuActiveItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
     </style>
 
 </resources>
