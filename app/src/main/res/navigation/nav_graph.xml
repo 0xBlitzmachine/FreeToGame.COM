@@ -9,4 +9,14 @@
         android:name="com.blitzmachine.freetogamecom.views.fragments.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.blitzmachine.freetogamecom.views.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.blitzmachine.freetogamecom.views.fragments.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>
