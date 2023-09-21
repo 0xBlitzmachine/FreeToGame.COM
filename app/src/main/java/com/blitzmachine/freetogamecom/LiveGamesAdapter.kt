@@ -24,7 +24,7 @@ class LiveGamesAdapter(private val gameViewModel: GameViewModel): ListAdapter<Ga
                 genreChip.setText(item.genre)
 
                 startMaterialCardView.setOnClickListener {
-                    gameviewModel.getDetailsOfGame(item.id)
+                    gameViewModel.getDetailsOfGame(item.id)
                     it.findNavController().navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
                 }
             }
