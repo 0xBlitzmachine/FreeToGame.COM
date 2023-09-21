@@ -8,6 +8,7 @@
         <!-- Setting own style of a component globally here
       <item name="checkboxStyle">@style/CustomCheckBox</item>
       -->
+        <item name="chipStyle">@style/CustomChipStyle</item>
 
         <item name="android:statusBarColor">@color/dark</item>
         <item name="android:textColor">@color/white</item>

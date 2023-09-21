@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.Game
+import com.google.android.material.chip.Chip
 
 class LiveGamesAdapter: ListAdapter<Game, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {

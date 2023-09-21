@@ -27,4 +27,16 @@
         <item name="android:color">@android:color/transparent</item>
     </style>
 
+    <style name="CustomChipStyle" parent="Widget.Material3.Chip.Suggestion">
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="chipStrokeColor">@color/grey</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:alpha">0.5</item>
+
+        <item name="android:clickable">false</item>
+        <item name="android:checkable">false</item>
+        <item name="checkedIconEnabled">false</item>
+    </style>
+
 </resources>

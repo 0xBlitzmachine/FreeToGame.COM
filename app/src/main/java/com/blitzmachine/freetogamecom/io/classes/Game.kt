@@ -5,10 +5,10 @@ data class Game(
     val title: String,
     val thumbnail: String,
     val short_description: String,
-    val game_url: String,
-    val genre: String,
     val platform: String,
+    val genre: String,
     val publisher: String,
     val developer: String,
     val release_date: String,
+    val game_url: String,
 )
