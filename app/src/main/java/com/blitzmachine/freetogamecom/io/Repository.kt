@@ -19,7 +19,7 @@ class Repository(private val api: FreeToGameAPI) {
     private val _detailsOfSingleGame: MutableLiveData<Game> = MutableLiveData()
     val detailsOfSingleGame: LiveData<Game> get() = _detailsOfSingleGame
 
-    // Get List of live games in Repository, as it will initialize before viewModel
+    // Get List of live games in Repository, as it will initialize before viewModel. (Some milliseconds saved .. but they are always welcome)
     init {
         getListOfLiveGames()
     }
