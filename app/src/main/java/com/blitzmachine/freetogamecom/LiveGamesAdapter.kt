@@ -16,6 +16,8 @@ class LiveGamesAdapter: ListAdapter<Game, LiveGamesAdapter.ItemViewHolder>(GameD
             with(itemLayoutBinding) {
                 thumbnailImageView.load(item.thumbnail)
                 gameTitleTextView.setText(item.title)
+                platformChip.setText(item.platform)
+                genreChip.setText(item.genre)
             }
         }
     }
