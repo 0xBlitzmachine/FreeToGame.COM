@@ -2,12 +2,12 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/startMaterialCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
+    android:layout_margin="15dp"
     android:backgroundTint="@android:color/transparent"
-    app:strokeColor="@color/black"
-    app:strokeWidth="1dp">
+    app:strokeColor="@color/grey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,49 +39,29 @@
             android:id="@+id/gameTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
+            android:layout_marginBottom="40dp"
             android:alpha="0.8"
-            android:shadowColor="@color/dark"
-            android:shadowRadius="10"
+            android:shadowColor="@color/white"
+            android:shadowRadius="5"
             android:text="Game Title"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/thumbnailImageView"
-            app:layout_constraintStart_toStartOf="@id/thumbnailImageView"
-            app:layout_constraintTop_toTopOf="@+id/thumbnailImageView" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/detailsChip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:alpha="1"
-            android:clickable="true"
-            android:enabled="true"
-            android:text="Details"
-            android:textColor="@color/blue_main"
-            app:chipBackgroundColor="#2C3A49"
-            app:chipStrokeColor="@color/blue_main"
-            app:closeIcon="@drawable/double_arrow"
-            app:closeIconSize="30sp"
-            app:closeIconTint="@color/blue_main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:rippleColor="#80367CC2"
-            tools:chipIconSize="15dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/freeTagChip"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
+            android:layout_marginStart="10dp"
             android:backgroundTint="@android:color/transparent"
             android:text="FREE"
             android:textColor="@color/white"
             app:chipStrokeColor="@color/white"
             app:closeIconVisible="false"
-            app:layout_constraintEnd_toEndOf="@+id/gameTitleTextView"
-            app:layout_constraintStart_toStartOf="@+id/gameTitleTextView"
-            app:layout_constraintTop_toBottomOf="@+id/gameTitleTextView" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/genreTextView"
@@ -116,7 +96,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/grey_dark"
-            android:text="PC"
+            android:text="Platform"
             android:textColor="@color/white"
             app:chipStrokeColor="@color/grey"
             app:closeIconVisible="false"
@@ -127,17 +107,15 @@
             android:id="@+id/genreChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/grey_dark"
-            android:text="Shooter"
+            android:text="MMORPG"
             android:textColor="@color/white"
             app:chipStrokeColor="@color/grey"
             app:closeIconVisible="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/detailsChip"
-            app:layout_constraintStart_toEndOf="@+id/platformChip" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -36,6 +36,7 @@
         <item name="android:enabled">false</item>
         <item name="android:clickable">false</item>
         <item name="android:checkable">false</item>
+        <item name="android:selectable">false</item>
         <item name="checkedIconEnabled">false</item>
     </style>
 
