@@ -19,6 +19,11 @@ class Repository(private val api: FreeToGameAPI) {
     private val _detailsOfSingleGame: MutableLiveData<Game> = MutableLiveData()
     val detailsOfSingleGame: LiveData<Game> get() = _detailsOfSingleGame
 
+    // Get List of live games in Repository, as it will initialize before viewModel
+    init {
+        getListOfLiveGames()
+    }
+
     fun getListOfLiveGames() {
         api.httpRoutes.getLiveGamesList("pc", null, null).enqueue(object : Callback<List<Games>> {
             override fun onResponse(call: Call<List<Games>>, response: Response<List<Games>>) {
