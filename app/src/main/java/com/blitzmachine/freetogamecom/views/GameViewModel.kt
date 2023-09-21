@@ -16,7 +16,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = Repository(FreeToGameAPI)
 
     val allLiveGames: LiveData<List<Games>> = repository.listOfLiveGames
-    val detailsOfSingleGame: LiveData<Game> = repository.detailOfSingleGame
+    val detailsOfSingleGame: LiveData<Game> = repository.detailsOfSingleGame
 
     init {
         getAllLiveGames()

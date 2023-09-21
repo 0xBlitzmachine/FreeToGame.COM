@@ -17,7 +17,7 @@ class Repository(private val api: FreeToGameAPI) {
     val listOfLiveGames: LiveData<List<Games>> get() = _listOfLiveGames
 
     private val _detailsOfSingleGame: MutableLiveData<Game> = MutableLiveData()
-    val detailOfSingleGame: LiveData<Game> get() = _detailsOfSingleGame
+    val detailsOfSingleGame: LiveData<Game> get() = _detailsOfSingleGame
 
     fun getListOfLiveGames() {
         api.httpRoutes.getLiveGamesList("pc", null, null).enqueue(object : Callback<List<Games>> {

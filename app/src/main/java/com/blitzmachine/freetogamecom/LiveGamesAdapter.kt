@@ -14,7 +14,7 @@ import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.coroutineContext
 
-class LiveGamesAdapter(private val gameviewModel: GameViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
+class LiveGamesAdapter(private val gameViewModel: GameViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {
         fun bind(item: Games) {
             with(itemLayoutBinding) {
