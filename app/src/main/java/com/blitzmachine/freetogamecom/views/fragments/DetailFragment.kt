@@ -31,16 +31,20 @@ class DetailFragment : Fragment() {
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(detailLayoutBinding) {
 
-                val releaseDateFormatted = game.release_date.split("-")
-
                 detailThumbnailImageView.load(game.thumbnail)
                 detailGameTitleTextView.setText(game.title)
                 platformDetailChip.setText(game.platform)
                 genreDetailChip.setText(game.genre)
-                releaseDateDetailChip.text = "${releaseDateFormatted[2]}.${releaseDateFormatted[1]}.${releaseDateFormatted[0]}"
+                releaseDateDetailChip.setText(formatReleaseDate(game.release_date))
                 publisherDetailChip.setText(game.publisher)
                 developerDetailChip.setText(game.developer)
             }
+        }
+    }
+
+    private fun formatReleaseDate(gameReleaseDate: String): String {
+        gameReleaseDate.split("-").also {
+            return "${it[2]}.${it[1]}.${it[0]}"
         }
     }
 }
