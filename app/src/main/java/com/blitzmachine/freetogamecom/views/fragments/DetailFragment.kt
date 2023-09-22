@@ -38,6 +38,7 @@ class DetailFragment : Fragment() {
                 releaseDateDetailChip.setText(formatReleaseDate(game.release_date))
                 publisherDetailChip.setText(game.publisher)
                 developerDetailChip.setText(game.developer)
+                descriptionDetailTextView.setText(game.description)
             }
         }
     }

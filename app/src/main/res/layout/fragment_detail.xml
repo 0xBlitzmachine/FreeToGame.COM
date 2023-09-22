@@ -39,18 +39,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/platformDetailChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:alpha="0.8"
                 android:backgroundTint="@color/danger"
-                app:layout_constraintBottom_toBottomOf="@+id/platformDetailTextView"
-                app:layout_constraintStart_toEndOf="@+id/platformDetailTextView"
-                app:layout_constraintTop_toTopOf="@+id/platformDetailTextView"
+                app:layout_constraintEnd_toEndOf="@+id/platformDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/platformDetailTextView"
+                app:layout_constraintTop_toBottomOf="@+id/platformDetailTextView"
                 tools:text="Platform" />
 
             <TextView
@@ -58,22 +57,21 @@
                 style="@style/DetailsFragmentPlaceholderTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
+                android:text="Platform"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="Platform" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/genreDetailChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:alpha="0.8"
                 android:backgroundTint="@color/cyan"
-                app:layout_constraintBottom_toBottomOf="@+id/genreDetailTextView"
-                app:layout_constraintStart_toEndOf="@+id/genreDetailTextView"
-                app:layout_constraintTop_toTopOf="@+id/genreDetailTextView"
+                app:layout_constraintEnd_toEndOf="@+id/genreDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/genreDetailTextView"
+                app:layout_constraintTop_toBottomOf="@+id/genreDetailTextView"
                 tools:text="MMOARPG" />
 
             <TextView
@@ -81,34 +79,32 @@
                 style="@style/DetailsFragmentPlaceholderTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/platformDetailTextView"
-                android:text="Genre" />
+                android:layout_marginEnd="60dp"
+                android:text="Genre"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/publisherDetailChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:alpha="0.8"
                 android:backgroundTint="@color/blue_main"
-                app:layout_constraintBottom_toBottomOf="@+id/publisherDetailTextView"
-                app:layout_constraintStart_toEndOf="@+id/publisherDetailTextView"
-                app:layout_constraintTop_toTopOf="@+id/publisherDetailTextView"
+                app:layout_constraintEnd_toEndOf="@+id/publisherDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/publisherDetailTextView"
+                app:layout_constraintTop_toBottomOf="@+id/publisherDetailTextView"
                 tools:text="Activision" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/releaseDateDetailChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:alpha="0.8"
                 android:backgroundTint="@color/grey"
-                app:layout_constraintBottom_toBottomOf="@+id/releaseDateDetailTextView"
-                app:layout_constraintStart_toEndOf="@+id/releaseDateDetailTextView"
-                app:layout_constraintTop_toTopOf="@+id/releaseDateDetailTextView"
+                app:layout_constraintEnd_toEndOf="@+id/releaseDateDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/releaseDateDetailTextView"
+                app:layout_constraintTop_toBottomOf="@+id/releaseDateDetailTextView"
                 tools:text="25.05.2005" />
 
             <TextView
@@ -116,33 +112,32 @@
                 style="@style/DetailsFragmentPlaceholderTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="60dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/releaseDateDetailTextView"
-                android:text="Publisher" />
+                android:layout_marginTop="80dp"
+                android:text="Publisher"
+                app:layout_constraintEnd_toEndOf="@+id/platformDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/platformDetailTextView"
+                app:layout_constraintTop_toTopOf="@+id/platformDetailChip" />
 
             <TextView
                 android:id="@+id/releaseDateDetailTextView"
                 style="@style/DetailsFragmentPlaceholderTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="60dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/genreDetailTextView"
-                android:text="Release Date" />
+                android:layout_marginTop="80dp"
+                android:text="Release Date"
+                app:layout_constraintEnd_toEndOf="@+id/publisherDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/publisherDetailTextView"
+                app:layout_constraintTop_toTopOf="@+id/publisherDetailChip" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/developerDetailChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:alpha="0.8"
                 android:backgroundTint="@color/blue_main"
-                app:layout_constraintBottom_toBottomOf="@+id/developerDetailTextView"
-                app:layout_constraintStart_toEndOf="@+id/developerDetailTextView"
-                app:layout_constraintTop_toTopOf="@+id/developerDetailTextView"
+                app:layout_constraintEnd_toEndOf="@+id/developerDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/developerDetailTextView"
+                app:layout_constraintTop_toBottomOf="@+id/developerDetailTextView"
                 tools:text="Activision" />
 
             <TextView
@@ -150,11 +145,22 @@
                 style="@style/DetailsFragmentPlaceholderTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="80dp"
+                android:text="Developer"
+                app:layout_constraintEnd_toEndOf="@+id/genreDetailTextView"
+                app:layout_constraintStart_toStartOf="@+id/genreDetailTextView"
+                app:layout_constraintTop_toTopOf="@+id/genreDetailChip" />
+
+            <TextView
+                android:id="@+id/descriptionDetailTextView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/publisherDetailTextView"
-                android:text="Developer" />
+                tools:text="Description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
