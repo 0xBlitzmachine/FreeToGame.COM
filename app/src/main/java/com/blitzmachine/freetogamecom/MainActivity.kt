@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.window.SplashScreen
 import android.window.SplashScreenView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.fragment.NavHostFragment
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(mainActivityLayoutBinding.root)
 
+        window.statusBarColor = ContextCompat.getColor(this, R.color.dark)
+
         val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
@@ -32,5 +36,6 @@ class MainActivity : AppCompatActivity() {
                 false -> mainActivityLayoutBinding.logoImageView.visibility = View.GONE
             }
         })
+
     }
 }

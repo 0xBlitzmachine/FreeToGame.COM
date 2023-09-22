@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FreeToGameCOM" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/blue_main</item>
-        <item name="statusBarBackground">@android:color/transparent</item>
+        <item name="colorPrimaryVariant">@color/dark</item>
         <item name="colorError">@color/danger</item>
 
 
