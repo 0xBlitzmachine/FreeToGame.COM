@@ -26,8 +26,10 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        startLayoutBinding.liveGamesReyclerView.setHasFixedSize(true)
-        startLayoutBinding.liveGamesReyclerView.adapter = liveGamesAdapter
+        startLayoutBinding.liveGamesReyclerView.apply {
+            setHasFixedSize(true)
+            adapter = liveGamesAdapter
+        }
 
         gameViewModel.allLiveGames.observe(viewLifecycleOwner) { changedListOfLiveGames ->
             liveGamesAdapter.submitList(changedListOfLiveGames)
