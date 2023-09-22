@@ -2,6 +2,7 @@ package com.blitzmachine.freetogamecom.views.fragments
 
 import android.opengl.Visibility
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,9 @@ import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDetailBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 
 class DetailFragment : Fragment() {
 
@@ -24,12 +28,18 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) {
+        gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(detailLayoutBinding) {
-                detailThumbnailImageView.load(it.thumbnail)
-                detailGameTitleTextView.setText(it.title)
-                platformDetailChip.setText(it.platform)
-                genreDetailChip.setText(it.genre)
+
+                val releaseDateFormatted = game.release_date.split("-")
+
+                detailThumbnailImageView.load(game.thumbnail)
+                detailGameTitleTextView.setText(game.title)
+                platformDetailChip.setText(game.platform)
+                genreDetailChip.setText(game.genre)
+                releaseDateDetailChip.text = "${releaseDateFormatted[2]}.${releaseDateFormatted[1]}.${releaseDateFormatted[0]}"
+                publisherDetailChip.setText(game.publisher)
+                developerDetailChip.setText(game.developer)
             }
         }
     }
