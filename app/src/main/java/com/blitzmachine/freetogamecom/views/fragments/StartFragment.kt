@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blitzmachine.freetogamecom.LiveGamesAdapter
+import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.databinding.FragmentStartBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
 
@@ -16,7 +18,8 @@ class StartFragment : Fragment() {
 
     private val startLayoutBinding: FragmentStartBinding by lazy { FragmentStartBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
-    private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel) }
+    private val uiViewModel: UiViewModel by activityViewModels()
+    private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, uiViewModel) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = startLayoutBinding.root
 
@@ -29,5 +32,10 @@ class StartFragment : Fragment() {
         gameViewModel.allLiveGames.observe(viewLifecycleOwner) { changedListOfLiveGames ->
             liveGamesAdapter.submitList(changedListOfLiveGames)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        uiViewModel.showMainLogo(true)
     }
 }

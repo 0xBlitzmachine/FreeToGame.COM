@@ -25,7 +25,7 @@ class Repository(private val api: FreeToGameAPI) {
     }
 
     fun getListOfLiveGames() {
-        api.httpRoutes.getLiveGamesList("pc", null, null).enqueue(object : Callback<List<Games>> {
+        api.httpRoutes.getLiveGamesList(null, null, null).enqueue(object : Callback<List<Games>> {
             override fun onResponse(call: Call<List<Games>>, response: Response<List<Games>>) {
                 if (response.isSuccessful) {
                     _listOfLiveGames.postValue(response.body())

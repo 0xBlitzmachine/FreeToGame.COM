@@ -11,10 +11,12 @@ import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
+import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.coroutineContext
 
-class LiveGamesAdapter(private val gameViewModel: GameViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
+class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiViewModel: UiViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
+
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {
         fun bind(item: Games) {
             with(itemLayoutBinding) {
@@ -24,6 +26,7 @@ class LiveGamesAdapter(private val gameViewModel: GameViewModel): ListAdapter<Ga
                 genreChip.setText(item.genre)
 
                 startMaterialCardView.setOnClickListener {
+                    uiViewModel.showMainLogo(false)
                     gameViewModel.getDetailsOfGame(item.id)
                     it.findNavController().navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
                 }

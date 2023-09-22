@@ -14,8 +14,8 @@
         android:layout_marginTop="5dp"
         android:shadowColor="@color/black"
         android:shadowRadius="10"
-        android:text="Games List"
-        android:textSize="40sp"
+        android:text="Live Games"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

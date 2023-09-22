@@ -29,10 +29,8 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/thumbnailImageView"
             app:layout_constraintEnd_toEndOf="@+id/thumbnailImageView"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/thumbnailImageView"
             app:layout_constraintTop_toTopOf="@+id/thumbnailImageView"
-            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/background_shadow_gradient" />
 
         <TextView
@@ -43,12 +41,13 @@
             android:alpha="0.8"
             android:shadowColor="@color/white"
             android:shadowRadius="5"
-            android:text="Game Title"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Game Title" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/freeTagChip"
@@ -96,12 +95,12 @@
             android:layout_marginStart="10dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/grey_dark"
-            android:text="Platform"
             android:textColor="@color/white"
             app:chipStrokeColor="@color/grey"
             app:closeIconVisible="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Platform" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/genreChip"
@@ -110,12 +109,12 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/grey_dark"
-            android:text="MMORPG"
             android:textColor="@color/white"
             app:chipStrokeColor="@color/grey"
             app:closeIconVisible="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="MMORPG" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
