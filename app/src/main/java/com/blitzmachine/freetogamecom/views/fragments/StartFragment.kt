@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.blitzmachine.freetogamecom.LiveGamesAdapter
 import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.databinding.FragmentStartBinding
