@@ -1,5 +1,6 @@
 package com.blitzmachine.freetogamecom
 
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -12,6 +13,7 @@ import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.coroutineContext
 
@@ -28,7 +30,7 @@ class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiV
                 startMaterialCardView.setOnClickListener {
                     uiViewModel.showMainLogo(false)
                     gameViewModel.getDetailsOfGame(item.id)
-                    it.findNavController().navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
+                    //it.findNavController().navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
                 }
             }
         }

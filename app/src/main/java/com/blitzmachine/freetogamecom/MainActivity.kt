@@ -1,5 +1,6 @@
 package com.blitzmachine.freetogamecom
 
+import android.annotation.SuppressLint
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,17 +10,24 @@ import android.window.SplashScreenView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
+import com.blitzmachine.freetogamecom.views.GameViewModel
+import com.blitzmachine.freetogamecom.views.fragments.BottomSheetDetailsFragment
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MainActivity : AppCompatActivity() {
 
     private val mainActivityLayoutBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val uiViewModel: UiViewModel by viewModels()
+    private val gameViewModel: GameViewModel by viewModels()
+    private var bottomSheet: BottomSheetDetailsFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,5 +45,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        gameViewModel.detailsOfSingleGame.observe(this, Observer {
+            bottomSheet?.dismiss()
+            bottomSheet = BottomSheetDetailsFragment().apply { show(supportFragmentManager, this.tag) }
+        })
     }
 }
