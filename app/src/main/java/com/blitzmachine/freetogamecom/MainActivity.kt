@@ -5,6 +5,7 @@ import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import android.window.SplashScreen
 import android.window.SplashScreenView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val mainActivityLayoutBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val uiViewModel: UiViewModel by viewModels()
     private val gameViewModel: GameViewModel by viewModels()
-    private var bottomSheet = BottomSheetDetailsFragment()
+    private lateinit var bottomSheet: BottomSheetDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +46,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        gameViewModel.detailsOfSingleGame.observe(this) {
-            //bottomSheet?.dismiss()
+        gameViewModel.detailsOfSingleGame.observe(this) { game ->
             bottomSheet = BottomSheetDetailsFragment().apply {
                 isCancelable = true
                 show(supportFragmentManager, this.tag)

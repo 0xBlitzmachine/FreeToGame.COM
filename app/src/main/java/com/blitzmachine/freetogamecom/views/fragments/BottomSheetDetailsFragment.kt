@@ -15,7 +15,7 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
     private val bottomSheetLayoutBinding: FragmentBottomSheetBinding by lazy { FragmentBottomSheetBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
-    private val uiViewMode: UiViewModel by activityViewModels()
+    private val uiViewModel: UiViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = bottomSheetLayoutBinding.root
 
@@ -25,5 +25,10 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) {game ->
             bottomSheetLayoutBinding.textView.setText(game.title)
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        uiViewModel.showMainLogo(true)
     }
 }
