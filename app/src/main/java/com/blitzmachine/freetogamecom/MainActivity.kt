@@ -36,21 +36,30 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.dark)
 
-        val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
         uiViewModel.showMainLogo.observe(this) { result ->
-            when (result) {
-                true -> mainActivityLayoutBinding.logoImageView.visibility = View.VISIBLE
-                false -> mainActivityLayoutBinding.logoImageView.visibility = View.GONE
-            }
+            mainActivityLayoutBinding.logoImageView.showMainLogo(result)
         }
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
-            bottomSheet = BottomSheetDetailsFragment().apply {
-                isCancelable = true
-                show(supportFragmentManager, this.tag)
-            }
+            showDetailedBottomSheet()
+        }
+    }
+
+    private fun showDetailedBottomSheet() {
+        bottomSheet = BottomSheetDetailsFragment().apply {
+            isCancelable = true
+            show(supportFragmentManager, "BSFDetails")
+        }
+    }
+
+    private fun View.showMainLogo(visible: Boolean) {
+        this.visibility = when (visible) {
+            true -> View.VISIBLE
+            false -> View.GONE
         }
     }
 }
