@@ -41,25 +41,17 @@ class MainActivity : AppCompatActivity() {
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
         uiViewModel.showMainLogo.observe(this) { result ->
-            mainActivityLayoutBinding.logoImageView.showMainLogo(result)
+            when (result) {
+                true -> mainActivityLayoutBinding.logoImageView.visibility = View.VISIBLE
+                false -> mainActivityLayoutBinding.logoImageView.visibility = View.GONE
+            }
         }
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
-            showDetailedBottomSheet()
-        }
-    }
-
-    private fun showDetailedBottomSheet() {
-        bottomSheet = BottomSheetDetailsFragment().apply {
-            isCancelable = true
-            show(supportFragmentManager, "BSFDetails")
-        }
-    }
-
-    private fun View.showMainLogo(visible: Boolean) {
-        this.visibility = when (visible) {
-            true -> View.VISIBLE
-            false -> View.GONE
+            bottomSheet = BottomSheetDetailsFragment().apply {
+                isCancelable = true
+                show(supportFragmentManager, "BSFDetails")
+            }
         }
     }
 }
