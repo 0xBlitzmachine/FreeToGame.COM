@@ -28,7 +28,7 @@ class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiV
                 genreChip.setText(item.genre)
 
                 startMaterialCardView.setOnClickListener {
-                    uiViewModel.showMainLogo(false)
+                    //uiViewModel.showMainLogo(false)
                     gameViewModel.getDetailsOfGame(item.id)
                     //it.findNavController().navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
                 }

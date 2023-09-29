@@ -19,16 +19,19 @@ import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.BottomSheetDetailsFragment
+import com.blitzmachine.freetogamecom.views.fragments.DetailFragment
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.Dispatchers
 
 class MainActivity : AppCompatActivity() {
 
     private val mainActivityLayoutBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val uiViewModel: UiViewModel by viewModels()
     private val gameViewModel: GameViewModel by viewModels()
-    private lateinit var bottomSheet: BottomSheetDetailsFragment
+    private lateinit var detailBottomSheet: BottomSheetDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.dark)
 
-        val navController =
-            (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
+        val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
         uiViewModel.showMainLogo.observe(this) { result ->
@@ -48,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
-            bottomSheet = BottomSheetDetailsFragment().apply {
-                isCancelable = true
-                show(supportFragmentManager, "BSFDetails")
+            detailBottomSheet = BottomSheetDetailsFragment().apply {
+                this.isCancelable = true
+                this.show(supportFragmentManager, "DetailsBottomSheet")
             }
         }
     }

@@ -29,17 +29,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
-            with(detailLayoutBinding) {
-
-                detailThumbnailImageView.load(game.thumbnail)
-                detailGameTitleTextView.setText(game.title)
-                platformDetailChip.setText(game.platform)
-                genreDetailChip.setText(game.genre)
-                releaseDateDetailChip.setText(formatReleaseDate(game.release_date))
-                publisherDetailChip.setText(game.publisher)
-                developerDetailChip.setText(game.developer)
-                descriptionDetailTextView.setText(game.description)
-            }
+            detailLayoutBinding.detailThumbnailImageView.load(game.thumbnail)
         }
     }
 
