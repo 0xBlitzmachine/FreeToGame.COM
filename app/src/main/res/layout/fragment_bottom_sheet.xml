@@ -21,33 +21,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/detailTitleTextView"
+        android:id="@+id/detailGameTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Game Title"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dragHandleView" />
+        app:layout_constraintTop_toBottomOf="@+id/dragHandleView"
+        tools:text="Game Title" />
 
-    <io.github.glailton.expandabletextview.ExpandableTextView
-        android:id="@+id/descriptionTextView"
+    <at.blogc.android.views.ExpandableTextView
+        android:id="@+id/expandableTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Game Description"
-        app:collapsedLines="3"
-        app:animDuration="1500"
-        app:ellipsizeTextColor="@color/grey"
+        android:layout_margin="15dp"
         android:ellipsize="start"
-        app:readMoreText="Read more"
-        app:readLessText="Close Description"
-        app:textMode="length"
-        app:isExpanded="false"
-        app:expandType="popup"
-        android:layout_margin="5dp"
+        android:maxLines="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/detailGameTitleTextView"
+        tools:text="Game Description" />
+
+    <ImageView
+        android:id="@+id/expandHandlerImageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/arrow_dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/expandableTextView"
+        app:layout_constraintStart_toStartOf="@+id/expandableTextView"
+        app:layout_constraintTop_toBottomOf="@+id/expandableTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

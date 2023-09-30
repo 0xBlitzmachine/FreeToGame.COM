@@ -6,8 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import androidx.fragment.app.activityViewModels
+import at.blogc.android.views.ExpandableTextView
 import coil.load
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentBottomSheetBinding
@@ -31,8 +33,23 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(bottomSheetLayoutBinding) {
-                detailTitleTextView.setText(game.title)
-                descriptionTextView.setText(game.description)
+                detailGameTitleTextView.setText(game.title)
+                expandableTextView.setText(game.description)
+            }
+        }
+
+
+        with(bottomSheetLayoutBinding) {
+            expandableTextView.setAnimationDuration(700L)
+            expandableTextView.setInterpolator(OvershootInterpolator())
+            expandHandlerImageView.setOnClickListener {
+                if (expandableTextView.isExpanded) {
+                    expandHandlerImageView.setImageResource(R.drawable.arrow_dropdown)
+                    expandableTextView.collapse()
+                } else {
+                    expandHandlerImageView.setImageResource(R.drawable.arrow_dropup)
+                    expandableTextView.expand()
+                }
             }
         }
     }
