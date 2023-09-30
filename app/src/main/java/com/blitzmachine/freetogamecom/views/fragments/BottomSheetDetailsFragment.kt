@@ -1,5 +1,6 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
+import android.animation.LayoutTransition
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
