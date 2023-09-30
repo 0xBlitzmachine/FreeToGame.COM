@@ -1,6 +1,7 @@
 package com.blitzmachine.freetogamecom
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -50,10 +51,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
+            
             detailBottomSheet = BottomSheetDetailsFragment().apply {
                 this.isCancelable = true
-                this.show(supportFragmentManager, "DetailsBottomSheet")
+            }.also {
+                it.show(supportFragmentManager, it.tag)
             }
+
+
         }
     }
 }

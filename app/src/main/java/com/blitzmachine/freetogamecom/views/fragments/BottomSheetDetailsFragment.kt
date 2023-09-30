@@ -6,14 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.activityViewModels
 import coil.load
+import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentBottomSheetBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
-const val detailsBottomSheetTag = "DetailsBottomSheet"
 
 class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
@@ -21,14 +22,17 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = bottomSheetLayoutBinding.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return bottomSheetLayoutBinding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(bottomSheetLayoutBinding) {
-                textView.setText(game.title)
+                detailTitleTextView.setText(game.title)
+                descriptionTextView.setText(game.description)
             }
         }
     }

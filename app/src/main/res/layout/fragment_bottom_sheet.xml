@@ -7,7 +7,7 @@
     android:layout_margin="20dp"
     android:fitsSystemWindows="true"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    tools:context=".views.fragments.BottomSheetDetailsFragment">
+    tools:context=".views.fragments.BottomSheetDetailsFragment" >
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
         android:id="@+id/dragHandleView"
@@ -21,11 +21,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/detailTitleTextView"
         android:layout_width="wrap_content"
-        android:layout_height="700dp"
-        android:text="@string/hello_blank_fragment"
+        android:layout_height="wrap_content"
+        android:text="Game Title"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dragHandleView" />
+
+    <io.github.glailton.expandabletextview.ExpandableTextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Game Description"
+        app:collapsedLines="3"
+        app:animDuration="1500"
+        app:ellipsizeTextColor="@color/grey"
+        android:ellipsize="start"
+        app:readMoreText="Read more"
+        app:readLessText="Close Description"
+        app:textMode="length"
+        app:isExpanded="false"
+        app:expandType="popup"
+        android:layout_margin="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTitleTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

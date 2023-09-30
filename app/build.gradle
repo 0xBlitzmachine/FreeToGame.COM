@@ -52,6 +52,10 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navFragmentDependenciesVersion"
     testImplementation 'junit:junit:4.13.2'
 
+    // Open-Source Expandable TextView
+    implementation "io.github.glailton.expandabletextview:expandabletextview:1.0.4"
+
+
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycleDependenciesVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleDependenciesVersion"
