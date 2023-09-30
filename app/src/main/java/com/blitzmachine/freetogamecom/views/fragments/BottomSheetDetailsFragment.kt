@@ -35,6 +35,12 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
             with(bottomSheetLayoutBinding) {
                 detailGameTitleTextView.setText(game.title)
                 expandableTextView.setText(game.description)
+
+                osTextView.setText(game.minimum_system_requirements.os)
+                processorTextView.setText(game.minimum_system_requirements.processor)
+                memoryTextView.setText(game.minimum_system_requirements.memory)
+                graphicsTextView.setText(game.minimum_system_requirements.graphics)
+                storageTextView.setText(game.minimum_system_requirements.storage)
             }
         }
 
@@ -42,13 +48,21 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         with(bottomSheetLayoutBinding) {
             expandableTextView.setAnimationDuration(700L)
             expandableTextView.setInterpolator(OvershootInterpolator())
-            expandHandlerImageView.setOnClickListener {
+            descriptionExpandHandler.setOnClickListener {
                 if (expandableTextView.isExpanded) {
-                    expandHandlerImageView.setImageResource(R.drawable.arrow_dropdown)
+                    descriptionExpandHandler.setImageResource(R.drawable.arrow_dropdown)
                     expandableTextView.collapse()
                 } else {
-                    expandHandlerImageView.setImageResource(R.drawable.arrow_dropup)
+                    descriptionExpandHandler.setImageResource(R.drawable.arrow_dropup)
                     expandableTextView.expand()
+                }
+            }
+
+            informationExpandHandler.setOnClickListener {
+                if (gameInformationLayout.visibility == View.VISIBLE) {
+                    gameInformationLayout.visibility = View.GONE
+                } else {
+                    gameInformationLayout.visibility = View.VISIBLE
                 }
             }
         }
