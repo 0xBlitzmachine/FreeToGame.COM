@@ -16,12 +16,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.BottomSheetDetailsFragment
 import com.blitzmachine.freetogamecom.views.fragments.DetailFragment
+import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             }.also {
                 it.show(supportFragmentManager, it.tag)
             }*/
+            navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
         }
     }
 }
