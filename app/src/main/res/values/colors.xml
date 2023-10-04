@@ -7,6 +7,8 @@
     <color name="primary_dark">#3a3f44</color>
     <color name="secondary">#7a8288</color>
 
+    <color name="blackAlpha">#4D000000</color>
+
     // FreeToGame.Com Website used colors of root kit.
     <color name="danger">#ee5f5b</color>
     <color name="red">#ee5f5b</color>

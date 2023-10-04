@@ -5,11 +5,12 @@
     android:id="@+id/detailScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".views.fragments.DetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/detailThumbnailImageView"
@@ -45,39 +46,84 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/detailThumbnailImageView" />
 
-        <at.blogc.android.views.ExpandableTextView
-            android:id="@+id/expandableTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="14dp"
-            android:ellipsize="start"
-            android:maxLines="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailThumbnailImageView"
-            tools:text="Game Description" />
-
-        <ImageView
-            android:id="@+id/descriptionExpandHandler"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/arrow_dropdown"
-            app:layout_constraintEnd_toEndOf="@+id/expandableTextView"
-            app:layout_constraintStart_toStartOf="@+id/expandableTextView"
-            app:layout_constraintTop_toBottomOf="@+id/expandableTextView" />
-
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/gameInformationCardView"
+            android:id="@+id/gameDescriptionCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:animateLayoutChanges="true"
-            android:backgroundTint="@android:color/transparent"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="1dp"
+            android:backgroundTint="@color/blackAlpha"
+            app:layout_constraintTop_toBottomOf="@+id/detailThumbnailImageView"
+            app:strokeColor="@color/grey"
+            tools:layout_editor_absoluteX="20dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/gameDescriptionPlaceholderTextView"
+                    style="@style/DetailsFragmentPlaceholderTextViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/descriptionExpandHandler"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/arrow_dropdown"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/gameDescriptionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/descriptionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/osImageView"
+                    app:layout_constraintStart_toStartOf="@+id/osImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/osImageView"
+                    tools:text="OS" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/gameSpecsCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:animateLayoutChanges="true"
+            android:backgroundTint="@color/blackAlpha"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionExpandHandler"
+            app:layout_constraintTop_toBottomOf="@id/gameDescriptionCardView"
             app:strokeColor="@color/grey">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,33 +131,34 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/informationExpandHandler"
+                    android:id="@+id/specsExpandHandler"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/arrow_dropdown"
-                    app:layout_constraintEnd_toEndOf="@+id/gameInformationPlaceholderTextView"
-                    app:layout_constraintStart_toStartOf="@+id/gameInformationPlaceholderTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/gameInformationPlaceholderTextView" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/gameInformationPlaceholderTextView"
+                    android:id="@+id/gameSpecsPlaceholderTextView"
+                    style="@style/DetailsFragmentPlaceholderTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Game Information"
+                    android:text="Specifications"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:id="@+id/gameInformationLayout"
+                android:id="@+id/gameSpecsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="58dp"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical"
-                tools:visibility="gone">
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/osImageView"
@@ -228,7 +275,6 @@
                     app:layout_constraintStart_toStartOf="@+id/storageImageView"
                     app:layout_constraintTop_toBottomOf="@+id/storageImageView"
                     tools:text="Storage" />
-
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,27 +1,16 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
 import android.animation.LayoutTransition
-import android.opengl.Visibility
 import android.os.Bundle
-import android.text.format.DateFormat
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnticipateInterpolator
-import android.view.animation.Interpolator
-import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.activityViewModels
-import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import coil.load
-import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDetailBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
 
 class DetailFragment : Fragment() {
 
@@ -37,32 +26,37 @@ class DetailFragment : Fragment() {
             with(detailLayoutBinding) {
                 detailLayoutBinding.detailThumbnailImageView.load(game.thumbnail)
                 detailGameTitleTextView.setText(game.title)
-                expandableTextView.setText(game.description)
+                descriptionTextView.setText(game.description)
                 osTextView.setText(game.minimum_system_requirements.os)
                 processorTextView.setText(game.minimum_system_requirements.processor)
                 memoryTextView.setText(game.minimum_system_requirements.memory)
                 graphicsTextView.setText(game.minimum_system_requirements.graphics)
                 storageTextView.setText(game.minimum_system_requirements.storage)
 
-                expandableTextView.setAnimationDuration(500L)
-                expandableTextView.setInterpolator(FastOutLinearInInterpolator())
-                descriptionExpandHandler.setOnClickListener {
-                    if (expandableTextView.isExpanded) {
-                        descriptionExpandHandler.setImageResource(R.drawable.arrow_dropdown)
-                        expandableTextView.collapse()
-                    } else {
-                        descriptionExpandHandler.setImageResource(R.drawable.arrow_dropup)
-                        expandableTextView.expand()
-                    }
-                }
+            }
+        }
+        with(detailLayoutBinding) {
+            gameDescriptionLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+            gameSpecsLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+            detailScrollView.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
-                //gameInformationCardView.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-                informationExpandHandler.setOnClickListener {
-                    if (gameInformationLayout.visibility == View.VISIBLE) {
-                        gameInformationLayout.visibility = View.GONE
-                    } else {
-                        gameInformationLayout.visibility = View.VISIBLE
-                    }
+            descriptionExpandHandler.setOnClickListener {
+                if (gameDescriptionLayout.visibility == View.VISIBLE) {
+                    descriptionExpandHandler.setImageResource(R.drawable.arrow_dropdown)
+                    gameDescriptionLayout.visibility = View.GONE
+                } else {
+                    descriptionExpandHandler.setImageResource(R.drawable.arrow_dropup)
+                    gameDescriptionLayout.visibility = View.VISIBLE
+                }
+            }
+
+            specsExpandHandler.setOnClickListener {
+                if (gameSpecsLayout.visibility == View.VISIBLE) {
+                    specsExpandHandler.setImageResource(R.drawable.arrow_dropdown)
+                    gameSpecsLayout.visibility = View.GONE
+                } else {
+                    specsExpandHandler.setImageResource(R.drawable.arrow_dropup)
+                    gameSpecsLayout.visibility = View.VISIBLE
                 }
             }
         }
