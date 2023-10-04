@@ -1,43 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.fragments.DetailFragment">
 
-    <ImageView
-        android:id="@+id/detailThumbnailImageView"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/gradientDetailmageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/detailThumbnailImageView"
-        app:layout_constraintEnd_toEndOf="@+id/detailThumbnailImageView"
-        app:layout_constraintStart_toStartOf="@+id/detailThumbnailImageView"
-        app:layout_constraintTop_toTopOf="@+id/detailThumbnailImageView"
-        app:srcCompat="@drawable/background_shadow_gradient_2" />
+        <ImageView
+            android:id="@+id/detailThumbnailImageView"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/gradientDetailmageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/detailThumbnailImageView"
+            app:layout_constraintEnd_toEndOf="@+id/detailThumbnailImageView"
+            app:layout_constraintStart_toStartOf="@+id/detailThumbnailImageView"
+            app:layout_constraintTop_toTopOf="@+id/detailThumbnailImageView"
+            app:srcCompat="@drawable/background_shadow_gradient_2" />
 
 
-    <TextView
-        android:id="@+id/detailGameTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/DetailsFragmentPlaceholderTextViewStyle"
-        android:text="Game Title"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/detailThumbnailImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/detailThumbnailImageView" />
+        <TextView
+            android:id="@+id/detailGameTitleTextView"
+            style="@style/DetailsFragmentPlaceholderTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game Title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/detailThumbnailImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/detailThumbnailImageView" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <at.blogc.android.views.ExpandableTextView
+            android:id="@+id/expandableTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="14dp"
+            android:ellipsize="start"
+            android:maxLines="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailThumbnailImageView"
+            tools:text="Game Description" />
+
+        <ImageView
+            android:id="@+id/descriptionExpandHandler"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/arrow_dropdown"
+            app:layout_constraintEnd_toEndOf="@+id/expandableTextView"
+            app:layout_constraintStart_toStartOf="@+id/expandableTextView"
+            app:layout_constraintTop_toBottomOf="@+id/expandableTextView" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/gameInformationCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:animateLayoutChanges="true"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionExpandHandler"
+            app:strokeColor="@color/grey">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/informationExpandHandler"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/arrow_dropdown"
+                    app:layout_constraintEnd_toEndOf="@+id/gameInformationPlaceholderTextView"
+                    app:layout_constraintStart_toStartOf="@+id/gameInformationPlaceholderTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/gameInformationPlaceholderTextView" />
+
+                <TextView
+                    android:id="@+id/gameInformationPlaceholderTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Game Information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/gameInformationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="58dp"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                tools:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/osImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon_devices"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/osTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/osImageView"
+                    app:layout_constraintStart_toStartOf="@+id/osImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/osImageView"
+                    tools:text="OS" />
+
+                <ImageView
+                    android:id="@+id/memoryImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:src="@drawable/icon_memory"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/processorImageView" />
+
+                <TextView
+                    android:id="@+id/memoryTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/memoryImageView"
+                    app:layout_constraintStart_toStartOf="@+id/memoryImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/memoryImageView"
+                    tools:text="Memory" />
+
+                <ImageView
+                    android:id="@+id/processorImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:src="@drawable/icon_cpu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/osImageView" />
+
+                <TextView
+                    android:id="@+id/processorTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/processorImageView"
+                    app:layout_constraintStart_toStartOf="@+id/processorImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/processorImageView"
+                    tools:text="Processor" />
+
+                <ImageView
+                    android:id="@+id/graphicsImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:src="@drawable/icon_gpu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/memoryImageView" />
+
+                <TextView
+                    android:id="@+id/graphicsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/graphicsImageView"
+                    app:layout_constraintStart_toStartOf="@+id/graphicsImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/graphicsImageView"
+                    tools:text="Graphics" />
+
+                <ImageView
+                    android:id="@+id/storageImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:src="@drawable/icon_storage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/graphicsImageView" />
+
+                <TextView
+                    android:id="@+id/storageTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/storageImageView"
+                    app:layout_constraintStart_toStartOf="@+id/storageImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/storageImageView"
+                    tools:text="Storage" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

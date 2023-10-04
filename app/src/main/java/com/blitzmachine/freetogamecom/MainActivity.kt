@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import android.window.SplashScreen
@@ -51,14 +52,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
-            
-            detailBottomSheet = BottomSheetDetailsFragment().apply {
+            /*detailBottomSheet = BottomSheetDetailsFragment().apply {
                 this.isCancelable = true
             }.also {
                 it.show(supportFragmentManager, it.tag)
-            }
-
-
+            }*/
         }
     }
 }

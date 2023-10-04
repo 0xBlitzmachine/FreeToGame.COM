@@ -1,8 +1,10 @@
 package com.blitzmachine.freetogamecom
 
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -28,9 +30,9 @@ class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiV
                 genreChip.setText(item.genre)
 
                 startMaterialCardView.setOnClickListener {
-                    //uiViewModel.showMainLogo(false)
+                    uiViewModel.showMainLogo(false)
                     gameViewModel.getDetailsOfGame(item.id)
-                    //it.findNavController().navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
+                    it.findNavController().navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
                 }
             }
         }

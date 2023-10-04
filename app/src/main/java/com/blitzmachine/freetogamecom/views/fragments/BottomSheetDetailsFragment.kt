@@ -3,6 +3,7 @@ package com.blitzmachine.freetogamecom.views.fragments
 import android.animation.LayoutTransition
 import android.content.DialogInterface
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,46 +32,9 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
-            with(bottomSheetLayoutBinding) {
-                detailGameTitleTextView.setText(game.title)
-                expandableTextView.setText(game.description)
-
-                osTextView.setText(game.minimum_system_requirements.os)
-                processorTextView.setText(game.minimum_system_requirements.processor)
-                memoryTextView.setText(game.minimum_system_requirements.memory)
-                graphicsTextView.setText(game.minimum_system_requirements.graphics)
-                storageTextView.setText(game.minimum_system_requirements.storage)
-            }
-        }
-
-
-        with(bottomSheetLayoutBinding) {
-            expandableTextView.setAnimationDuration(700L)
-            expandableTextView.setInterpolator(OvershootInterpolator())
-            descriptionExpandHandler.setOnClickListener {
-                if (expandableTextView.isExpanded) {
-                    descriptionExpandHandler.setImageResource(R.drawable.arrow_dropdown)
-                    expandableTextView.collapse()
-                } else {
-                    descriptionExpandHandler.setImageResource(R.drawable.arrow_dropup)
-                    expandableTextView.expand()
-                }
-            }
-
-            informationExpandHandler.setOnClickListener {
-                if (gameInformationLayout.visibility == View.VISIBLE) {
-                    gameInformationLayout.visibility = View.GONE
-                } else {
-                    gameInformationLayout.visibility = View.VISIBLE
-                }
-            }
-        }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        //uiViewModel.showMainLogo(true)
     }
 }
