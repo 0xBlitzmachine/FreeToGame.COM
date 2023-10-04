@@ -26,7 +26,14 @@ class DetailFragment : Fragment() {
             with(detailLayoutBinding) {
                 detailLayoutBinding.detailThumbnailImageView.load(game.thumbnail)
                 detailGameTitleTextView.setText(game.title)
+
                 descriptionTextView.setText(game.description)
+
+                detailGenreTextView.setText(game.genre)
+                detailPlatformTextView.setText(game.platform)
+                detailPublisherTextView.setText(game.publisher)
+                detailDeveloperTextView.setText(game.developer)
+
                 osTextView.setText(game.minimum_system_requirements.os)
                 processorTextView.setText(game.minimum_system_requirements.processor)
                 memoryTextView.setText(game.minimum_system_requirements.memory)
@@ -37,6 +44,7 @@ class DetailFragment : Fragment() {
         }
         with(detailLayoutBinding) {
             gameDescriptionLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+            gameInformationLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             gameSpecsLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             detailScrollView.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
@@ -47,6 +55,16 @@ class DetailFragment : Fragment() {
                 } else {
                     descriptionExpandHandler.setImageResource(R.drawable.arrow_dropup)
                     gameDescriptionLayout.visibility = View.VISIBLE
+                }
+            }
+
+            informationExpandHandler.setOnClickListener {
+                if (gameInformationLayout.visibility == View.VISIBLE) {
+                    informationExpandHandler.setImageResource(R.drawable.arrow_dropdown)
+                    gameInformationLayout.visibility = View.GONE
+                } else {
+                    informationExpandHandler.setImageResource(R.drawable.arrow_dropup)
+                    gameInformationLayout.visibility = View.VISIBLE
                 }
             }
 
