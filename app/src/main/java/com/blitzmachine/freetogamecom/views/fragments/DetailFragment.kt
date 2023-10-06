@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import coil.Coil
 import coil.load
+import coil.util.CoilUtils
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDetailBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
+import okhttp3.internal.wait
 
 class DetailFragment : Fragment() {
 
@@ -19,14 +22,13 @@ class DetailFragment : Fragment() {
     private val uiViewModel: UiViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = detailLayoutBinding.root
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        TODO("Handle Web Browser based games as their JSON response do not include 'minimum_system_requirements'")
-
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(detailLayoutBinding) {
-                detailLayoutBinding.detailThumbnailImageView.load(game.thumbnail)
+                detailThumbnailImageView.load(game.thumbnail)
                 detailGameTitleTextView.setText(game.title)
 
                 descriptionTextView.setText(game.description)
@@ -36,14 +38,15 @@ class DetailFragment : Fragment() {
                 detailPublisherTextView.setText(game.publisher)
                 detailDeveloperTextView.setText(game.developer)
 
-                osTextView.setText(game.minimum_system_requirements.os)
-                processorTextView.setText(game.minimum_system_requirements.processor)
-                memoryTextView.setText(game.minimum_system_requirements.memory)
-                graphicsTextView.setText(game.minimum_system_requirements.graphics)
-                storageTextView.setText(game.minimum_system_requirements.storage)
+                osTextView.setText(game.minimum_system_requirements?.os ?: "No Information")
+                processorTextView.setText(game.minimum_system_requirements?.processor ?: "No Information")
+                memoryTextView.setText(game.minimum_system_requirements?.memory ?: "No Information")
+                graphicsTextView.setText(game.minimum_system_requirements?.graphics ?: "No Information")
+                storageTextView.setText(game.minimum_system_requirements?.storage ?: "No Information")
 
             }
         }
+
         with(detailLayoutBinding) {
             gameDescriptionLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             gameInformationLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
@@ -82,10 +85,6 @@ class DetailFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        uiViewModel.showMainLogo(true)
-    }
     private fun formatReleaseDate(gameReleaseDate: String): String {
         gameReleaseDate.split("-").also {
             return "${it[2]}.${it[1]}.${it[0]}"

@@ -6,11 +6,4 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class UiViewModel: ViewModel() {
-
-    private val _showMainLogo: MutableLiveData<Boolean> = MutableLiveData(true)
-    val showMainLogo: LiveData<Boolean> get() = _showMainLogo
-
-    fun showMainLogo(boolean: Boolean) {
-        _showMainLogo.postValue(boolean)
-    }
 }

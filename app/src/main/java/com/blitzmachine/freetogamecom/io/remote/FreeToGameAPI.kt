@@ -1,7 +1,7 @@
 package com.blitzmachine.freetogamecom.io.remote
 
+import androidx.core.content.ContextCompat
 import com.blitzmachine.freetogamecom.utils.APIUtils
-import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,5 +17,5 @@ val retroFit = Retrofit.Builder()
     .build()
 
 object FreeToGameAPI {
-    val httpRoutes: HttpRoutes by lazy { retroFit.create(HttpRoutes::class.java) }
+    val httpRoutes: HttpRouteController by lazy { retroFit.create(HttpRouteController::class.java) }
 }

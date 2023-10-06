@@ -30,7 +30,6 @@ class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiV
                 genreChip.setText(item.genre)
 
                 startMaterialCardView.setOnClickListener {
-                    uiViewModel.showMainLogo(false)
                     gameViewModel.getDetailsOfGame(item.id)
                 }
             }

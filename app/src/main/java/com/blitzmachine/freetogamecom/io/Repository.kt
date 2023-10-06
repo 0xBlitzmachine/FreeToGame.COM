@@ -7,6 +7,7 @@ import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import com.blitzmachine.freetogamecom.utils.APIUtils
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,14 +21,13 @@ class Repository(private val api: FreeToGameAPI) {
     private val _detailsOfSingleGame: MutableLiveData<Game> = MutableLiveData()
     val detailsOfSingleGame: LiveData<Game> get() = _detailsOfSingleGame
 
-    // Get List of live games in Repository, as it will initialize before viewModel. (Some milliseconds saved .. but they are always welcome)
     init {
         getListOfLiveGames()
     }
 
-    fun getListOfLiveGames() {
+    fun getListOfLiveGames(platform: String? = null, category: String? = null, sortBy: String? = null) {
         try {
-            api.httpRoutes.getLiveGamesList(null, null, null).enqueue(object : Callback<List<Games>> {
+            api.httpRoutes.getLiveGamesList(platform, category, sortBy).enqueue(object : Callback<List<Games>> {
                     override fun onResponse(call: Call<List<Games>>, response: Response<List<Games>>) {
                         if (response.isSuccessful) {
                             _listOfLiveGames.postValue(response.body())
