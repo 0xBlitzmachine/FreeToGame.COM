@@ -1,6 +1,7 @@
 package com.blitzmachine.freetogamecom
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Resources
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
@@ -45,21 +47,15 @@ class MainActivity : AppCompatActivity() {
         window.statusBarColor = this.getColor(R.color.black)
 
         val navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
-        mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
-        //
-        mainActivityLayoutBinding.bottomNavigationView.setOnItemSelectedListener {
-            if (it.itemId == R.id.startFragment && navController.currentDestination?.id == R.id.detailFragment) {
-                navController.popBackStack()
-                Toast.makeText(this, "Home ausgewählt aber Detail war offen - Closed", Toast.LENGTH_SHORT).show()
-            } else if (it.itemId == navController.currentDestination?.id) {
-                // Do nothing?
-            } else {
-                navController.navigate(it.itemId)
+        mainActivityLayoutBinding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            if (menuItem.itemId != navController.currentDestination?.id) {
+                navController.navigate(menuItem.itemId)
             }
             true
         }
-        setSupportActionBar(mainActivityLayoutBinding.materialToolbar)
+
+
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
             /*detailBottomSheet = BottomSheetDetailsFragment().apply {
