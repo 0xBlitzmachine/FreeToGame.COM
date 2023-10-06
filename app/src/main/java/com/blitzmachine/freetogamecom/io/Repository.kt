@@ -10,6 +10,7 @@ import com.blitzmachine.freetogamecom.utils.APIUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 class Repository(private val api: FreeToGameAPI) {
 
@@ -25,35 +26,42 @@ class Repository(private val api: FreeToGameAPI) {
     }
 
     fun getListOfLiveGames() {
-        api.httpRoutes.getLiveGamesList(null, null, null).enqueue(object : Callback<List<Games>> {
-            override fun onResponse(call: Call<List<Games>>, response: Response<List<Games>>) {
-                if (response.isSuccessful) {
-                    _listOfLiveGames.postValue(response.body())
-                } else {
-                    Log.e(APIUtils.apiLogcatTag, "LiveGamesRequest - Response was not successful. ${response.code()}")
-                }
-            }
+        try {
+            api.httpRoutes.getLiveGamesList(null, null, null).enqueue(object : Callback<List<Games>> {
+                    override fun onResponse(call: Call<List<Games>>, response: Response<List<Games>>) {
+                        if (response.isSuccessful) {
+                            _listOfLiveGames.postValue(response.body())
+                        } else {
+                            Log.e(APIUtils.apiLogcatTag, "LiveGamesRequest failed. Response Code: ${response.code()}")
+                        }
+                    }
 
-            override fun onFailure(call: Call<List<Games>>, t: Throwable) {
-                Log.e(APIUtils.apiLogcatTag, "onFailure - LiveGames: ${t.message}")
-            }
-        })
+                    override fun onFailure(call: Call<List<Games>>, t: Throwable) {
+                        Log.e(APIUtils.apiLogcatTag, "LiveGamesRequest failed: ${t.message}")
+                    }
+                })
+        } catch (ex: Exception) {
+            Log.e(APIUtils.apiLogcatTag,"LiveGamesRequest Exception: ${ex.message}")
+        }
     }
 
     fun getDetailsOfGame(id: Int) {
-        api.httpRoutes.getGameDetails(id).enqueue(object : Callback<Game> {
-            override fun onResponse(call: Call<Game>, response: Response<Game>) {
-                if (response.isSuccessful) {
-                    _detailsOfSingleGame.postValue(response.body())
-                } else {
-                    Log.e(APIUtils.apiLogcatTag, "DetailsOfGame - Response was not successful. ${response.code()}")
+        try {
+            api.httpRoutes.getGameDetails(id).enqueue(object : Callback<Game> {
+                override fun onResponse(call: Call<Game>, response: Response<Game>) {
+                    if (response.isSuccessful) {
+                        _detailsOfSingleGame.postValue(response.body())
+                    } else {
+                        Log.e(APIUtils.apiLogcatTag, "GameDetailsRequest failed. Response Code: ${response.code()}")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<Game>, t: Throwable) {
-                Log.e(APIUtils.apiLogcatTag, "onFailure - DetailsOfGame: ${t.message}")
-            }
-
-        })
+                override fun onFailure(call: Call<Game>, t: Throwable) {
+                    Log.e(APIUtils.apiLogcatTag, "GameDetailsRequest failed: ${t.message}")
+                }
+            })
+        } catch (ex: Exception) {
+            Log.e(APIUtils.apiLogcatTag, "GameDetailRequest Exception: ${ex.message}")
+        }
     }
 }

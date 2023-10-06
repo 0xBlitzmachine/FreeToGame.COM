@@ -22,6 +22,8 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        TODO("Handle Web Browser based games as their JSON response do not include 'minimum_system_requirements'")
+
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(detailLayoutBinding) {
                 detailLayoutBinding.detailThumbnailImageView.load(game.thumbnail)
