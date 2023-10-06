@@ -50,7 +50,12 @@ class MainActivity : AppCompatActivity() {
         //
         mainActivityLayoutBinding.bottomNavigationView.setOnItemSelectedListener {
             if (it.itemId == R.id.startFragment && navController.currentDestination?.id == R.id.detailFragment) {
-                Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show()
+                navController.popBackStack()
+                Toast.makeText(this, "Home ausgewählt aber Detail war offen - Closed", Toast.LENGTH_SHORT).show()
+            } else if (it.itemId == navController.currentDestination?.id) {
+                // Do nothing?
+            } else {
+                navController.navigate(it.itemId)
             }
             true
         }
