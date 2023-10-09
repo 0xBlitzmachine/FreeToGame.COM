@@ -18,8 +18,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private val mainActivityLayoutBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val uiViewModel: UiViewModel by viewModels()
     private val gameViewModel: GameViewModel by viewModels()
+    private lateinit var navController: NavController
    // private lateinit var detailBottomSheet: BottomSheetDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,16 +49,17 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = this.getColor(R.color.black)
 
-        val navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
+        navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
+        mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
-        mainActivityLayoutBinding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            if (menuItem.itemId != navController.currentDestination?.id) {
-                navController.navigate(menuItem.itemId)
-            }
-            true
-        }
-
-
+        val toolbarConfig = AppBarConfiguration(setOf(
+            R.id.startFragment,
+            R.id.searchFragment,
+            R.id.favoriteFragment
+        ))
+        setSupportActionBar(mainActivityLayoutBinding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        setupActionBarWithNavController(navController, toolbarConfig)
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
             /*detailBottomSheet = BottomSheetDetailsFragment().apply {
@@ -65,5 +69,9 @@ class MainActivity : AppCompatActivity() {
             }*/
             navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp() || navController.navigateUp()
     }
 }
