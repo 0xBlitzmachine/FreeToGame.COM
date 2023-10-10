@@ -14,6 +14,7 @@ import coil.util.CoilUtils
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDetailBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
+import com.blitzmachine.freetogamecom.views.ScreenshotAdapter
 import okhttp3.internal.wait
 
 class DetailFragment : Fragment() {
@@ -21,14 +22,18 @@ class DetailFragment : Fragment() {
     private val detailLayoutBinding: FragmentDetailBinding by lazy { FragmentDetailBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
+    private val screenshotAdapter: ScreenshotAdapter by lazy { ScreenshotAdapter() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = detailLayoutBinding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        detailLayoutBinding.screenshotRecyclerView.adapter = screenshotAdapter
+
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(detailLayoutBinding) {
+                screenshotAdapter.submitList(game.screenshots)
                 detailThumbnailImageView.load(game.thumbnail)
                 detailGameTitleTextView.setText(game.title)
 
@@ -44,7 +49,6 @@ class DetailFragment : Fragment() {
                 memoryTextView.setText(game.minimum_system_requirements?.memory ?: "No Information")
                 graphicsTextView.setText(game.minimum_system_requirements?.graphics ?: "No Information")
                 storageTextView.setText(game.minimum_system_requirements?.storage ?: "No Information")
-
             }
         }
 

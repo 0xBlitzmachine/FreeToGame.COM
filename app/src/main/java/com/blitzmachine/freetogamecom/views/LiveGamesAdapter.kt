@@ -1,25 +1,18 @@
-package com.blitzmachine.freetogamecom
+package com.blitzmachine.freetogamecom.views
 
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.Games
-import com.blitzmachine.freetogamecom.views.GameViewModel
-import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.coroutineContext
 
-class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiViewModel: UiViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
+class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiViewModel: UiViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(
+    GameDiffUtil()
+) {
 
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {
         fun bind(item: Games) {

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.blitzmachine.freetogamecom.LiveGamesAdapter
+import com.blitzmachine.freetogamecom.views.LiveGamesAdapter
 import com.blitzmachine.freetogamecom.databinding.FragmentStartBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
 
