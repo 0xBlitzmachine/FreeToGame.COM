@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import coil.Coil
 import coil.load
 import coil.util.CoilUtils
@@ -48,6 +49,8 @@ class DetailFragment : Fragment() {
         }
 
         with(detailLayoutBinding) {
+            backButton.setOnClickListener { it.findNavController().navigateUp() }
+
             gameDescriptionLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             gameInformationLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             gameSpecsLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)

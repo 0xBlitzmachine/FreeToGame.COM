@@ -7,6 +7,8 @@ import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import android.window.SplashScreen
@@ -51,15 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
-
-        val toolbarConfig = AppBarConfiguration(setOf(
-            R.id.startFragment,
-            R.id.searchFragment,
-            R.id.favoriteFragment
-        ))
-        setSupportActionBar(mainActivityLayoutBinding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        setupActionBarWithNavController(navController, toolbarConfig)
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
             /*detailBottomSheet = BottomSheetDetailsFragment().apply {
