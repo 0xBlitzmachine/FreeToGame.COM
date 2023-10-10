@@ -1,6 +1,8 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
 import android.animation.LayoutTransition
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,7 +35,13 @@ class DetailFragment : Fragment() {
 
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(detailLayoutBinding) {
+
                 screenshotAdapter.submitList(game.screenshots)
+                redirectButton.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(game.game_url))
+                    startActivity(intent)
+                }
+
                 detailThumbnailImageView.load(game.thumbnail)
                 detailGameTitleTextView.setText(game.title)
 

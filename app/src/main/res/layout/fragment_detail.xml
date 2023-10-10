@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
 
         <ImageView
             android:id="@+id/detailThumbnailImageView"
@@ -422,6 +423,7 @@
                     app:layout_constraintStart_toStartOf="@+id/storageImageView"
                     app:layout_constraintTop_toBottomOf="@+id/storageImageView"
                     tools:text="Storage" />
+
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -432,10 +434,12 @@
             android:layout_height="60dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:alpha="0.6"
             android:backgroundTint="@android:color/transparent"
             android:src="@drawable/icon_arrowback"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/screenshotRecyclerView"
@@ -443,12 +447,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gameSpecsCardView"
             tools:listitem="@layout/screenshot_item_layout" />
+
+        <Button
+            android:id="@+id/redirectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:alpha="0.6"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Go to website"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/screenshotRecyclerView"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="2dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
