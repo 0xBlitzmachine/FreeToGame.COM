@@ -38,8 +38,9 @@ class DetailFragment : Fragment() {
 
                 screenshotAdapter.submitList(game.screenshots)
                 redirectButton.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(game.game_url))
-                    startActivity(intent)
+                    Intent(Intent.ACTION_VIEW, Uri.parse(game.game_url)).also {
+                        startActivity(it)
+                    }
                 }
 
                 detailThumbnailImageView.load(game.thumbnail)
