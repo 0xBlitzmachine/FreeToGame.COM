@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     private val uiViewModel: UiViewModel by viewModels()
     private val gameViewModel: GameViewModel by viewModels()
     private lateinit var navController: NavController
-   // private lateinit var detailBottomSheet: BottomSheetDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +54,6 @@ class MainActivity : AppCompatActivity() {
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
-            /*detailBottomSheet = BottomSheetDetailsFragment().apply {
-                this.isCancelable = true
-            }.also {
-                it.show(supportFragmentManager, it.tag)
-            }*/
             navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
         }
     }

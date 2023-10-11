@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.views.LiveGamesAdapter
 import com.blitzmachine.freetogamecom.databinding.FragmentStartBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
@@ -16,6 +18,7 @@ class StartFragment : Fragment() {
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
     private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, uiViewModel) }
+    private lateinit var detailBottomSheet: BottomSheetDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,14 @@ class StartFragment : Fragment() {
         startLayoutBinding.liveGamesReyclerView.apply {
             setHasFixedSize(true)
             adapter = liveGamesAdapter
+        }
+
+        startLayoutBinding.searchButton.setOnClickListener {
+            detailBottomSheet = BottomSheetDetailsFragment().apply {
+                this.isCancelable = true
+            }.also {
+                it.show((activity as MainActivity).supportFragmentManager, it.tag)
+            }
         }
 
         gameViewModel.listOfLiveGames.observe(viewLifecycleOwner) { listOfLiveGames ->
