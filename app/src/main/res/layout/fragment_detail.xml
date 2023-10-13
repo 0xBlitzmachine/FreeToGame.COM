@@ -40,12 +40,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Game Title"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gradientDetailmageView" />
+            app:layout_constraintTop_toBottomOf="@id/gradientDetailmageView"
+            tools:text="@string/gameTitle" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/gameDescriptionCardView"
@@ -72,7 +72,7 @@
                     style="@style/DetailsFragmentPlaceholderTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description"
+                    android:text="@string/description"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +102,7 @@
                     android:id="@+id/descriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_margin="10dp"
                     android:gravity="center"
                     app:layout_constraintEnd_toEndOf="@+id/osImageView"
                     app:layout_constraintStart_toStartOf="@+id/osImageView"
@@ -139,7 +138,7 @@
                     style="@style/DetailsFragmentPlaceholderTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Information"
+                    android:text="@string/information"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +174,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Genre"
+                        android:text="@string/genre"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -196,7 +195,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Platform"
+                        android:text="@string/platform"
                         app:layout_constraintEnd_toEndOf="@+id/textView11"
                         app:layout_constraintStart_toStartOf="@+id/textView11"
                         app:layout_constraintTop_toBottomOf="@+id/detailGenreTextView" />
@@ -217,7 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Publisher"
+                        android:text="@string/publisher"
                         app:layout_constraintEnd_toEndOf="@+id/textView13"
                         app:layout_constraintStart_toStartOf="@+id/textView13"
                         app:layout_constraintTop_toBottomOf="@+id/detailPlatformTextView" />
@@ -238,7 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Developer"
+                        android:text="@string/developer"
                         app:layout_constraintEnd_toEndOf="@+id/textView15"
                         app:layout_constraintStart_toStartOf="@+id/textView15"
                         app:layout_constraintTop_toBottomOf="@+id/detailPublisherTextView" />
@@ -247,12 +246,32 @@
                         android:id="@+id/detailDeveloperTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView17"
                         app:layout_constraintStart_toStartOf="@+id/textView17"
                         app:layout_constraintTop_toBottomOf="@+id/textView17"
                         tools:text="Activision" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/DetailsFragmentPlaceholderTextViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/releaseDate"
+                        app:layout_constraintEnd_toEndOf="@+id/textView17"
+                        app:layout_constraintStart_toStartOf="@+id/textView17"
+                        app:layout_constraintTop_toBottomOf="@+id/detailDeveloperTextView" />
+
+                    <TextView
+                        android:id="@+id/detailReleaseDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/textView"
+                        app:layout_constraintStart_toStartOf="@+id/textView"
+                        app:layout_constraintTop_toBottomOf="@+id/textView"
+                        tools:text="20.05.1999" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -292,7 +311,7 @@
                     style="@style/DetailsFragmentPlaceholderTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Specifications"
+                    android:text="@string/specifications"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -462,7 +481,7 @@
             android:layout_marginTop="50dp"
             android:alpha="0.7"
             android:backgroundTint="@android:color/transparent"
-            android:text="Go to website"
+            android:text="@string/goToWebsite"
             android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -9,5 +9,17 @@
     <string name="favoriteFragmentMenuText">Favorite</string>
 
     <!-- DetailsFrag Placeholder Text -->
+    <string name="description">Description</string>
+    <string name="information">Information</string>
+    <string name="specifications">Specifications</string>
+
+    <string name="genre">Genre</string>
+    <string name="platform">Platform</string>
+    <string name="publisher">Publisher</string>
+    <string name="developer">Developer</string>
+    <string name="releaseDate">Release Date</string>
+
+    <string name="goToWebsite">Go to Website</string>
+    <string name="gameTitle">Game Title</string>
 
 </resources>
