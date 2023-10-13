@@ -51,7 +51,8 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
                 // You normal Filter function of API WHEN Genre ChipGroup has ONLY ONE SELECTION
                 // else use the filter Endpoint of the API.
                 gameViewModel.getAllLiveGames(
-                    bottomSheetLayoutBinding.platformChipGroup.findViewById<Chip?>(bottomSheetLayoutBinding.platformChipGroup.checkedChipId).text.toString())
+                    bottomSheetLayoutBinding.platformChipGroup.findViewById<Chip?>(
+                        bottomSheetLayoutBinding.platformChipGroup.checkedChipId).text.toString())
                 dismiss()
                 return true
             }
