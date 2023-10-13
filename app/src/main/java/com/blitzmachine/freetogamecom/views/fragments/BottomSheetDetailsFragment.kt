@@ -1,6 +1,8 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
 import android.animation.LayoutTransition
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Layout
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import android.widget.RadioButton
+import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.activityViewModels
 import at.blogc.android.views.ExpandableTextView
@@ -24,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 
 class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
@@ -34,32 +38,33 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         return bottomSheetLayoutBinding.root
     }
 
+    @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        // Null-Check for not existing Tags.
         Genre.values().forEach { genre ->
-            Chip(this.context).apply {
-                this.text = genre.value
-                this.id = View.generateViewId()
-                this.isCheckable = true
-                this.isClickable = true
-                this.isEnabled = true
-            }.also {chip ->
-                bottomSheetLayoutBinding.chipGroup.addView(chip)
+            generateChip(genre.value, this.requireContext()).also {chip ->
+                bottomSheetLayoutBinding.genreChipGroup.addView(chip)
             }
         }
 
         Platform.values().forEach { platform ->
-            RadioButton(this.context).apply {
-                this.text = platform.value
-                this.id = View.generateViewId()
-            }.also { radioButton ->
-                bottomSheetLayoutBinding.platformRadioGroup.addView(radioButton)
+            generateChip(platform.value, this.requireContext()).also {chip ->
+                bottomSheetLayoutBinding.platformChipGroup.addView(chip)
             }
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
+    private fun generateChip(text: String, context: Context): Chip {
+        return Chip(context).apply {
+            this.text = text
+            this.id = View.generateViewId()
+            this.isCheckable = true
+            this.isClickable = true
+            this.isEnabled = true
+            this.chipBackgroundColor = context.getColorStateList(R.color.chip_background_color)
+        }
     }
 }
