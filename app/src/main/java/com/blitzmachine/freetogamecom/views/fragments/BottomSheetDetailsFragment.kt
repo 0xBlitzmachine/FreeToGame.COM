@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import android.widget.RadioButton
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.activityViewModels
@@ -38,21 +39,41 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         return bottomSheetLayoutBinding.root
     }
 
-    @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
+        bottomSheetLayoutBinding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
+            // Return true if the query has been handled by the listener.
+            // Return false to let the SearchView perform the default action.
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                // You normal Filter function of API WHEN Genre ChipGroup has ONLY ONE SELECTION
+                // else use the filter Endpoint of the API.
+                gameViewModel.getAllLiveGames(
+                    bottomSheetLayoutBinding.platformChipGroup.findViewById<Chip?>(bottomSheetLayoutBinding.platformChipGroup.checkedChipId).text.toString())
+                dismiss()
+                return true
+            }
+
+            // Return true if the action was handled by the listener.
+            // Return false if the SearchView should perform the default action of showing any suggestions if available-
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+
         // Null-Check for not existing Tags.
-        Genre.values().forEach { genre ->
-            generateChip(genre.value, this.requireContext()).also {chip ->
-                bottomSheetLayoutBinding.genreChipGroup.addView(chip)
+        Platform.values().forEach { platform ->
+            generateChip(platform.value, this.requireContext()).also { chip ->
+                bottomSheetLayoutBinding.platformChipGroup.addView(chip)
             }
         }
 
-        Platform.values().forEach { platform ->
-            generateChip(platform.value, this.requireContext()).also {chip ->
-                bottomSheetLayoutBinding.platformChipGroup.addView(chip)
+        // ChipGroup currently on singleSelection for testing before multiple selection can be done
+        Genre.values().forEach { genre ->
+            generateChip(genre.value, this.requireContext()).also { chip ->
+                bottomSheetLayoutBinding.genreChipGroup.addView(chip)
             }
         }
     }
