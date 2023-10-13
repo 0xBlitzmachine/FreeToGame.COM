@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import android.widget.RadioButton
+import androidx.core.view.forEach
 import androidx.fragment.app.activityViewModels
 import at.blogc.android.views.ExpandableTextView
 import coil.load
@@ -33,27 +34,29 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         return bottomSheetLayoutBinding.root
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         Genre.values().forEach { genre ->
-            Chip(this.context).also {chip ->
-                chip.text = genre.value
+            Chip(this.context).apply {
+                this.text = genre.value
+                this.id = View.generateViewId()
+                this.isCheckable = true
+                this.isClickable = true
+                this.isEnabled = true
+            }.also {chip ->
                 bottomSheetLayoutBinding.chipGroup.addView(chip)
             }
         }
 
-        Platform.values().forEach {
-            RadioButton(this.context).also {radioButton ->
-                radioButton.text = it.value
-                radioButton.id = View.generateViewId()
+        Platform.values().forEach { platform ->
+            RadioButton(this.context).apply {
+                this.text = platform.value
+                this.id = View.generateViewId()
+            }.also { radioButton ->
                 bottomSheetLayoutBinding.platformRadioGroup.addView(radioButton)
             }
         }
-            // Handle Filter
-            // Enum for Platform and Genre
-            // gameViewModel.getAllLiveGames("platform", "category", "sortBy")
     }
 
     override fun onDismiss(dialog: DialogInterface) {

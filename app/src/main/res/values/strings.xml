@@ -8,4 +8,6 @@
     <string name="searchFragmentMenuText">Explore</string>
     <string name="favoriteFragmentMenuText">Favorite</string>
 
+    <!-- DetailsFrag Placeholder Text -->
+
 </resources>
