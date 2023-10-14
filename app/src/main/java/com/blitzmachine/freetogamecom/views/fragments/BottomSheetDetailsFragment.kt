@@ -48,12 +48,19 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
             // Return false to let the SearchView perform the default action.
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                // You normal Filter function of API WHEN Genre ChipGroup has ONLY ONE SELECTION
+                // Use normal Filter function of API WHEN Genre ChipGroup has ONLY ONE SELECTION
                 // else use the filter Endpoint of the API.
-                gameViewModel.getAllLiveGames(
-                    bottomSheetLayoutBinding.platformChipGroup.findViewById<Chip?>(
-                        bottomSheetLayoutBinding.platformChipGroup.checkedChipId).text.toString())
-                dismiss()
+                /*gameViewModel.getAllLiveGames(bottomSheetLayoutBinding.platformChipGroup.findViewById<Chip?>(
+                    bottomSheetLayoutBinding.platformChipGroup.checkedChipId).text.toString())
+                dismiss()*/
+                var test: MutableList<Chip> = emptyList<Chip>().toMutableList()
+
+                for (chipID in bottomSheetLayoutBinding.genreChipGroup.checkedChipIds) {
+                    bottomSheetLayoutBinding.genreChipGroup.findViewById<Chip?>(chipID).also {
+                        test += it
+                        Log.d("BSF", it.text.toString())
+                    }
+                }
                 return true
             }
 
