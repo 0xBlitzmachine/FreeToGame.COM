@@ -27,14 +27,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/filterPlaceholderTextView"
+                style="@style/DetailsFragmentPlaceholderTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Filter Options" />
+                android:text="Filter Options"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,8 +59,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:orientation="horizontal"
-                    app:singleSelection="true">
-                </com.google.android.material.chip.ChipGroup>
+                    app:singleSelection="true"></com.google.android.material.chip.ChipGroup>
             </LinearLayout>
 
             <LinearLayout
