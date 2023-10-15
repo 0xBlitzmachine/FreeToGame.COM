@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import android.widget.RadioButton
@@ -41,7 +42,6 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         bottomSheetLayoutBinding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
             // Return true if the query has been handled by the listener.
@@ -84,6 +84,11 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
                 bottomSheetLayoutBinding.genreChipGroup.addView(chip)
             }
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        Log.d("BottomSheet", dialog.toString())
     }
 
     private fun generateChip(text: String, context: Context): Chip {

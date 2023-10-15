@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.views.LiveGamesAdapter
 import com.blitzmachine.freetogamecom.databinding.FragmentStartBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class StartFragment : Fragment() {
 
@@ -18,12 +21,6 @@ class StartFragment : Fragment() {
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
     private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, uiViewModel) }
-    private lateinit var detailBottomSheet: BottomSheetDetailsFragment
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = startLayoutBinding.root
 
@@ -36,7 +33,7 @@ class StartFragment : Fragment() {
         }
 
         startLayoutBinding.searchButton.setOnClickListener {
-            detailBottomSheet = BottomSheetDetailsFragment().apply {
+            BottomSheetDetailsFragment().apply {
                 this.isCancelable = true
             }.also {
                 it.show((activity as MainActivity).supportFragmentManager, it.tag)
