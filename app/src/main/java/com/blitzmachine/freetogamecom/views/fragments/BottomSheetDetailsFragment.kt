@@ -2,6 +2,7 @@ package com.blitzmachine.freetogamecom.views.fragments
 
 import android.animation.LayoutTransition
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
@@ -86,9 +87,19 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        Log.d("BottomSheet", dialog.toString())
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).also {sheetDialog ->
+            sheetDialog.setOnShowListener {dialogInterface ->
+                (dialogInterface as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet).also {frameLayout ->
+                    if (frameLayout != null) {
+                        BottomSheetBehavior.from(frameLayout).apply {
+                            this.state = BottomSheetBehavior.STATE_EXPANDED
+                            this.skipCollapsed = true
+                        }
+                    }
+                }
+            }
+        }.also {dialog -> return dialog }
     }
 
     private fun generateChip(text: String, context: Context): Chip {
