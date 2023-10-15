@@ -12,15 +12,31 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:context=".views.fragments.BottomSheetDetailsFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:iconifiedByDefault="false"
-        app:queryHint="Search for games" />
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            android:alpha="0.6"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/icon_arrowback" />
+
+        <TextView
+            android:id="@+id/filterPlaceholderTextView"
+            style="@style/DetailsFragmentPlaceholderTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Filter Options"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,26 +45,17 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/filterPlaceholderTextView"
-                style="@style/DetailsFragmentPlaceholderTextViewStyle"
+                android:id="@+id/platformPlaceholderTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Filter Options"
-                android:textSize="16sp" />
+                android:text="@string/platform" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/platformPlaceholderTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/platform" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/platformChipGroup"
@@ -56,36 +63,40 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    app:singleSelection="true"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/genrePlaceholderTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/genre" />
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/genreChipGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp">
+                    app:singleSelection="true">
 
                 </com.google.android.material.chip.ChipGroup>
-                </ScrollView>
+
             </LinearLayout>
+
         </LinearLayout>
+
+    <TextView
+        android:id="@+id/genrePlaceholderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/genre" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/genreChipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

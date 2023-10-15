@@ -44,33 +44,9 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomSheetLayoutBinding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
-            // Return true if the query has been handled by the listener.
-            // Return false to let the SearchView perform the default action.
-            override fun onQueryTextSubmit(query: String?): Boolean {
-
-                // Use normal Filter function of API WHEN Genre ChipGroup has ONLY ONE SELECTION
-                // else use the filter Endpoint of the API.
-                /*gameViewModel.getAllLiveGames(bottomSheetLayoutBinding.platformChipGroup.findViewById<Chip?>(
-                    bottomSheetLayoutBinding.platformChipGroup.checkedChipId).text.toString())
-                dismiss()*/
-                var test: MutableList<Chip> = emptyList<Chip>().toMutableList()
-
-                for (chipID in bottomSheetLayoutBinding.genreChipGroup.checkedChipIds) {
-                    bottomSheetLayoutBinding.genreChipGroup.findViewById<Chip?>(chipID).also {
-                        test += it
-                        Log.d("BSF", it.text.toString())
-                    }
-                }
-                return true
-            }
-
-            // Return true if the action was handled by the listener.
-            // Return false if the SearchView should perform the default action of showing any suggestions if available-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
+        bottomSheetLayoutBinding.backButton.setOnClickListener {
+            this.dismiss()
+        }
 
         // Null-Check for not existing Tags.
         Platform.values().forEach { platform ->
@@ -79,12 +55,15 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
             }
         }
 
+        var count = 0
         // ChipGroup currently on singleSelection for testing before multiple selection can be done
         Genre.values().forEach { genre ->
             generateChip(genre.value, this.requireContext()).also { chip ->
                 bottomSheetLayoutBinding.genreChipGroup.addView(chip)
+                count++
             }
-        }
+            // ScrollView does not scroll completely down but has all items needed
+        }.also { bottomSheetLayoutBinding.genrePlaceholderTextView.setText("$count inside : ${Genre.values().size} needed") }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
