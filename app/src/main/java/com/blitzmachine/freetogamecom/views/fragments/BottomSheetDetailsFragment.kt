@@ -93,7 +93,8 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
                 (dialogInterface as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet).also {frameLayout ->
                     if (frameLayout != null) {
                         BottomSheetBehavior.from(frameLayout).apply {
-                            this.state = BottomSheetBehavior.STATE_EXPANDED
+                            this.peekHeight = 1800
+                            this.isDraggable = false
                             this.skipCollapsed = true
                         }
                     }
