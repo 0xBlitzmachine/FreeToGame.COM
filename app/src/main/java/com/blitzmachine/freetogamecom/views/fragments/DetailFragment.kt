@@ -24,7 +24,7 @@ class DetailFragment : Fragment() {
     private val detailLayoutBinding: FragmentDetailBinding by lazy { FragmentDetailBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
-    private val screenshotAdapter: ScreenshotAdapter by lazy { ScreenshotAdapter() }
+    private val screenshotAdapter: ScreenshotAdapter by lazy { ScreenshotAdapter(this.requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = detailLayoutBinding.root
 
