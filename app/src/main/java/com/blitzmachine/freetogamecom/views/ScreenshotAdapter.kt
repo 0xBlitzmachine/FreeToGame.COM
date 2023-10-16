@@ -15,6 +15,7 @@ import coil.request.ImageRequest
 import com.blitzmachine.freetogamecom.databinding.ScreenshotItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.GameScreenshots
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class ScreenshotAdapter(private val context: Context): ListAdapter<GameScreenshots, ScreenshotAdapter.ItemViewHolder>(ScreenshotDiff()) {
     inner class ItemViewHolder(private val binding: ScreenshotItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
@@ -35,8 +36,8 @@ class ScreenshotAdapter(private val context: Context): ListAdapter<GameScreensho
                 )
                 .crossfade(true)
                 .crossfade(1000)
-                .build().also {
-                    context.imageLoader.enqueue(it)
+                .build().also {imgRequest ->
+                    context.imageLoader.enqueue(imgRequest)
                 }
         }
     }

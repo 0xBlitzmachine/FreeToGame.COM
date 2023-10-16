@@ -55,15 +55,12 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
             }
         }
 
-        var count = 0
         // ChipGroup currently on singleSelection for testing before multiple selection can be done
         Genre.values().forEach { genre ->
             generateChip(genre.value, this.requireContext()).also { chip ->
                 bottomSheetLayoutBinding.genreChipGroup.addView(chip)
-                count++
             }
-            // ScrollView does not scroll completely down but has all items needed
-        }.also { bottomSheetLayoutBinding.genrePlaceholderTextView.setText("$count inside : ${Genre.values().size} needed") }
+        }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -72,7 +69,7 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
                 (dialogInterface as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet).also {frameLayout ->
                     if (frameLayout != null) {
                         BottomSheetBehavior.from(frameLayout).apply {
-                            this.peekHeight = 1800
+                            this.state = BottomSheetBehavior.STATE_EXPANDED
                             this.isDraggable = false
                             this.skipCollapsed = true
                         }
