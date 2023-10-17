@@ -32,6 +32,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
+import com.google.android.material.chip.ChipGroup
 
 class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
@@ -51,13 +52,13 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
         bottomSheetLayoutBinding.filterButton.setOnClickListener {
             // Handle Filter
-            this.dismiss()
+            getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
         }
 
         // Null-Check for not existing Tags.
         Platform.values().forEach { platform ->
             generateChip(platform.value, this.requireContext()).also { chip ->
-                chip.isChecked = chip.text == "all"
+                chip.isChecked = chip.text == "All"
                 bottomSheetLayoutBinding.platformChipGroup.addView(chip)
             }
         }
@@ -86,9 +87,17 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         }.also {dialog -> return dialog }
     }
 
+    private fun getPlatformSelection(chipGroup: ChipGroup): Platform {
+
+    }
+
+    private fun getGenreSelections(): List<Genre> {
+        return emptyList()
+    }
+
     private fun generateChip(text: String, context: Context): Chip {
         return Chip(context).apply {
-            this.text = text
+            this.text = text.replaceFirst(text.first(), text.first().uppercaseChar())
             this.id = View.generateViewId()
             this.isCheckable = true
             this.isClickable = true
