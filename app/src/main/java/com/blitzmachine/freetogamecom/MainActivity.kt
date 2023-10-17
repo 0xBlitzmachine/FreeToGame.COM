@@ -50,15 +50,12 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = this.getColor(R.color.black)
 
+
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
         gameViewModel.detailsOfSingleGame.observe(this) { game ->
             navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp() || navController.navigateUp()
     }
 }
