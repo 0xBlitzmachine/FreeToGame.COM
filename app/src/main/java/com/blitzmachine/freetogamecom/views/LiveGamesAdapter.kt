@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
@@ -17,7 +18,12 @@ class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiV
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {
         fun bind(item: Games) {
             with(itemLayoutBinding) {
-                thumbnailImageView.load(item.thumbnail)
+                thumbnailImageView.load(item.thumbnail) {
+                    this.placeholder(R.drawable.logo_footer)
+                    this.error(R.drawable.logo_footer)
+                    this.crossfade(true)
+                    this.crossfade(2000)
+                }
                 gameTitleTextView.setText(item.title)
                 platformChip.setText(item.platform)
                 genreChip.setText(item.genre)

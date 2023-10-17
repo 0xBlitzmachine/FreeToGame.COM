@@ -44,9 +44,14 @@ class DetailFragment : Fragment() {
                     }
                 }
 
-                detailThumbnailImageView.load(game.thumbnail)
-                detailGameTitleTextView.setText(game.title)
+                detailThumbnailImageView.load(game.thumbnail) {
+                    this.placeholder(R.drawable.logo_footer)
+                    this.error(R.drawable.logo_footer)
+                    this.crossfade(true)
+                    this.crossfade(2000)
+                }
 
+                detailGameTitleTextView.setText(game.title)
                 descriptionTextView.setText(game.description)
 
                 detailGenreTextView.setText(game.genre)

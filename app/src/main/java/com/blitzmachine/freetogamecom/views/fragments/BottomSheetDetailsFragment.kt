@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.RadioButton
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
@@ -48,9 +49,15 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
             this.dismiss()
         }
 
+        bottomSheetLayoutBinding.filterButton.setOnClickListener {
+            // Handle Filter
+            this.dismiss()
+        }
+
         // Null-Check for not existing Tags.
         Platform.values().forEach { platform ->
             generateChip(platform.value, this.requireContext()).also { chip ->
+                chip.isChecked = chip.text == "all"
                 bottomSheetLayoutBinding.platformChipGroup.addView(chip)
             }
         }

@@ -5,13 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.imageLoader
 import coil.load
+import coil.memory.MemoryCache
+import coil.request.CachePolicy
 import coil.request.ImageRequest
+import coil.transition.Transition
+import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.ScreenshotItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.GameScreenshots
 import kotlinx.coroutines.Dispatchers
@@ -20,25 +25,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class ScreenshotAdapter(private val context: Context): ListAdapter<GameScreenshots, ScreenshotAdapter.ItemViewHolder>(ScreenshotDiff()) {
     inner class ItemViewHolder(private val binding: ScreenshotItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GameScreenshots) {
-            ImageRequest.Builder(context)
-                .data(item.image)
-                .target(
-                    onStart = {
-                        Log.d("Coil", "Image started to load ...")
-                    },
-                    onSuccess = {
-                        Log.d("Coil", "Image successfully downloaded.")
-                        binding.screenshotImageView.setImageDrawable(it)
-                    },
-                    onError = {
-                        Log.d("Coil", "Image failed to load! ...")
-                    }
-                )
-                .crossfade(true)
-                .crossfade(1000)
-                .build().also {imgRequest ->
-                    context.imageLoader.enqueue(imgRequest)
-                }
+            binding.screenshotImageView.load(item.image) {
+                this.placeholder(R.drawable.logo_footer)
+                this.error(R.drawable.logo_footer)
+                this.crossfade(true)
+                this.crossfade(2000)
+            }
         }
     }
 
