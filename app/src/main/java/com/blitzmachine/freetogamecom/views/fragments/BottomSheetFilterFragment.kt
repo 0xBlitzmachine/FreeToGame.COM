@@ -99,10 +99,10 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
     private fun getGenreSelections(chipGroup: ChipGroup): List<Genre> {
         val selectedGenre = emptyList<Genre>().toMutableList()
         getSelectChips(chipGroup).forEach {chipObject ->
-            if (chipObject.text.toString() == "3d") {
-                selectedGenre.add(Genre.valueOf("THREE_D"))
-            } else if (chipObject.text.toString() == "2d") {
-                selectedGenre.add(Genre.valueOf("TWO_D"))
+            if (chipObject.text.toString() == Genre.THREE_D.value) {
+                selectedGenre.add(Genre.valueOf(Genre.THREE_D.name))
+            } else if (chipObject.text.toString() == Genre.TWO_D.value) {
+                selectedGenre.add(Genre.valueOf(Genre.TWO_D.name))
             } else {
                 selectedGenre.add(Genre.valueOf(chipObject.text.toString().uppercase().replace("-", "_")))
             }
