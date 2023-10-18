@@ -17,7 +17,7 @@ class StartFragment : Fragment() {
     private val startLayoutBinding: FragmentStartBinding by lazy { FragmentStartBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
-    private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, uiViewModel) }
+    private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, this.requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = startLayoutBinding.root
 

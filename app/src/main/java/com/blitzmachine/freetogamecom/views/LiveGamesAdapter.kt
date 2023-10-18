@@ -18,6 +18,7 @@ import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.classes.Games
+import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.Deferred
@@ -25,14 +26,19 @@ import kotlinx.coroutines.coroutineScope
 
 class LiveGamesAdapter(
     private val gameViewModel: GameViewModel,
-    private val uiViewModel: UiViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
+    private val context: Context): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
 
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {
         fun bind(item: Games) {
             with(itemLayoutBinding) {
 
-                thumbnailImageView.load(item.thumbnail)
-                
+                thumbnailImageView.load(item.thumbnail) {
+                    this.placeholder(Utils.createCircularProgressDrawable(context))
+                    this.error(R.drawable.image_not_available)
+                    this.crossfade(true)
+                    this.crossfade(1000)
+                }
+
                 gameTitleTextView.setText(item.title)
                 platformChip.setText(item.platform)
                 genreChip.setText(item.genre)
