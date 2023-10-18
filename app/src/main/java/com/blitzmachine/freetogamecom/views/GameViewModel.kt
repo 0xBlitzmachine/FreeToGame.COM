@@ -32,4 +32,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun getDetailsOfGame(id: Int) {
         repository.getDetailsOfGame(id)
     }
+
+    fun getFilteredGameList(tag: String? = null, platform: String? = null) {
+        repository.getFilteredGameList(tag, platform)
+    }
 }

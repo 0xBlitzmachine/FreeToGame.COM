@@ -17,7 +17,7 @@ import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
+import kotlin.Exception
 
 class Repository(private val api: FreeToGameAPI) {
 
@@ -68,6 +68,27 @@ class Repository(private val api: FreeToGameAPI) {
             })
         } catch (ex: Exception) {
             Log.e(APIUtils.apiLogcatTag, "GameDetailRequest Exception: ${ex.message}")
+        }
+    }
+
+    fun getFilteredGameList(tag: String? = null, platform: String? = null) {
+        try {
+            api.httpRoutes.getFilteredGameList(tag, platform).enqueue(object : Callback<List<Games>> {
+                override fun onResponse(call: Call<List<Games>>, response: Response<List<Games>>) {
+                    if (response.isSuccessful) {
+                        _listOfLiveGames.postValue(response.body())
+                    } else {
+                        Log.e(APIUtils.apiLogcatTag, "FilteredGameList failed. Response Code: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Games>>, t: Throwable) {
+                    Log.e(APIUtils.apiLogcatTag, "FilteredGameList failed: ${t.message}")
+                }
+
+            })
+        } catch (ex: Exception) {
+            Log.e(APIUtils.apiLogcatTag, "FilteredGameList Exception: ${ex.message}")
         }
     }
 }

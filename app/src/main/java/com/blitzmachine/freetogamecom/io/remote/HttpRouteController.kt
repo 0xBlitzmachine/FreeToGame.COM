@@ -17,4 +17,10 @@ interface HttpRouteController {
     @GET("game")
     fun getGameDetails(
         @Query("id") id: Int): Call<Game>
+
+    @GET("filter")
+    fun getFilteredGameList(
+        @Query("tag") category: String?,
+        @Query("platform") platform: String?
+    ): Call<List<Games>>
 }

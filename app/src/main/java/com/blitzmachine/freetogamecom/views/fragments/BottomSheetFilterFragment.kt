@@ -43,14 +43,21 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
 
             // When Empty means no selection has been done
             if (selectedGenres.isEmpty()) {
-                Log.d("Filter", "Genre Selection = null")
-                //gameViewModel.getAllLiveGames(selectedPlatform.value)
+                gameViewModel.getAllLiveGames(selectedPlatform.value)
             } else if (selectedGenres.size < 2) {
-                Log.d("Filter", "Only one Genre selected.")
-                //gameViewModel.getAllLiveGames(selectedPlatform.value, selectedGenres[0].value)
+                gameViewModel.getAllLiveGames(selectedPlatform.value, selectedGenres[0].value)
             } else {
-                Log.d("Filter", "More than 1 Genre selected.")
+                var tags: String = ""
+                selectedGenres.forEachIndexed { index, genre ->
+                    if (selectedGenres.lastIndex != index) {
+                        tags += "${genre.value}."
+                    } else {
+                        tags += genre.value
+                    }
+                }
+                gameViewModel.getFilteredGameList(tags, selectedPlatform.value)
             }
+            this.dismiss()
         }
 
         // Null-Check for not existing Tags.
@@ -91,8 +98,8 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
 
     private fun getGenreSelections(chipGroup: ChipGroup): List<Genre> {
         val selectedGenre = emptyList<Genre>().toMutableList()
-        getSelectChips(chipGroup).forEach {
-            selectedGenre.add(Genre.valueOf(it.text.toString().uppercase().replace("-", "_")))
+        getSelectChips(chipGroup).forEach {chipObject ->
+            selectedGenre.add(Genre.valueOf(chipObject.text.toString().uppercase().replace("-", "_")))
         }
         return selectedGenre
     }
