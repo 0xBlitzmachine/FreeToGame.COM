@@ -21,6 +21,7 @@ import com.blitzmachine.freetogamecom.databinding.ScreenshotItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.GameScreenshots
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.job
 
 class ScreenshotAdapter(private val context: Context): ListAdapter<GameScreenshots, ScreenshotAdapter.ItemViewHolder>(ScreenshotDiff()) {
     inner class ItemViewHolder(private val binding: ScreenshotItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {

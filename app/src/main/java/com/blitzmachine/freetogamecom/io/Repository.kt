@@ -1,8 +1,14 @@
 package com.blitzmachine.freetogamecom.io
 
+import android.content.Context
 import android.util.Log
+import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import coil.imageLoader
+import coil.request.CachePolicy
+import coil.request.ImageRequest
+import coil.request.ImageResult
 import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
@@ -23,6 +29,17 @@ class Repository(private val api: FreeToGameAPI) {
 
     init {
         getListOfLiveGames()
+    }
+
+    suspend fun loadImage(item: Games, targetView: ImageView, context: Context): ImageResult {
+        val imgRequest = ImageRequest.Builder(context)
+            .data(item.thumbnail)
+            .target(targetView)
+            .diskCachePolicy(CachePolicy.ENABLED)
+            .memoryCachePolicy(CachePolicy.ENABLED)
+            .build()
+
+        return context.imageLoader.enqueue(imgRequest).job.await()
     }
 
     fun getListOfLiveGames(platform: String? = null, category: String? = null, sortBy: String? = null) {

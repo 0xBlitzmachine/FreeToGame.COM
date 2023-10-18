@@ -1,29 +1,38 @@
 package com.blitzmachine.freetogamecom.views
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.imageLoader
 import coil.load
+import coil.request.CachePolicy
+import coil.request.Disposable
+import coil.request.ImageRequest
+import coil.request.ImageResult
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
+import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.coroutineScope
 
-class LiveGamesAdapter(private val gameViewModel: GameViewModel, private val uiViewModel: UiViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(
-    GameDiffUtil()
-) {
+class LiveGamesAdapter(
+    private val gameViewModel: GameViewModel,
+    private val uiViewModel: UiViewModel): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
 
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {
         fun bind(item: Games) {
             with(itemLayoutBinding) {
-                thumbnailImageView.load(item.thumbnail) {
-                    this.placeholder(R.drawable.logo_footer)
-                    this.error(R.drawable.logo_footer)
-                    this.crossfade(true)
-                    this.crossfade(2000)
-                }
+
+                gameViewModel.loadImage(item, thumbnailImageView, root.context)
+
                 gameTitleTextView.setText(item.title)
                 platformChip.setText(item.platform)
                 genreChip.setText(item.genre)

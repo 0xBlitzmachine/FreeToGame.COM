@@ -52,7 +52,7 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
 
         bottomSheetLayoutBinding.filterButton.setOnClickListener {
             // Handle Filter
-            getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
+           // getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
         }
 
         // Null-Check for not existing Tags.
@@ -88,7 +88,7 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
     }
 
     private fun getPlatformSelection(chipGroup: ChipGroup): Platform {
-
+        return Platform.PC
     }
 
     private fun getGenreSelections(): List<Genre> {
