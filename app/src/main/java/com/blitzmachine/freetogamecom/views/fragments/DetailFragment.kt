@@ -21,6 +21,7 @@ import coil.request.ImageRequest
 import coil.util.CoilUtils
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDetailBinding
+import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.ScreenshotAdapter
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +35,7 @@ class DetailFragment : Fragment() {
     private val detailLayoutBinding: FragmentDetailBinding by lazy { FragmentDetailBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
-    private val screenshotAdapter: ScreenshotAdapter by lazy { ScreenshotAdapter(this.requireContext()) }
+    private val screenshotAdapter: ScreenshotAdapter by lazy { ScreenshotAdapter(requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = detailLayoutBinding.root
 
@@ -54,7 +55,7 @@ class DetailFragment : Fragment() {
                 }
 
                 detailThumbnailImageView.load(game.thumbnail) {
-                    this.placeholder(R.drawable.logo_footer)
+                    this.placeholder(Utils.createCircularProgressDrawable(requireContext()))
                     this.error(R.drawable.logo_footer)
                     this.crossfade(true)
                     this.crossfade(2000)

@@ -14,6 +14,9 @@ import coil.request.CachePolicy
 import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.request.ImageResult
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
+import coil.transform.Transformation
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
 import com.blitzmachine.freetogamecom.io.classes.Game

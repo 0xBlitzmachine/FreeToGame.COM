@@ -1,29 +1,17 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
-import android.animation.LayoutTransition
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
-import androidx.core.content.ContextCompat
-import androidx.core.view.forEach
 import androidx.fragment.app.activityViewModels
-import at.blogc.android.views.ExpandableTextView
-import coil.load
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentBottomSheetBinding
+import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.io.classes.Genre
 import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.views.GameViewModel
@@ -31,10 +19,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 
-class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
+class BottomSheetFilterFragment : BottomSheetDialogFragment() {
 
     private val bottomSheetLayoutBinding: FragmentBottomSheetBinding by lazy { FragmentBottomSheetBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
@@ -51,8 +38,19 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
         }
 
         bottomSheetLayoutBinding.filterButton.setOnClickListener {
-            // Handle Filter
-           // getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
+            val selectedPlatform: Platform = getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
+            val selectedGenres: List<Genre> = getGenreSelections(bottomSheetLayoutBinding.genreChipGroup)
+
+            // When Empty means no selection has been done
+            if (selectedGenres.isEmpty()) {
+                Log.d("Filter", "Genre Selection = null")
+                //gameViewModel.getAllLiveGames(selectedPlatform.value)
+            } else if (selectedGenres.size < 2) {
+                Log.d("Filter", "Only one Genre selected.")
+                //gameViewModel.getAllLiveGames(selectedPlatform.value, selectedGenres[0].value)
+            } else {
+                Log.d("Filter", "More than 1 Genre selected.")
+            }
         }
 
         // Null-Check for not existing Tags.
@@ -88,11 +86,30 @@ class BottomSheetDetailsFragment : BottomSheetDialogFragment() {
     }
 
     private fun getPlatformSelection(chipGroup: ChipGroup): Platform {
-        return Platform.PC
+        return Platform.valueOf(getSelectChip(chipGroup).text.toString().uppercase())
     }
 
-    private fun getGenreSelections(): List<Genre> {
-        return emptyList()
+    private fun getGenreSelections(chipGroup: ChipGroup): List<Genre> {
+        val selectedGenre = emptyList<Genre>().toMutableList()
+        getSelectChips(chipGroup).forEach {
+            selectedGenre.add(Genre.valueOf(it.text.toString().uppercase().replace("-", "_")))
+        }
+        return selectedGenre
+    }
+
+    private fun getSelectChip(chipGroup: ChipGroup): Chip {
+        return chipGroup.findViewById(chipGroup.checkedChipId)
+    }
+
+    private fun getSelectChips(chipGroup: ChipGroup): List<Chip> {
+        val chips = emptyList<Chip>().toMutableList()
+        chipGroup.checkedChipIds.forEach {chipId ->
+            // Try findViewByTag later
+            chipGroup.findViewById<Chip>(chipId).also {chipObject ->
+                chips.add(chipObject)
+            }
+        }
+        return chips
     }
 
     private fun generateChip(text: String, context: Context): Chip {
