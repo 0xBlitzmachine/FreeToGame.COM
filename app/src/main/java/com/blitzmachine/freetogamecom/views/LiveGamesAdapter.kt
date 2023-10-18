@@ -31,8 +31,8 @@ class LiveGamesAdapter(
         fun bind(item: Games) {
             with(itemLayoutBinding) {
 
-                gameViewModel.loadImage(item, thumbnailImageView, root.context)
-
+                thumbnailImageView.load(item.thumbnail)
+                
                 gameTitleTextView.setText(item.title)
                 platformChip.setText(item.platform)
                 genreChip.setText(item.genre)

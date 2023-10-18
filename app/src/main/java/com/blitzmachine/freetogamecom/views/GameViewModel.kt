@@ -32,12 +32,4 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun getDetailsOfGame(id: Int) {
         repository.getDetailsOfGame(id)
     }
-
-    fun loadImage(item: Games, targetView: ImageView, context: Context) {
-        var imgResult: ImageResult? = null
-        viewModelScope.launch {
-            imgResult = repository.loadImage(item, targetView, context)
-        }
-        Log.d("Coil", "$imgResult")
-    }
 }

@@ -31,17 +31,6 @@ class Repository(private val api: FreeToGameAPI) {
         getListOfLiveGames()
     }
 
-    suspend fun loadImage(item: Games, targetView: ImageView, context: Context): ImageResult {
-        val imgRequest = ImageRequest.Builder(context)
-            .data(item.thumbnail)
-            .target(targetView)
-            .diskCachePolicy(CachePolicy.ENABLED)
-            .memoryCachePolicy(CachePolicy.ENABLED)
-            .build()
-
-        return context.imageLoader.enqueue(imgRequest).job.await()
-    }
-
     fun getListOfLiveGames(platform: String? = null, category: String? = null, sortBy: String? = null) {
         try {
             api.httpRoutes.getLiveGamesList(platform, category, sortBy).enqueue(object : Callback<List<Games>> {
