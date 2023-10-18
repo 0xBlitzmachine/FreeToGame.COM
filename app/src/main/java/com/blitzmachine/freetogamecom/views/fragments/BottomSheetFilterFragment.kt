@@ -49,11 +49,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
             } else {
                 var tags: String = ""
                 selectedGenres.forEachIndexed { index, genre ->
-                    if (selectedGenres.lastIndex != index) {
-                        tags += "${genre.value}."
-                    } else {
-                        tags += genre.value
-                    }
+                    tags += if (selectedGenres.lastIndex != index) "${genre.value}." else genre.value
                 }
                 gameViewModel.getFilteredGameList(tags, selectedPlatform.value)
             }
