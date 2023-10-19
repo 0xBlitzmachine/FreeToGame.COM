@@ -105,7 +105,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
     }
 
     private fun getSelectChips(chipGroup: ChipGroup): List<Chip> {
-        return chipGroup.checkedChipIds.map { chipObject -> chipGroup.findViewById(chipObject) }
+        return chipGroup.checkedChipIds.map { chipId -> chipGroup.findViewById(chipId) }
     }
 
     private fun generateChip(text: String, context: Context): Chip {
