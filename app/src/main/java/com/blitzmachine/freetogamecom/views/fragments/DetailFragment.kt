@@ -74,10 +74,6 @@ class DetailFragment : Fragment() {
                 it.findNavController().navigateUp()
             }
 
-            gameDescriptionLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-            gameInformationLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-            gameSpecsLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-
             val expandHandlers = listOf<ImageView> (
                 descriptionExpandHandler,
                 informationExpandHandler,
@@ -93,6 +89,7 @@ class DetailFragment : Fragment() {
             var indexer = 0
             do {
                 setupExpandableCardView(expandHandlers[indexer], expandedRootLayouts[indexer])
+                expandedRootLayouts[indexer].layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
                 indexer++
             } while (expandHandlers.size != indexer)
         }
