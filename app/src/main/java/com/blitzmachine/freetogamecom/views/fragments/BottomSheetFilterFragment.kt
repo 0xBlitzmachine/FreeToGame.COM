@@ -41,7 +41,6 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
             val selectedPlatform: Platform = getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
             val selectedGenres: List<Genre> = getGenreSelections(bottomSheetLayoutBinding.genreChipGroup)
 
-
             when (selectedGenres.size) {
                 0 -> gameViewModel.getAllLiveGames(selectedPlatform.value)
                 1 -> gameViewModel.getAllLiveGames(selectedPlatform.value, selectedGenres[0].value)
@@ -55,7 +54,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
         }
 
         // Null-Check for not existing Tags.
-        Platform.values().forEach { platform ->
+        Platform.values().map { platform ->
             generateChip(platform.value, this.requireContext()).also { chip ->
                 chip.isChecked = chip.text == "All"
                 bottomSheetLayoutBinding.platformChipGroup.addView(chip)
@@ -63,7 +62,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
         }
 
         // ChipGroup currently on singleSelection for testing before multiple selection can be done
-        Genre.values().forEach { genre ->
+        Genre.values().map { genre ->
             generateChip(genre.value, this.requireContext()).also { chip ->
                 bottomSheetLayoutBinding.genreChipGroup.addView(chip)
             }
@@ -92,7 +91,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
 
     private fun getGenreSelections(chipGroup: ChipGroup): List<Genre> {
         val selectedGenre = emptyList<Genre>().toMutableList()
-        getSelectChips(chipGroup).forEach {chipObject ->
+        getSelectChips(chipGroup).map {chipObject ->
             when (chipObject.text.toString()) {
                 Genre.THREE_D.value -> selectedGenre.add(Genre.THREE_D)
                 Genre.TWO_D.value -> selectedGenre.add(Genre.TWO_D)
