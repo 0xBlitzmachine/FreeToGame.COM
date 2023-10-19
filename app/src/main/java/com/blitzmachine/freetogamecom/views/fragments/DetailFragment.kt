@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
@@ -77,9 +78,23 @@ class DetailFragment : Fragment() {
             gameInformationLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
             gameSpecsLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
-            setupExpandableCardView(descriptionExpandHandler, gameDescriptionLayout)
-            setupExpandableCardView(informationExpandHandler, gameInformationLayout)
-            setupExpandableCardView(specsExpandHandler, gameSpecsLayout)
+            val expandHandlers = listOf<ImageView> (
+                descriptionExpandHandler,
+                informationExpandHandler,
+                specsExpandHandler
+            )
+
+            val expandedRootLayouts = listOf<LinearLayout>(
+                gameDescriptionLayout,
+                gameInformationLayout,
+                gameSpecsLayout
+            )
+
+            var indexer = 0
+            do {
+                setupExpandableCardView(expandHandlers[indexer], expandedRootLayouts[indexer])
+                indexer++
+            } while (expandHandlers.size != indexer)
         }
     }
 
