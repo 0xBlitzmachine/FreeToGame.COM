@@ -97,12 +97,15 @@ class DetailFragment : Fragment() {
 
     private fun setupExpandableCardView(expandHandler: ImageView, rootLayout: LinearLayout) {
         expandHandler.setOnClickListener {
-            rootLayout.visibility = if (rootLayout.visibility == View.VISIBLE) {
-                expandHandler.setImageResource(R.drawable.arrow_dropdown)
-                View.GONE
-            } else {
-                expandHandler.setImageResource(R.drawable.arrow_dropup)
-                View.VISIBLE
+            rootLayout.visibility = when (rootLayout.visibility) {
+                View.GONE -> {
+                    expandHandler.setImageResource(R.drawable.arrow_dropup)
+                    View.VISIBLE
+                }
+                else -> {
+                    expandHandler.setImageResource(R.drawable.arrow_dropdown)
+                    View.GONE
+                }
             }
         }
     }
