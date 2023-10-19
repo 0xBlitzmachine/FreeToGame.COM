@@ -45,8 +45,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
                 0 -> gameViewModel.getAllLiveGames(selectedPlatform.value)
                 1 -> gameViewModel.getAllLiveGames(selectedPlatform.value, selectedGenres[0].value)
                 else -> {
-                    val tags: String = selectedGenres.joinToString(".") { genre -> genre.value }
-                    Log.d("Sheet", tags)
+                    val tags = selectedGenres.joinToString(".") { genre -> genre.value }
                     gameViewModel.getFilteredGameList(tags, selectedPlatform.value)
                 }
             }
