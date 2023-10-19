@@ -41,17 +41,15 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
             val selectedPlatform: Platform = getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
             val selectedGenres: List<Genre> = getGenreSelections(bottomSheetLayoutBinding.genreChipGroup)
 
-            // When Empty means no selection has been done
-            if (selectedGenres.isEmpty()) {
-                gameViewModel.getAllLiveGames(selectedPlatform.value)
-            } else if (selectedGenres.size < 2) {
-                gameViewModel.getAllLiveGames(selectedPlatform.value, selectedGenres[0].value)
-            } else {
-                var tags: String = ""
-                selectedGenres.forEachIndexed { index, genre ->
-                    tags += if (selectedGenres.lastIndex != index) "${genre.value}." else genre.value
+
+            when (selectedGenres.size) {
+                0 -> gameViewModel.getAllLiveGames(selectedPlatform.value)
+                1 -> gameViewModel.getAllLiveGames(selectedPlatform.value, selectedGenres[0].value)
+                else -> {
+                    val tags: String = selectedGenres.joinToString(".") { genre -> genre.value }
+                    Log.d("Sheet", tags)
+                    gameViewModel.getFilteredGameList(tags, selectedPlatform.value)
                 }
-                gameViewModel.getFilteredGameList(tags, selectedPlatform.value)
             }
             this.dismiss()
         }
@@ -95,12 +93,10 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
     private fun getGenreSelections(chipGroup: ChipGroup): List<Genre> {
         val selectedGenre = emptyList<Genre>().toMutableList()
         getSelectChips(chipGroup).forEach {chipObject ->
-            if (chipObject.text.toString() == Genre.THREE_D.value) {
-                selectedGenre.add(Genre.THREE_D)
-            } else if (chipObject.text.toString() == Genre.TWO_D.value) {
-                selectedGenre.add(Genre.TWO_D)
-            } else {
-                selectedGenre.add(Genre.valueOf(chipObject.text.toString().uppercase().replace("-", "_")))
+            when (chipObject.text.toString()) {
+                Genre.THREE_D.value -> selectedGenre.add(Genre.THREE_D)
+                Genre.TWO_D.value -> selectedGenre.add(Genre.TWO_D)
+                else -> selectedGenre.add(Genre.valueOf(chipObject.text.toString().uppercase().replace("-", "_")))
             }
         }
         return selectedGenre
@@ -111,19 +107,12 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
     }
 
     private fun getSelectChips(chipGroup: ChipGroup): List<Chip> {
-        val chips = emptyList<Chip>().toMutableList()
-        chipGroup.checkedChipIds.forEach {chipId ->
-            // Try findViewByTag later
-            chipGroup.findViewById<Chip>(chipId).also {chipObject ->
-                chips.add(chipObject)
-            }
-        }
-        return chips
+        return chipGroup.checkedChipIds.map { chipObject -> chipGroup.findViewById(chipObject) }
     }
 
     private fun generateChip(text: String, context: Context): Chip {
         return Chip(context).apply {
-            this.text = text.replaceFirst(text.first(), text.first().uppercaseChar())
+            this.text = text.replaceFirstChar { it.uppercase() }
             this.id = View.generateViewId()
             this.isCheckable = true
             this.isClickable = true
