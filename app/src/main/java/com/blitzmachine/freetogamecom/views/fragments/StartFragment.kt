@@ -13,22 +13,22 @@ import com.blitzmachine.freetogamecom.views.GameViewModel
 
 class StartFragment : Fragment() {
 
-    private val startLayoutBinding: FragmentStartBinding by lazy { FragmentStartBinding.inflate(layoutInflater) }
+    private val binding: FragmentStartBinding by lazy { FragmentStartBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
     private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, this.requireContext()) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = startLayoutBinding.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        startLayoutBinding.liveGamesReyclerView.apply {
+        binding.liveGamesReyclerView.apply {
             setHasFixedSize(true)
             adapter = liveGamesAdapter
         }
 
-        startLayoutBinding.searchButton.setOnClickListener {
+        binding.searchButton.setOnClickListener {
             BottomSheetFilterFragment().apply {
                 this.isCancelable = true
             }.also {

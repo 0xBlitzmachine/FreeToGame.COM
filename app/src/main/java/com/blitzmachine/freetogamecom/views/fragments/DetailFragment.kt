@@ -4,7 +4,6 @@ import android.animation.LayoutTransition
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,40 +11,30 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import coil.Coil
-import coil.imageLoader
 import coil.load
-import coil.request.ImageRequest
-import coil.util.CoilUtils
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDetailBinding
 import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.ScreenshotAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.job
-import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 
 class DetailFragment : Fragment() {
 
-    private val detailLayoutBinding: FragmentDetailBinding by lazy { FragmentDetailBinding.inflate(layoutInflater) }
+    private val binding: FragmentDetailBinding by lazy { FragmentDetailBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
     private val uiViewModel: UiViewModel by activityViewModels()
     private val screenshotAdapter: ScreenshotAdapter by lazy { ScreenshotAdapter(requireContext()) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = detailLayoutBinding.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailLayoutBinding.screenshotRecyclerView.adapter = screenshotAdapter
+        binding.screenshotRecyclerView.adapter = screenshotAdapter
 
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
-            with(detailLayoutBinding) {
+            with(binding) {
 
                 screenshotAdapter.submitList(game.screenshots)
                 redirectButton.setOnClickListener {
@@ -79,7 +68,7 @@ class DetailFragment : Fragment() {
             }
         }
 
-        with(detailLayoutBinding) {
+        with(binding) {
             backButton.setOnClickListener {
                 it.findNavController().navigateUp()
             }

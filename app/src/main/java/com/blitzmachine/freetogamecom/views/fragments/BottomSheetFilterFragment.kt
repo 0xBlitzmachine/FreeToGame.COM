@@ -3,7 +3,6 @@ package com.blitzmachine.freetogamecom.views.fragments
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.FrameLayout
 import androidx.fragment.app.activityViewModels
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentBottomSheetBinding
-import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.io.classes.Genre
 import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.views.GameViewModel
@@ -23,23 +21,23 @@ import com.google.android.material.chip.ChipGroup
 
 class BottomSheetFilterFragment : BottomSheetDialogFragment() {
 
-    private val bottomSheetLayoutBinding: FragmentBottomSheetBinding by lazy { FragmentBottomSheetBinding.inflate(layoutInflater) }
+    private val binding: FragmentBottomSheetBinding by lazy { FragmentBottomSheetBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return bottomSheetLayoutBinding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomSheetLayoutBinding.backButton.setOnClickListener {
+        binding.backButton.setOnClickListener {
             this.dismiss()
         }
 
-        bottomSheetLayoutBinding.filterButton.setOnClickListener {
-            val selectedPlatform: Platform = getPlatformSelection(bottomSheetLayoutBinding.platformChipGroup)
-            val selectedGenres: List<Genre> = getGenreSelections(bottomSheetLayoutBinding.genreChipGroup)
+        binding.filterButton.setOnClickListener {
+            val selectedPlatform: Platform = getPlatformSelection(binding.platformChipGroup)
+            val selectedGenres: List<Genre> = getGenreSelections(binding.genreChipGroup)
 
             when (selectedGenres.size) {
                 0 -> gameViewModel.getAllLiveGames(selectedPlatform.value)
@@ -56,14 +54,14 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
         Platform.values().map { platform ->
             generateChip(platform.value, this.requireContext()).also { chip ->
                 chip.isChecked = chip.text == "All"
-                bottomSheetLayoutBinding.platformChipGroup.addView(chip)
+                binding.platformChipGroup.addView(chip)
             }
         }
 
         // ChipGroup currently on singleSelection for testing before multiple selection can be done
         Genre.values().map { genre ->
             generateChip(genre.value, this.requireContext()).also { chip ->
-                bottomSheetLayoutBinding.genreChipGroup.addView(chip)
+                binding.genreChipGroup.addView(chip)
             }
         }
     }
