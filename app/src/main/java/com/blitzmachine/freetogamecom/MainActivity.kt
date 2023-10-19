@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
-        gameViewModel.detailsOfSingleGame.observe(this) { game ->
+        gameViewModel.detailsOfSingleGame.observe(this) {
             navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
         }
     }
