@@ -1,25 +1,21 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentBottomSheetBinding
 import com.blitzmachine.freetogamecom.io.classes.Genre
 import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.views.GameViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-class BottomSheetFilterFragment : BottomSheetDialogFragment() {
+class FilterDialogFragment : DialogFragment() {
 
     private val binding: FragmentBottomSheetBinding by lazy { FragmentBottomSheetBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
@@ -66,7 +62,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
         }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).also {sheetDialog ->
             sheetDialog.setOnShowListener {dialogInterface ->
                 (dialogInterface as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet).also {frameLayout ->
@@ -80,7 +76,7 @@ class BottomSheetFilterFragment : BottomSheetDialogFragment() {
                 }
             }
         }.also {dialog -> return dialog }
-    }
+    }*/
 
     private fun getPlatformSelection(chipGroup: ChipGroup): Platform {
         return Platform.valueOf(getSelectChip(chipGroup).text.toString().uppercase())

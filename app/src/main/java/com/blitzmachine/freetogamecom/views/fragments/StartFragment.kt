@@ -15,7 +15,6 @@ class StartFragment : Fragment() {
 
     private val binding: FragmentStartBinding by lazy { FragmentStartBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
-    private val uiViewModel: UiViewModel by activityViewModels()
     private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, this.requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = binding.root
@@ -29,7 +28,7 @@ class StartFragment : Fragment() {
         }
 
         binding.searchButton.setOnClickListener {
-            BottomSheetFilterFragment().apply {
+            FilterDialogFragment().apply {
                 this.isCancelable = true
             }.also {
                 it.show((activity as MainActivity).supportFragmentManager, it.tag)

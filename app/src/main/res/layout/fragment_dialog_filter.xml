@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheetRootLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp"
-    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    tools:context=".views.fragments.BottomSheetFilterFragment">
+    tools:context=".views.fragments.FilterDialogFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,20 +32,12 @@
             android:text="Filter Options"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/filterButton"
-            style="@style/SecondaryButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:text="Filter" />
-
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
@@ -81,8 +69,8 @@
         android:text="@string/genre" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="300dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,7 +79,7 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/genreChipGroup"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
@@ -101,5 +89,15 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/filterButton"
+        style="@style/SecondaryButtonStyle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Filter" />
 
 </LinearLayout>
