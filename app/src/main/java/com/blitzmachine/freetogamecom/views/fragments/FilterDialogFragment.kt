@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.blitzmachine.freetogamecom.R
-import com.blitzmachine.freetogamecom.databinding.FragmentBottomSheetBinding
+import com.blitzmachine.freetogamecom.databinding.FragmentDialogFilterBinding
 import com.blitzmachine.freetogamecom.io.classes.Genre
 import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.views.GameViewModel
@@ -17,7 +17,7 @@ import com.google.android.material.chip.ChipGroup
 
 class FilterDialogFragment : DialogFragment() {
 
-    private val binding: FragmentBottomSheetBinding by lazy { FragmentBottomSheetBinding.inflate(layoutInflater) }
+    private val binding: FragmentDialogFilterBinding by lazy { FragmentDialogFilterBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -61,22 +61,6 @@ class FilterDialogFragment : DialogFragment() {
             }
         }
     }
-
-    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).also {sheetDialog ->
-            sheetDialog.setOnShowListener {dialogInterface ->
-                (dialogInterface as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet).also {frameLayout ->
-                    if (frameLayout != null) {
-                        BottomSheetBehavior.from(frameLayout).apply {
-                            this.state = BottomSheetBehavior.STATE_EXPANDED
-                            this.isDraggable = false
-                            this.skipCollapsed = true
-                        }
-                    }
-                }
-            }
-        }.also {dialog -> return dialog }
-    }*/
 
     private fun getPlatformSelection(chipGroup: ChipGroup): Platform {
         return Platform.valueOf(getSelectChip(chipGroup).text.toString().uppercase())
