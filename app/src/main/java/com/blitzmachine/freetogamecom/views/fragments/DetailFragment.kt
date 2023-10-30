@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
@@ -19,6 +18,8 @@ import com.blitzmachine.freetogamecom.databinding.FragmentDetailBinding
 import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.ScreenshotAdapter
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 
 class DetailFragment : Fragment() {
 
@@ -36,7 +37,14 @@ class DetailFragment : Fragment() {
         gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
             with(binding) {
 
-                screenshotAdapter.submitList(game.screenshots)
+                //screenshotAdapter.submitList(game.screenshots)
+                var screenshotCollection = emptyList<SlideModel>().toMutableList()
+                game.screenshots.forEach { screenshot ->
+                    screenshotCollection.add(SlideModel(imageUrl = screenshot.image, scaleType = ScaleTypes.FIT))
+                }.also {
+                    imageSlider.setImageList(screenshotCollection)
+                }
+
                 redirectButton.setOnClickListener {
                     Intent(Intent.ACTION_VIEW, Uri.parse(game.game_url)).also {
                         startActivity(it)

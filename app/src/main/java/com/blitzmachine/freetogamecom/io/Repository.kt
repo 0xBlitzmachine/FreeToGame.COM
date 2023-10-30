@@ -1,5 +1,6 @@
 package com.blitzmachine.freetogamecom.io
 
+import android.app.NotificationManager
 import android.content.Context
 import android.util.Log
 import android.widget.ImageView
@@ -41,6 +42,7 @@ class Repository(private val api: FreeToGameAPI) {
                             Log.e(APIUtils.apiLogcatTag, "LiveGamesRequest failed. Response Code: ${response.code()}")
                         }
                     }
+
 
                     override fun onFailure(call: Call<List<Games>>, t: Throwable) {
                         Log.e(APIUtils.apiLogcatTag, "LiveGamesRequest failed: ${t.message}")

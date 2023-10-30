@@ -1,6 +1,7 @@
 package com.blitzmachine.freetogamecom.utils
 
 import android.content.Context
+import android.graphics.Paint
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.blitzmachine.freetogamecom.R
 
