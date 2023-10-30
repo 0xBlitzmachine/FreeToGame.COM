@@ -30,8 +30,14 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     private val _detailsOfSingleGame: MutableLiveData<Game> = MutableLiveData()
     val detailsOfSingleGame: LiveData<Game> get() = _detailsOfSingleGame
 
+    val cachedGames: LiveData<List<Games>> = database.databaseDao().getAllCachedGames()
+
     init {
         getListOfLiveGames()
+    }
+
+    suspend fun cacheGame(game: Games) {
+        database.databaseDao().insertGame(game)
     }
 
     fun getListOfLiveGames(platform: String? = null, category: String? = null, sortBy: String? = null) {
