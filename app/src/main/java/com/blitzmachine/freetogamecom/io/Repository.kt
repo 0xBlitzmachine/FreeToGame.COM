@@ -12,6 +12,7 @@ import coil.request.ImageRequest
 import coil.request.ImageResult
 import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.classes.Games
+import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import com.blitzmachine.freetogamecom.utils.APIUtils
 import kotlinx.coroutines.runBlocking
@@ -20,7 +21,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.Exception
 
-class Repository(private val api: FreeToGameAPI) {
+class Repository(
+    private val api: FreeToGameAPI,
+    private val database: GameDatabase) {
 
     private val _listOfLiveGames: MutableLiveData<List<Games>> = MutableLiveData()
     val listOfLiveGames: LiveData<List<Games>> get() = _listOfLiveGames
