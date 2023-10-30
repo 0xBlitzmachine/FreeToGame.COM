@@ -40,5 +40,9 @@ class StartFragment : Fragment() {
         gameViewModel.listOfLiveGames.observe(viewLifecycleOwner) { listOfLiveGames ->
             liveGamesAdapter.submitList(listOfLiveGames)
         }
+
+        gameViewModel.allCachedGames.observe(viewLifecycleOwner) {
+            Log.d("Cache", it.toString())
+        }
     }
 }
