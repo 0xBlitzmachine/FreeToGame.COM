@@ -22,8 +22,7 @@ abstract class GameDatabase : RoomDatabase() {
             }
 
             synchronized(this) {
-                val instance = Room.databaseBuilder(context, GameDatabase::class.java, "game_database").build()
-                return instance
+                return Room.databaseBuilder(context, GameDatabase::class.java, "game_database").build()
             }
         }
     }
