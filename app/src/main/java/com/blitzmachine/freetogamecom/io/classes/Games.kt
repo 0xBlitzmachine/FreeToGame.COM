@@ -3,7 +3,7 @@ package com.blitzmachine.freetogamecom.io.classes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity("Games")
+@Entity(tableName = "games")
 data class Games(
     @PrimaryKey
     val id: Int,
@@ -16,5 +16,5 @@ data class Games(
     val developer: String,
     val release_date: String,
     val game_url: String,
-    val isLiked: Boolean = false
+    val isLiked: Boolean = true
 )
