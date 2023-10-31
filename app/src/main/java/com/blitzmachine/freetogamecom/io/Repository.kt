@@ -1,22 +1,13 @@
 package com.blitzmachine.freetogamecom.io
 
-import android.app.NotificationManager
-import android.content.Context
 import android.util.Log
-import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import coil.imageLoader
-import coil.request.CachePolicy
-import coil.request.ImageRequest
-import coil.request.ImageResult
-import com.blitzmachine.freetogamecom.io.classes.Game
+import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Games
-import com.blitzmachine.freetogamecom.io.local.DatabaseDao
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import com.blitzmachine.freetogamecom.utils.APIUtils
-import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,10 +18,10 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     private val _listOfLiveGames: MutableLiveData<List<Games>> = MutableLiveData()
     val listOfLiveGames: LiveData<List<Games>> get() = _listOfLiveGames
 
-    private val _detailsOfSingleGame: MutableLiveData<Game> = MutableLiveData()
-    val detailsOfSingleGame: LiveData<Game> get() = _detailsOfSingleGame
+    private val _detailsOfSingleGame: MutableLiveData<DetailedGame> = MutableLiveData()
+    val detailsOfSingleGame: LiveData<DetailedGame> get() = _detailsOfSingleGame
 
-    val cachedGames: LiveData<List<Games>> = database.databaseDao().getAllCachedGames()
+    val cachedGames: LiveData<List<Games>> = database.databaseDao().getGames()
 
     init {
         getListOfLiveGames()
@@ -63,8 +54,8 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
 
     fun getDetailsOfGame(id: Int) {
         try {
-            api.httpRoutes.getGameDetails(id).enqueue(object : Callback<Game> {
-                override fun onResponse(call: Call<Game>, response: Response<Game>) {
+            api.httpRoutes.getGameDetails(id).enqueue(object : Callback<DetailedGame> {
+                override fun onResponse(call: Call<DetailedGame>, response: Response<DetailedGame>) {
                     if (response.isSuccessful) {
                         _detailsOfSingleGame.postValue(response.body())
                     } else {
@@ -72,7 +63,7 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
                     }
                 }
 
-                override fun onFailure(call: Call<Game>, t: Throwable) {
+                override fun onFailure(call: Call<DetailedGame>, t: Throwable) {
                     Log.e(APIUtils.apiLogcatTag, "GameDetailsRequest failed: ${t.message}")
                 }
             })

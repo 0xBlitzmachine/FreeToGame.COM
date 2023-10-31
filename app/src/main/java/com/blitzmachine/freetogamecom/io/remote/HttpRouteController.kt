@@ -1,6 +1,6 @@
 package com.blitzmachine.freetogamecom.io.remote
 
-import com.blitzmachine.freetogamecom.io.classes.Game
+import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Games
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,7 +16,7 @@ interface HttpRouteController {
 
     @GET("game")
     fun getGameDetails(
-        @Query("id") id: Int): Call<Game>
+        @Query("id") id: Int): Call<DetailedGame>
 
     @GET("filter")
     fun getFilteredGameList(

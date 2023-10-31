@@ -5,9 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.blitzmachine.freetogamecom.io.Repository
-import com.blitzmachine.freetogamecom.io.classes.Game
+import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Games
-import com.blitzmachine.freetogamecom.io.local.DatabaseDao
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +18,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = Repository(FreeToGameAPI, database)
 
     val listOfLiveGames: LiveData<List<Games>> = repository.listOfLiveGames
-    val detailsOfSingleGame: LiveData<Game> = repository.detailsOfSingleGame
+    val detailsOfSingleGame: LiveData<DetailedGame> = repository.detailsOfSingleGame
     val allCachedGames: LiveData<List<Games>> = repository.cachedGames
 
     fun cacheGame(game: Games)  {

@@ -17,6 +17,6 @@ interface DatabaseDao {
     suspend fun insertGames(games: List<Games>)
 
     @Query("SELECT * FROM games")
-    fun getAllCachedGames(): LiveData<List<Games>>
+    fun getGames(): LiveData<List<Games>>
 
 }

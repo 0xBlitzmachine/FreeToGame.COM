@@ -1,31 +1,16 @@
 package com.blitzmachine.freetogamecom.views
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.imageLoader
 import coil.load
-import coil.request.CachePolicy
-import coil.request.Disposable
-import coil.request.ImageRequest
-import coil.request.ImageResult
-import coil.transform.CircleCropTransformation
-import coil.transform.RoundedCornersTransformation
-import coil.transform.Transformation
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
-import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.classes.Games
 import com.blitzmachine.freetogamecom.utils.Utils
-import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.coroutineScope
 
 class LiveGamesAdapter(
     private val gameViewModel: GameViewModel,
