@@ -5,18 +5,17 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.blitzmachine.freetogamecom.io.classes.Games
+import com.blitzmachine.freetogamecom.io.classes.Game
 
 @Dao
 interface DatabaseDao {
 
+    // Keep ConflictStrategy on REPLACE and use own logic to filter either if
+    // object has same content as the fresh one fetched by API or not.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGame(game: Games)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGames(games: List<Games>)
+    suspend fun insertGame(game: Game)
 
     @Query("SELECT * FROM games")
-    fun getGames(): LiveData<List<Games>>
+    fun getGames(): LiveData<List<Game>>
 
 }

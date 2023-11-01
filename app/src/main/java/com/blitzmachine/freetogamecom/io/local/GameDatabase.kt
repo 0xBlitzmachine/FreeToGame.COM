@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.blitzmachine.freetogamecom.io.classes.Games
+import com.blitzmachine.freetogamecom.io.classes.Game
 
-@Database(entities = [Games::class], version = 1, exportSchema = false)
+@Database(entities = [Game::class], version = 1, exportSchema = false)
 abstract class GameDatabase : RoomDatabase() {
     abstract fun databaseDao(): DatabaseDao
 

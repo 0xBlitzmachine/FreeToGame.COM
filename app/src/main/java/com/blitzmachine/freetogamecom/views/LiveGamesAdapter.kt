@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.GameItemLayoutBinding
-import com.blitzmachine.freetogamecom.io.classes.Games
+import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.utils.Utils
 
 class LiveGamesAdapter(
     private val gameViewModel: GameViewModel,
-    private val context: Context): ListAdapter<Games, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
+    private val context: Context): ListAdapter<Game, LiveGamesAdapter.ItemViewHolder>(GameDiffUtil()) {
 
     inner class ItemViewHolder(private val itemLayoutBinding: GameItemLayoutBinding): RecyclerView.ViewHolder(itemLayoutBinding.root) {
-        fun bind(item: Games) {
+        fun bind(item: Game) {
             with(itemLayoutBinding) {
 
                 thumbnailImageView.load(item.thumbnail) {
@@ -48,12 +48,12 @@ class LiveGamesAdapter(
     }
 }
 
-class GameDiffUtil(): DiffUtil.ItemCallback<Games>() {
-    override fun areItemsTheSame(oldItem: Games, newItem: Games): Boolean {
+class GameDiffUtil(): DiffUtil.ItemCallback<Game>() {
+    override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Games, newItem: Games): Boolean {
+    override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
         return oldItem.id == newItem.id &&
                 oldItem.game_url == newItem.game_url &&
                 oldItem.genre == newItem.genre &&

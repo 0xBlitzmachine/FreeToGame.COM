@@ -16,5 +16,5 @@ data class Game(
     val developer: String,
     val release_date: String,
     val game_url: String,
-    val isLiked: Boolean = true
+    val isLiked: Boolean = false
 )
