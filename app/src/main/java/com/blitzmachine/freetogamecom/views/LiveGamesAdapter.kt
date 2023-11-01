@@ -32,7 +32,7 @@ class LiveGamesAdapter(
                 genreChip.setText(item.genre)
 
                 startMaterialCardView.setOnClickListener {
-                    //gameViewModel.getDetailsOfGame(item.id)
+                    gameViewModel.getDetailsOfGame(item.id)
                     gameViewModel.cacheGame(item)
                 }
             }
