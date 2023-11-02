@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
-        var counter: Int = 0
+
         gameViewModel.listOfNewGame.observe(this) { games ->
             if (gameViewModel.cachedGames.value?.isEmpty() == true) {
                 Log.d("Caching", "Database was empty - Filling with data!")
@@ -48,26 +48,11 @@ class MainActivity : AppCompatActivity() {
                                         cachedGame.platform == game.platform &&
                                         cachedGame.title == game.title
                             }) {
-                            counter++
-                            Log.d("Caching", "Skipping Item as they are the same. Items skipped: ${counter}")
                             continue
                         } else {
                             if (cachedGames.find { cachedGame -> cachedGame.id == game.id }?.isLiked == true) {
-                                gameViewModel.cacheGame(Game(
-                                    game.id,
-                                    game.title,
-                                    game.thumbnail,
-                                    game.short_description,
-                                    game.platform,
-                                    game.genre,
-                                    game.publisher,
-                                    game.developer,
-                                    game.release_date,
-                                    game.game_url,
-                                    true))
-                                Log.d("Caching", "GameID: ${game.id} had new content while liked - Refreshed!")
+                                gameViewModel.cacheGame(game.copy(isLiked = true))
                             } else {
-                                Log.d("Caching", "GameID: ${game.id} had new content and was not liked! - Refreshed!")
                                 gameViewModel.cacheGame(game)
                             }
                         }
