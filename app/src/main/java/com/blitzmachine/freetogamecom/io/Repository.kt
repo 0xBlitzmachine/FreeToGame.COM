@@ -31,6 +31,10 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
         database.databaseDao().insertGame(game)
     }
 
+    suspend fun cacheGames(games: List<Game>) {
+        database.databaseDao().insertGames(games)
+    }
+
     fun fetchNewData(platform: String? = null, category: String? = null, sortBy: String? = null) {
         try {
             api.httpRoutes.getNewData(platform, category, sortBy).enqueue(object : Callback<List<Game>> {

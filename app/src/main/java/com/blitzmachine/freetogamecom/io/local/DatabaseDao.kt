@@ -15,6 +15,9 @@ interface DatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGame(game: Game)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertGames(games: List<Game>)
+
     @Query("SELECT * FROM games")
     fun getGames(): LiveData<List<Game>>
 

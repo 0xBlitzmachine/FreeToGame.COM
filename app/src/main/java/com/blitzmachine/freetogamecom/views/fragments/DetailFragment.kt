@@ -34,16 +34,15 @@ class DetailFragment : Fragment() {
 
         binding.screenshotRecyclerView.adapter = screenshotAdapter
 
-        gameViewModel.detailsOfSingleGame.observe(viewLifecycleOwner) { game ->
+        gameViewModel.detailsOfGame.observe(viewLifecycleOwner) { game ->
             with(binding) {
 
                 //screenshotAdapter.submitList(game.screenshots)
                 var screenshotCollection = emptyList<SlideModel>().toMutableList()
                 game.screenshots.forEach { screenshot ->
                     screenshotCollection.add(SlideModel(imageUrl = screenshot.image, scaleType = ScaleTypes.FIT))
-                }.also {
-                    imageSlider.setImageList(screenshotCollection)
                 }
+                imageSlider.setImageList(screenshotCollection)
 
                 redirectButton.setOnClickListener {
                     Intent(Intent.ACTION_VIEW, Uri.parse(game.game_url)).also {

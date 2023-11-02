@@ -37,12 +37,9 @@ class StartFragment : Fragment() {
             }
         }
 
-        gameViewModel.listOfLiveGames.observe(viewLifecycleOwner) { listOfLiveGames ->
-            liveGamesAdapter.submitList(listOfLiveGames)
-        }
-
-        gameViewModel.allCachedGames.observe(viewLifecycleOwner) {
-            Log.d("Cache", it.toString())
+        gameViewModel.cachedGames.observe(viewLifecycleOwner) { cachedGames ->
+            liveGamesAdapter.submitList(cachedGames)
+            Log.d("Caching", "${cachedGames.size}")
         }
     }
 }

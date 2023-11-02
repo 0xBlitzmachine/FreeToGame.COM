@@ -28,6 +28,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun cacheGames(games: List<Game>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.cacheGames(games)
+        }
+    }
+
     fun fetchNewData(platform: String? = null, category: String? = null, sortBy: String? = null) {
         repository.fetchNewData(platform, category, sortBy)
     }

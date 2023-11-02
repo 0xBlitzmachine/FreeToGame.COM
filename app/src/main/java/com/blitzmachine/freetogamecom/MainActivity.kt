@@ -2,6 +2,7 @@ package com.blitzmachine.freetogamecom
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -26,27 +27,32 @@ class MainActivity : AppCompatActivity() {
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
+        var counter: Int = 0
         gameViewModel.listOfNewGame.observe(this) { games ->
             if (gameViewModel.cachedGames.value?.isEmpty() == true) {
-                games.forEach { game ->
-                    gameViewModel.cacheGame(game)
-                }
+                Log.d("Caching", "Database was empty - Filling with data!")
+                gameViewModel.cacheGames(games)
             } else {
-                games.forEach { newGame ->
-                    for (oldGame in gameViewModel.cachedGames.value!!) {
-                        if (oldGame.id == newGame.id &&
-                            oldGame.game_url == newGame.game_url &&
-                            oldGame.genre == newGame.genre &&
-                            oldGame.platform == newGame.platform &&
-                            oldGame.developer == newGame.developer &&
-                            oldGame.publisher == newGame.publisher &&
-                            oldGame.release_date == newGame.release_date &&
-                            oldGame.short_description == newGame.short_description &&
-                            oldGame.thumbnail == newGame.thumbnail
-                        ) {
+                val cachedGames = gameViewModel.cachedGames.value
+                if (cachedGames != null) {
+                    for (game in games) {
+                        if (cachedGames.any { cachedGame -> cachedGame.id == game.id &&
+                                        cachedGame.game_url == game.game_url &&
+                                        cachedGame.thumbnail == game.thumbnail &&
+                                        cachedGame.genre == game.genre &&
+                                        cachedGame.short_description == game.short_description &&
+                                        cachedGame.developer == game.developer &&
+                                        cachedGame.release_date == game.release_date &&
+                                        cachedGame.publisher == game.publisher &&
+                                        cachedGame.platform == game.platform &&
+                                        cachedGame.title == game.title
+                            }) {
+                            counter++
+                            Log.d("Caching", "Skipping Item as they are the same. Items skipped: ${counter}")
                             continue
                         } else {
-                            gameViewModel.cacheGame(newGame)
+                            Log.d("Caching", "${game.title} cached!")
+                            gameViewModel.cacheGame(game)
                         }
                     }
                 }
