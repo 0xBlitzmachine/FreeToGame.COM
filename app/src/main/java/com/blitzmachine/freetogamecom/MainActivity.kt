@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
+import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
@@ -51,8 +52,24 @@ class MainActivity : AppCompatActivity() {
                             Log.d("Caching", "Skipping Item as they are the same. Items skipped: ${counter}")
                             continue
                         } else {
-                            Log.d("Caching", "${game.title} cached!")
-                            gameViewModel.cacheGame(game)
+                            if (cachedGames.find { cachedGame -> cachedGame.id == game.id }?.isLiked == true) {
+                                gameViewModel.cacheGame(Game(
+                                    game.id,
+                                    game.title,
+                                    game.thumbnail,
+                                    game.short_description,
+                                    game.platform,
+                                    game.genre,
+                                    game.publisher,
+                                    game.developer,
+                                    game.release_date,
+                                    game.game_url,
+                                    true))
+                                Log.d("Caching", "GameID: ${game.id} had new content while liked - Refreshed!")
+                            } else {
+                                Log.d("Caching", "GameID: ${game.id} had new content and was not liked! - Refreshed!")
+                                gameViewModel.cacheGame(game)
+                            }
                         }
                     }
                 }

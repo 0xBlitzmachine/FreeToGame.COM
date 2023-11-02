@@ -28,7 +28,7 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     }
 
     suspend fun cacheGame(game: Game) {
-        database.databaseDao().insertGame(game)
+        database.databaseDao().upsertGame(game)
     }
 
     suspend fun cacheGames(games: List<Game>) {

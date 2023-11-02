@@ -55,6 +55,7 @@ class GameDiffUtil(): DiffUtil.ItemCallback<Game>() {
 
     override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
         return oldItem.id == newItem.id &&
+                oldItem.title == newItem.title &&
                 oldItem.game_url == newItem.game_url &&
                 oldItem.genre == newItem.genre &&
                 oldItem.platform == newItem.platform &&
@@ -62,6 +63,7 @@ class GameDiffUtil(): DiffUtil.ItemCallback<Game>() {
                 oldItem.publisher == newItem.publisher &&
                 oldItem.release_date == newItem.release_date &&
                 oldItem.short_description == newItem.short_description &&
-                oldItem.thumbnail == newItem.thumbnail
+                oldItem.thumbnail == newItem.thumbnail &&
+                oldItem.isLiked == newItem.isLiked
     }
 }
