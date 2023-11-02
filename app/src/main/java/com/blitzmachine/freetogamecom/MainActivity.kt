@@ -31,14 +31,13 @@ class MainActivity : AppCompatActivity() {
 
         gameViewModel.listOfNewGame.observe(this) { games ->
             if (gameViewModel.cachedGames.value?.isEmpty() == true) {
-                Log.d("Caching", "Database was empty - Filling with data!")
                 gameViewModel.cacheGames(games)
             } else {
                 val cachedGames = gameViewModel.cachedGames.value
                 if (cachedGames != null) {
                     for (game in games) {
-                        if (cachedGames.any { cachedGame -> cachedGame.id == game.id &&
-                                        cachedGame.game_url == game.game_url &&
+                        if (cachedGames.any { cachedGame ->
+                                cachedGame.game_url == game.game_url &&
                                         cachedGame.thumbnail == game.thumbnail &&
                                         cachedGame.genre == game.genre &&
                                         cachedGame.short_description == game.short_description &&

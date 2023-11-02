@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import coil.imageLoader
 import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.views.LiveGamesAdapter
@@ -24,16 +28,40 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.liveGamesReyclerView.apply {
-            setHasFixedSize(true)
-            adapter = liveGamesAdapter
-        }
+        with (binding) {
+            binding.scrollToBeginFAB.setOnClickListener {
+                liveGamesReyclerView.scrollToPosition(0)
+            }
 
-        binding.searchButton.setOnClickListener {
-            FilterDialogFragment().apply {
-                this.isCancelable = true
-            }.also {
-                it.show((activity as MainActivity).supportFragmentManager, it.tag)
+            liveGamesReyclerView.apply {
+                setHasFixedSize(true)
+                adapter = liveGamesAdapter
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+                        if (dy > 0) {
+                            // Scroll down - Seems like "dy" position is the Y swipe length
+                        } else if (dy < 0) {
+                            // Scroll up
+                        }
+                    }
+
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+
+                        if (newState == SCROLL_STATE_DRAGGING) {
+                            Log.d("Scroll", "SCROLL_STATE_DRAGGING")
+                        }
+                    }
+                })
+            }
+
+            searchButton.setOnClickListener {
+                FilterDialogFragment().apply {
+                    this.isCancelable = true
+                }.also {
+                    it.show((activity as MainActivity).supportFragmentManager, it.tag)
+                }
             }
         }
 
