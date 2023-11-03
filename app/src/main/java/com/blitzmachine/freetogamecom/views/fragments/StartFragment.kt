@@ -31,7 +31,7 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
-            binding.scrollToBeginFAB.setOnClickListener {
+            scrollToBeginFAB.setOnClickListener {
                 it.visibility = View.INVISIBLE
                 liveGamesReyclerView.scrollToPosition(0)
             }
@@ -70,7 +70,6 @@ class StartFragment : Fragment() {
 
         gameViewModel.cachedGames.observe(viewLifecycleOwner) { cachedGames ->
             liveGamesAdapter.submitList(cachedGames)
-            Log.d("Caching", "${cachedGames.size}")
         }
     }
 }
