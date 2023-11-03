@@ -33,7 +33,6 @@ class LiveGamesAdapter(
 
                 startMaterialCardView.setOnClickListener {
                     gameViewModel.getDetailsOfGame(item.id)
-                    gameViewModel.cacheGame(item)
                 }
             }
         }

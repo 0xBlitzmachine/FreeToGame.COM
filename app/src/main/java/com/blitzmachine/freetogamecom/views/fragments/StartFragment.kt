@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import coil.imageLoader
@@ -30,19 +32,20 @@ class StartFragment : Fragment() {
 
         with (binding) {
             binding.scrollToBeginFAB.setOnClickListener {
+                it.visibility = View.INVISIBLE
                 liveGamesReyclerView.scrollToPosition(0)
             }
 
             liveGamesReyclerView.apply {
                 setHasFixedSize(true)
                 adapter = liveGamesAdapter
-                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                addOnScrollListener(object : OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)
-                        if (dy > 0) {
-                            // Scroll down - Seems like "dy" position is the Y swipe length
-                        } else if (dy < 0) {
-                            // Scroll up
+                        if (recyclerView.computeVerticalScrollOffset() > 1000) {
+                            if (scrollToBeginFAB.visibility != View.VISIBLE) {
+                                scrollToBeginFAB.visibility = View.VISIBLE
+                            }
                         }
                     }
 
