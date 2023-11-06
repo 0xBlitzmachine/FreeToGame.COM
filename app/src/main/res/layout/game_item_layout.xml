@@ -5,7 +5,8 @@
     android:id="@+id/startMaterialCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp">
+    android:layout_margin="15dp"
+    app:checkedIcon="@drawable/icon_star_filled">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
             android:id="@+id/thumbnailImageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -113,6 +114,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="MMORPG" />
+
+        <ImageButton
+            android:id="@+id/favoriteImageButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_star_outlined" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

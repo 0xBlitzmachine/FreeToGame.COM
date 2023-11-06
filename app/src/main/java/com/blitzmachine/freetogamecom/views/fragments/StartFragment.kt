@@ -32,7 +32,6 @@ class StartFragment : Fragment() {
 
         with (binding) {
             scrollToBeginFAB.setOnClickListener {
-                it.visibility = View.INVISIBLE
                 liveGamesReyclerView.scrollToPosition(0)
             }
 
@@ -42,10 +41,12 @@ class StartFragment : Fragment() {
                 addOnScrollListener(object : OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)
-                        if (recyclerView.computeVerticalScrollOffset() > 1000) {
+                        if (recyclerView.computeVerticalScrollOffset() > 1200) {
                             if (scrollToBeginFAB.visibility != View.VISIBLE) {
                                 scrollToBeginFAB.visibility = View.VISIBLE
                             }
+                        } else if (recyclerView.computeVerticalScrollOffset() < 1200) {
+                            scrollToBeginFAB.visibility = View.INVISIBLE
                         }
                     }
 

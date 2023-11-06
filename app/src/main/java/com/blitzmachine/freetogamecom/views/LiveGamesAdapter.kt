@@ -20,6 +20,7 @@ class LiveGamesAdapter(
         fun bind(item: Game) {
             with(itemLayoutBinding) {
 
+
                 thumbnailImageView.load(item.thumbnail) {
                     this.placeholder(Utils.createCircularProgressDrawable(context))
                     this.error(R.drawable.image_not_available)
@@ -33,6 +34,24 @@ class LiveGamesAdapter(
 
                 startMaterialCardView.setOnClickListener {
                     gameViewModel.getDetailsOfGame(item.id)
+                }
+
+                favoriteImageButton.setImageResource(
+                    if (item.isLiked) {
+                        R.drawable.icon_star_filled
+                    } else {
+                        R.drawable.icon_star_outlined
+                    }
+                )
+
+                favoriteImageButton.setOnClickListener {
+                    if (item.isLiked) {
+                        gameViewModel.cacheGame(item.copy(isLiked = false))
+                        favoriteImageButton.setImageResource(R.drawable.icon_star_outlined)
+                    } else {
+                        gameViewModel.cacheGame(item.copy(isLiked = true))
+                        favoriteImageButton.setImageResource(R.drawable.icon_star_filled)
+                    }
                 }
             }
         }
@@ -53,8 +72,7 @@ class GameDiffUtil(): DiffUtil.ItemCallback<Game>() {
     }
 
     override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
-        return oldItem.id == newItem.id &&
-                oldItem.title == newItem.title &&
+        return oldItem.title == newItem.title &&
                 oldItem.game_url == newItem.game_url &&
                 oldItem.genre == newItem.genre &&
                 oldItem.platform == newItem.platform &&
