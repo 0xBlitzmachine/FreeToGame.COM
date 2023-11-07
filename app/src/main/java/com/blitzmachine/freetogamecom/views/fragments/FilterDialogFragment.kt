@@ -30,11 +30,7 @@ class FilterDialogFragment : DialogFragment() {
         binding.backButton.setOnClickListener {
             this.dismiss()
         }
-
-
-        TODO("Since Caching has been implemented - Filter logic needs a change to work" +
-                "with already provided data instead of waiting for the API result. Also" +
-                "Filter function should also support offline-mode since I cache already.")
+        
         binding.filterButton.setOnClickListener {
             val selectedPlatform: Platform = getPlatformSelection(binding.platformChipGroup)
             val selectedGenres: List<Genre> = getGenreSelections(binding.genreChipGroup)

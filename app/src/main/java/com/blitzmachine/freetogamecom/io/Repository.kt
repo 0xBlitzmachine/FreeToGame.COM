@@ -35,9 +35,9 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
         database.databaseDao().insertGames(games)
     }
 
-    fun fetchNewData(platform: String? = null, category: String? = null, sortBy: String? = null) {
+    fun fetchNewData() {
         try {
-            api.httpRoutes.getNewData(platform, category, sortBy).enqueue(object : Callback<List<Game>> {
+            api.httpRoutes.getNewData().enqueue(object : Callback<List<Game>> {
                     override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
                         if (response.isSuccessful) {
                             _listOfNewGames.postValue(response.body())
@@ -53,27 +53,6 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
                 })
         } catch (ex: Exception) {
             Log.e(APIUtils.apiLogcatTag,"LiveGamesRequest Exception: ${ex.message}")
-        }
-    }
-
-    fun fetchNewFilteredData(tag: String? = null, platform: String? = null) {
-        try {
-            api.httpRoutes.getNewFilteredData(tag, platform).enqueue(object : Callback<List<Game>> {
-                override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
-                    if (response.isSuccessful) {
-                        _listOfNewGames.postValue(response.body())
-                    } else {
-                        Log.e(APIUtils.apiLogcatTag, "FilteredGameList failed. Response Code: ${response.code()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<List<Game>>, t: Throwable) {
-                    Log.e(APIUtils.apiLogcatTag, "FilteredGameList failed: ${t.message}")
-                }
-
-            })
-        } catch (ex: Exception) {
-            Log.e(APIUtils.apiLogcatTag, "FilteredGameList Exception: ${ex.message}")
         }
     }
 

@@ -29,8 +29,8 @@ class FavoriteFragment : Fragment() {
             }
         }
 
-        gameViewModel.cachedGames.observe(viewLifecycleOwner) {
-            favoriteAdapter.submitList(it.filter { it.isLiked })
+        gameViewModel.cachedGames.observe(viewLifecycleOwner) { games ->
+            favoriteAdapter.submitList(games.filter { game -> game.isLiked })
         }
         //favoriteAdapter.submitList(gameViewModel.cachedGames.value?.filter { game -> game.isLiked })
     }

@@ -4,10 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blitzmachine.freetogamecom.io.Repository
 import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Game
+import com.blitzmachine.freetogamecom.io.classes.Genre
+import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +25,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val detailsOfGame: LiveData<DetailedGame> = repository.detailsOfGame
     val cachedGames: LiveData<List<Game>> = repository.cachedGames
 
+    private val _selectedPlatform: MutableLiveData<Platform> = MutableLiveData(Platform.ALL)
+    val selectedPlatform: LiveData<Platform?> get() = _selectedPlatform
+
+    private val _selectedGenre: MutableLiveData<List<Genre>?> = MutableLiveData(null)
+    val selectedGenre: LiveData<List<Genre>?> get() = _selectedGenre
+
     fun cacheGame(game: Game)  {
         viewModelScope.launch(Dispatchers.IO) {
             repository.cacheGame(game)
@@ -34,16 +43,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun fetchNewData(platform: String? = null, category: String? = null, sortBy: String? = null) {
-        repository.fetchNewData(platform, category, sortBy)
-    }
-
-    fun fetchNewFilteredData(tag: String? = null, platform: String? = null) {
-        repository.fetchNewFilteredData(tag, platform)
+    fun fetchNewData() {
+        repository.fetchNewData()
     }
 
     fun getDetailsOfGame(id: Int) {
         repository.getDetailsOfGame(id)
     }
-
 }

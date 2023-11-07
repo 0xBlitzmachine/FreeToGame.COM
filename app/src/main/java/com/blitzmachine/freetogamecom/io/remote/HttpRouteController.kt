@@ -9,15 +9,7 @@ import retrofit2.http.Query
 interface HttpRouteController {
 
     @GET("games")
-    fun getNewData(
-        @Query("platform") platform: String?,
-        @Query("category") category: String?,
-        @Query("sort-by") sortBy: String?): Call<List<Game>>
-
-    @GET("filter")
-    fun getNewFilteredData(
-        @Query("tag") category: String?,
-        @Query("platform") platform: String?): Call<List<Game>>
+    fun getNewData(): Call<List<Game>>
 
     @GET("game")
     fun getGameDetails(
