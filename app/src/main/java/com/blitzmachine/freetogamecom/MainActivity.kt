@@ -34,11 +34,10 @@ class MainActivity : AppCompatActivity() {
             val tags: MutableMap<String, Int> = mutableMapOf()
 
             for (game in games) {
-                val platform = game.platform
-                if (tags.keys.contains(platform)) {
-                    tags[platform] = tags[platform]!! + 1
+                if (tags.keys.contains(game.platform)) {
+                    tags[game.platform] = tags[game.platform]!! + 1
                 } else {
-                    tags[platform] = 1
+                    tags[game.platform] = 1
                 }
             }
 
