@@ -29,7 +29,23 @@ class MainActivity : AppCompatActivity() {
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
 
+
         gameViewModel.listOfNewGame.observe(this) { games ->
+            val tags: MutableMap<String, Int> = mutableMapOf()
+
+            for (game in games) {
+                val platform = game.platform
+                if (tags.keys.contains(platform)) {
+                    tags[platform] = tags[platform]!! + 1
+                } else {
+                    tags[platform] = 1
+                }
+            }
+
+            for ((key, value) in tags) {
+                Log.d("Tags", "$key - $value")
+            }
+
             if (gameViewModel.cachedGames.value?.isEmpty() == true) {
                 gameViewModel.cacheGames(games)
             } else {

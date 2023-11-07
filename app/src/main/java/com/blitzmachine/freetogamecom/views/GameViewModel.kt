@@ -24,12 +24,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val listOfNewGame: LiveData<List<Game>> = repository.listOfNewGame
     val detailsOfGame: LiveData<DetailedGame> = repository.detailsOfGame
     val cachedGames: LiveData<List<Game>> = repository.cachedGames
-
-    private val _selectedPlatform: MutableLiveData<Platform> = MutableLiveData(Platform.ALL)
-    val selectedPlatform: LiveData<Platform?> get() = _selectedPlatform
-
-    private val _selectedGenre: MutableLiveData<List<Genre>?> = MutableLiveData(null)
-    val selectedGenre: LiveData<List<Genre>?> get() = _selectedGenre
+    val filteredCachedGames: LiveData<List<Game>> = repository.filteredListOfGames
 
     fun cacheGame(game: Game)  {
         viewModelScope.launch(Dispatchers.IO) {
@@ -40,6 +35,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun cacheGames(games: List<Game>) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.cacheGames(games)
+        }
+    }
+
+    fun getFilteredCachedGames(platform: String? = null, genre: List<String>? = null) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getFilteredCachedGames(platform, genre)
         }
     }
 

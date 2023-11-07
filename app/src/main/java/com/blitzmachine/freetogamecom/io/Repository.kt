@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Game
+import com.blitzmachine.freetogamecom.io.classes.Genre
+import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import com.blitzmachine.freetogamecom.utils.APIUtils
@@ -21,6 +23,9 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     private val _detailsOfGame: MutableLiveData<DetailedGame> = MutableLiveData()
     val detailsOfGame: LiveData<DetailedGame> get() = _detailsOfGame
 
+    private val _filteredListOfGames: MutableLiveData<List<Game>> = MutableLiveData()
+    val filteredListOfGames: LiveData<List<Game>> get() = _filteredListOfGames
+
     val cachedGames: LiveData<List<Game>> = database.databaseDao().getGames()
 
     init {
@@ -33,6 +38,10 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
 
     suspend fun cacheGames(games: List<Game>) {
         database.databaseDao().insertGames(games)
+    }
+
+    suspend fun getFilteredCachedGames(platform: String? = null, genre: List<String>? = null) {
+        _filteredListOfGames.postValue(database.databaseDao().getFilteredGames(platform, genre))
     }
 
     fun fetchNewData() {

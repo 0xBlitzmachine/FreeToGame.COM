@@ -36,11 +36,11 @@ class FilterDialogFragment : DialogFragment() {
             val selectedGenres: List<Genre> = getGenreSelections(binding.genreChipGroup)
 
             when (selectedGenres.size) {
-                0 -> gameViewModel.fetchNewData(selectedPlatform.value)
-                1 -> gameViewModel.fetchNewData(selectedPlatform.value, selectedGenres[0].value)
+                0 -> gameViewModel.getFilteredCachedGames(selectedPlatform.value)
+                1 -> gameViewModel.getFilteredCachedGames(selectedPlatform.value, listOf(selectedGenres[0].value))
                 else -> {
                     val tags = selectedGenres.joinToString(".") { genre -> genre.value }
-                    gameViewModel.fetchNewFilteredData(tags, selectedPlatform.value)
+                    gameViewModel.getFilteredCachedGames(tags, listOf())
                 }
             }
             this.dismiss()

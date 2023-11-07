@@ -71,29 +71,6 @@ class StartFragment : Fragment() {
         }
 
         gameViewModel.cachedGames.observe(viewLifecycleOwner) { cachedGames ->
-            when (gameViewModel.selectedPlatform.value) {
-                Platform.PC -> {
-                    if (gameViewModel.selectedGenre.value != null) {
-
-                    } else {
-
-                    }
-                }
-                Platform.BROWSER -> {
-                    if (gameViewModel.selectedGenre.value != null) {
-
-                    } else {
-
-                    }
-                }
-                else -> {
-                    if (gameViewModel.selectedGenre.value != null) {
-
-                    } else {
-
-                    }
-                }
-            }
             liveGamesAdapter.submitList(cachedGames)
         }
     }
