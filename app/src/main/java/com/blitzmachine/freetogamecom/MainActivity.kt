@@ -9,9 +9,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 import com.blitzmachine.freetogamecom.io.classes.Game
+import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
+import com.squareup.moshi.internal.Util
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +30,6 @@ class MainActivity : AppCompatActivity() {
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
-
-
         gameViewModel.listOfNewGame.observe(this) { games ->
             val tags: MutableMap<String, Int> = mutableMapOf()
 
@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
             for ((key, value) in tags) {
                 Log.d("Tags", "$key - $value")
             }
+
+            Log.d("online", Utils.isOnline(this).toString())
 
             if (gameViewModel.cachedGames.value?.isEmpty() == true) {
                 gameViewModel.cacheGames(games)
