@@ -28,8 +28,9 @@ interface DatabaseDao {
     @Query("SELECT * FROM games")
     fun getGames(): LiveData<List<Game>>
 
-    @Query("SELECT * FROM games WHERE (:platform IS NULL OR platform = :platform) AND (:genre IS NULL OR genre IN (:genre))")
+    @Query("SELECT * FROM games WHERE (:platform IS NULL OR platform IN (:platform)) AND (:genre IS NULL OR genre IN (:genre))")
     suspend fun getFilteredGames(platform: String? = null, genre: List<String>? = null): List<Game>
+
 
 
 }
