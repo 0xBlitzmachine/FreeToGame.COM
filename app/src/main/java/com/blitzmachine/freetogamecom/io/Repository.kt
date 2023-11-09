@@ -56,6 +56,7 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
         try {
             api.httpRoutes.getNewData().enqueue(object : Callback<List<Game>> {
                     override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
+                        // Returns true if the code is in [200..300), which means the request was successfully received, understood, and accepted
                         if (response.isSuccessful) {
                             _listOfNewGames.postValue(response.body())
                         } else {

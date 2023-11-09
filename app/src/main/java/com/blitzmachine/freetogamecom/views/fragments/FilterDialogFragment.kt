@@ -46,36 +46,63 @@ class FilterDialogFragment : DialogFragment() {
             this.dismiss()
         }
 
-        // Null-Check for not existing Tags.
-        Platform.values().map { platform ->
-            generateChip(platform.value, this.requireContext()).also { chip ->
-                chip.isChecked = chip.text == "All"
-                binding.platformChipGroup.addView(chip)
+
+        val genreCollection = mutableSetOf<String>()
+        val platformCollection = mutableSetOf<String>()
+
+        // Unique Chip genre and platform generation, depending on the cached data
+        for (cachedGame in gameViewModel.cachedGames.value!!) {
+            if (genreCollection.contains(cachedGame.genre)) {
+                continue
+            }
+            genreCollection += cachedGame.genre
+            generateChip(cachedGame.genre, this.requireContext()).also { chipObject ->
+                binding.genreChipGroup.addView(chipObject)
             }
         }
 
-        // ChipGroup currently on singleSelection for testing before multiple selection can be done
-        Genre.values().map { genre ->
-            generateChip(genre.value, this.requireContext()).also { chip ->
-                binding.genreChipGroup.addView(chip)
+        for (cachedGame in gameViewModel.cachedGames.value!!) {
+            if (platformCollection.contains(cachedGame.platform)) {
+                continue
+            }
+            platformCollection += cachedGame.platform
+            generateChip(
+                text =
+                if (cachedGame.platform == "PC (Windows), Web Browser") {
+                    "Both"
+                }
+                else {
+                    cachedGame.platform
+                }, this.requireContext()).also { chipObject ->
+                    binding.genreChipGroup.addView(chipObject)
             }
         }
     }
 
-    private fun getPlatformSelection(chipGroup: ChipGroup): Platform {
-        return Platform.valueOf(getSelectChip(chipGroup).text.toString().uppercase())
+    private fun getPlatformSelection(chipGroup: ChipGroup): String {
+        val selectedChip = getSelectChip(chipGroup)
+        return if (selectedChip.text.toString() == "Both") {
+            "PC (Windows), Web Browser"
+        } else {
+            selectedChip.text.toString()
+        }
     }
 
-    private fun getGenreSelections(chipGroup: ChipGroup): List<Genre> {
-        val selectedGenre = emptyList<Genre>().toMutableList()
-        getSelectChips(chipGroup).map {chipObject ->
-            when (chipObject.text.toString()) {
-                Genre.THREE_D.value -> selectedGenre.add(Genre.THREE_D)
-                Genre.TWO_D.value -> selectedGenre.add(Genre.TWO_D)
-                else -> selectedGenre.add(Genre.valueOf(chipObject.text.toString().uppercase().replace("-", "_")))
-            }
+    private fun getGenreSelections(chipGroup: ChipGroup): List<String>? {
+        val selectedChips = getSelectChips(chipGroup)
+        val genreCollection = mutableListOf<String>()
+
+        if (selectedChips.isEmpty()) {
+            return null
         }
-        return selectedGenre
+
+        for (chip in selectedChips) {
+            if (genreCollection.contains(chip.text.toString())) {
+                continue
+            }
+            genreCollection += chip.text.toString()
+        }
+        return genreCollection
     }
 
     private fun getSelectChip(chipGroup: ChipGroup): Chip {
@@ -88,7 +115,7 @@ class FilterDialogFragment : DialogFragment() {
 
     private fun generateChip(text: String, context: Context): Chip {
         return Chip(context).apply {
-            this.text = text.replaceFirstChar { it.uppercase() }
+            this.text = text
             this.id = View.generateViewId()
             this.isCheckable = true
             this.isClickable = true
