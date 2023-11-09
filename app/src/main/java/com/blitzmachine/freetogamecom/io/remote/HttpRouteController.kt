@@ -14,5 +14,4 @@ interface HttpRouteController {
     @GET("game")
     fun getGameDetails(
         @Query("id") id: Int): Call<DetailedGame>
-
 }

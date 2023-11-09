@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Tags", "$key - $value")
             }
 
-            Log.d("online", Utils.isOnline(this).toString())
-
             if (gameViewModel.cachedGames.value?.isEmpty() == true) {
                 gameViewModel.cacheGames(games)
             } else {

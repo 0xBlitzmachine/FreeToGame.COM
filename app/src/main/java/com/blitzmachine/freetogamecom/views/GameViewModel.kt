@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = GameDatabase.getDatabase(application)
-    private val repository = Repository(FreeToGameAPI, database)
+    private val repository = Repository(FreeToGameAPI, database, application)
 
     val listOfNewGame: LiveData<List<Game>> = repository.listOfNewGame
     val detailsOfGame: LiveData<DetailedGame> = repository.detailsOfGame

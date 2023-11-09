@@ -1,5 +1,6 @@
 package com.blitzmachine.freetogamecom.io
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,12 +11,13 @@ import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import com.blitzmachine.freetogamecom.utils.APIUtils
+import com.blitzmachine.freetogamecom.utils.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.Exception
 
-class Repository(private val api: FreeToGameAPI, private val database: GameDatabase) {
+class Repository(private val api: FreeToGameAPI, private val database: GameDatabase, private val context: Context) {
 
     private val _listOfNewGames: MutableLiveData<List<Game>> = MutableLiveData()
     val listOfNewGame: LiveData<List<Game>> get() = _listOfNewGames
@@ -29,7 +31,13 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     val cachedGames: LiveData<List<Game>> = database.databaseDao().getGames()
 
     init {
-        fetchNewData()
+        when (Utils.isOnline(context)) {
+            true -> {
+                Log.d("Repository", "isOnline - Fetching data for equality check with stored data")
+                fetchNewData()
+            }
+            false -> Log.d("Repository","isOffline - Loading stored data ...")
+        }
     }
 
     suspend fun cacheGame(game: Game) {
@@ -54,7 +62,6 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
                             Log.e(APIUtils.apiLogcatTag, "LiveGamesRequest failed. Response Code: ${response.code()}")
                         }
                     }
-
 
                     override fun onFailure(call: Call<List<Game>>, t: Throwable) {
                         Log.e(APIUtils.apiLogcatTag, "LiveGamesRequest failed: ${t.message}")
