@@ -56,7 +56,13 @@ class FilterDialogFragment : DialogFragment() {
             val selectedPlatform = getPlatformSelection(binding.platformChipGroup)
             val selectedGenre = getGenreSelections(binding.genreChipGroup)
 
-            //gameViewModel.getFilteredCachedGames(selectedPlatform, selectedGenre)
+            if (selectedGenre.size == 0) {
+                gameViewModel.getFilteredCachedGames(selectedPlatform)
+            } else {
+                gameViewModel.getFilteredCachedGames(selectedPlatform, selectedGenre)
+            }
+
+
         }
 
 
@@ -64,26 +70,28 @@ class FilterDialogFragment : DialogFragment() {
 
     }
 
-    private fun getPlatformSelection(chipGroup: ChipGroup): Set<String>? {
+    private fun getPlatformSelection(chipGroup: ChipGroup): Set<String> {
         val selectedChip = getSelectChip(chipGroup)
         val selection = mutableSetOf<String>()
 
-        selection += if (selectedChip.text.toString() == "Web Browser") {
-            selectedChip.text.toString()
-        } else if (selectedChip.text.toString() == "PC (Windows)") {
-            selectedChip.text.toString()
+        if (selectedChip.text == "PC (Windows)") {
+            selection += selectedChip.text.toString()
+        } else if (selectedChip.text == "Web Browser") {
+            selection += selectedChip.text.toString()
         } else {
-            return null
+            selection += selectedChip.text.toString()
+            selection += "PC (Windows)"
+            selection += "Web Browser"
         }
         return selection
     }
 
-    private fun getGenreSelections(chipGroup: ChipGroup): Set<String>? {
+    private fun getGenreSelections(chipGroup: ChipGroup): Set<String> {
         val selectedChips = getSelectChips(chipGroup)
         val selection = mutableSetOf<String>()
 
         if (selectedChips.isEmpty()) {
-            return null
+            return emptySet()
         }
 
         for (chip in selectedChips) {

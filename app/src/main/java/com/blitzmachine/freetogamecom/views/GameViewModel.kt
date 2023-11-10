@@ -38,7 +38,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getFilteredCachedGames(platform: Set<String>?, genre: Set<String>?) {
+    fun getFilteredCachedGames(platform: Set<String>, genre: Set<String>?) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getFilteredCachedGames(platform, genre)
         }

@@ -23,6 +23,12 @@ interface DatabaseDao {
     @Query("SELECT * FROM games")
     fun getGames(): LiveData<List<Game>>
 
-    @Query("SELECT * FROM games WHERE platform in (:platform) AND genre IN (:genre)")
-    suspend fun getFilteredGames(platform: Set<String>?, genre: Set<String>?): List<Game>
+    /*@Query("SELECT * FROM games WHERE platform IN (:platform) AND genre IN (:genre)")
+    suspend fun getFilteredGames(platform: Set<String>, genre: Set<String>): List<Game>*/
+
+    @Query("SELECT * FROM games WHERE platform IN (:platform) AND (:genre OR genre IN (:genre))")
+    suspend fun getFilteredGames(platform: Set<String>, genre: Set<String>?): List<Game>
+
+
+
 }

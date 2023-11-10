@@ -48,7 +48,7 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
         database.databaseDao().insertGames(games)
     }
 
-    suspend fun getFilteredCachedGames(platform: Set<String>?, genre: Set<String>?) {
+    suspend fun getFilteredCachedGames(platform: Set<String>, genre: Set<String>?) {
         var test = emptyList<Game>()
         try {
         test = database.databaseDao().getFilteredGames(platform, genre)
