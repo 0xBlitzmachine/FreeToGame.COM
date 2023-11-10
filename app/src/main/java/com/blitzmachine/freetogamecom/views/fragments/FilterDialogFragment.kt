@@ -2,6 +2,7 @@ package com.blitzmachine.freetogamecom.views.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDialogFilterBinding
 import com.blitzmachine.freetogamecom.io.classes.Genre
 import com.blitzmachine.freetogamecom.io.classes.Platform
+import com.blitzmachine.freetogamecom.utils.GenreObserver
+import com.blitzmachine.freetogamecom.utils.PlatformObserver
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -28,7 +31,23 @@ class FilterDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Sprichst die ChipGroup and und mit "check" selectest du ein Chip.
+
+        PlatformObserver(gameViewModel).observe(viewLifecycleOwner) { platformCollection ->
+            platformCollection.map { platform ->
+                generateChip(platform, this.requireContext()).also { chip ->
+                    binding.platformChipGroup.addView(chip)
+                }
+            }
+        }
+
+        GenreObserver(gameViewModel).observe(viewLifecycleOwner) { genreCollection ->
+            genreCollection.map { genre ->
+                generateChip(genre, this.requireContext()).also { chip ->
+                    binding.genreChipGroup.addView(chip)
+                }
+            }
+        }
+
         binding.backButton.setOnClickListener {
             this.dismiss()
         }
@@ -36,63 +55,44 @@ class FilterDialogFragment : DialogFragment() {
         binding.filterButton.setOnClickListener {
             val selectedPlatform = getPlatformSelection(binding.platformChipGroup)
             val selectedGenre = getGenreSelections(binding.genreChipGroup)
+
+            //gameViewModel.getFilteredCachedGames(selectedPlatform, selectedGenre)
         }
 
 
 
 
-
-        val genreCollection = mutableSetOf<String>()
-        for (cachedGame in gameViewModel.cachedGames.value!!) {
-            if (genreCollection.contains(cachedGame.genre)) {
-                continue
-            }
-            genreCollection += cachedGame.genre
-            generateChip(cachedGame.genre, this.requireContext()).also { chipObject ->
-                binding.genreChipGroup.addView(chipObject)
-            }
-        }
-
-        val platformCollection = mutableSetOf<String>()
-        for (cachedGame in gameViewModel.cachedGames.value!!) {
-            if (platformCollection.contains(cachedGame.platform)) {
-                continue
-            }
-            platformCollection += cachedGame.platform
-            generateChip(cachedGame.platform, this.requireContext()).also { chipObject ->
-                    binding.platformChipGroup.addView(chipObject)
-            }
-        }
-
-        binding.platformChipGroup.isSelectionRequired = true
-        binding.platformChipGroup.isSingleSelection = true
     }
 
-    private fun getPlatformSelection(chipGroup: ChipGroup): String? {
+    private fun getPlatformSelection(chipGroup: ChipGroup): Set<String>? {
         val selectedChip = getSelectChip(chipGroup)
+        val selection = mutableSetOf<String>()
 
-        return if (selectedChip.text == "PC (Windows), Web Browser") {
-            null
-        } else {
+        selection += if (selectedChip.text.toString() == "Web Browser") {
             selectedChip.text.toString()
+        } else if (selectedChip.text.toString() == "PC (Windows)") {
+            selectedChip.text.toString()
+        } else {
+            return null
         }
+        return selection
     }
 
-    private fun getGenreSelections(chipGroup: ChipGroup): List<String>? {
+    private fun getGenreSelections(chipGroup: ChipGroup): Set<String>? {
         val selectedChips = getSelectChips(chipGroup)
-        val genreCollection = mutableSetOf<String>()
+        val selection = mutableSetOf<String>()
 
         if (selectedChips.isEmpty()) {
             return null
         }
 
         for (chip in selectedChips) {
-            if (genreCollection.contains(chip.text.toString())) {
+            if (selection.contains(chip.text.toString())) {
                 continue
             }
-            genreCollection += chip.text.toString()
+            selection += chip.text.toString()
         }
-        return genreCollection.toList()
+        return selection
     }
 
     private fun getSelectChip(chipGroup: ChipGroup): Chip {

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 import com.blitzmachine.freetogamecom.io.classes.Game
+import com.blitzmachine.freetogamecom.utils.PlatformObserver
 import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections

@@ -48,8 +48,15 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
         database.databaseDao().insertGames(games)
     }
 
-    suspend fun getFilteredCachedGames(platform: String? = null, genre: List<String>? = null) {
-        _filteredListOfGames.postValue(database.databaseDao().getFilteredGames(platform, genre))
+    suspend fun getFilteredCachedGames(platform: Set<String>?, genre: Set<String>?) {
+        var test = emptyList<Game>()
+        try {
+        test = database.databaseDao().getFilteredGames(platform, genre)
+        } catch (ex: Exception) {
+            Log.e("Repository", "Filter Request failed! ${ex.message}")
+            Log.e("Repository", test.toString())
+        }
+        _filteredListOfGames.postValue(test)
     }
 
     fun fetchNewData() {

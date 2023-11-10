@@ -14,11 +14,6 @@ import com.blitzmachine.freetogamecom.io.classes.Platform
 @Dao
 interface DatabaseDao {
 
-    // isLiked beachten.
-
-    // Keep ConflictStrategy on REPLACE and use own logic to filter either if
-    // object has same content as the fresh one fetched by API or not.
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGames(games: List<Game>)
 
@@ -28,9 +23,6 @@ interface DatabaseDao {
     @Query("SELECT * FROM games")
     fun getGames(): LiveData<List<Game>>
 
-    @Query("SELECT * FROM games WHERE (:platform IS NULL OR platform IN (:platform)) AND (:genre IS NULL OR genre IN (:genre))")
-    suspend fun getFilteredGames(platform: String? = null, genre: List<String>? = null): List<Game>
-
-
-
+    @Query("SELECT * FROM games WHERE platform in (:platform) AND genre IN (:genre)")
+    suspend fun getFilteredGames(platform: Set<String>?, genre: Set<String>?): List<Game>
 }
