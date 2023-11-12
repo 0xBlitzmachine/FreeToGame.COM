@@ -27,6 +27,10 @@ class FavoriteAdapter(private val gameViewModel: GameViewModel, private val cont
                 favoriteImageButton.setOnClickListener {
                     gameViewModel.cacheGame(item.copy(isLiked = false))
                 }
+
+                favoriteCardView.setOnClickListener {
+                    gameViewModel.getDetailsOfGame(item.id)
+                }
             }
         }
     }

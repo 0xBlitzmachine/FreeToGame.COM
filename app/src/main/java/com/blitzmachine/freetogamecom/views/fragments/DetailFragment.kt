@@ -38,7 +38,7 @@ class DetailFragment : Fragment() {
             with(binding) {
 
                 //screenshotAdapter.submitList(game.screenshots)
-                var screenshotCollection = emptyList<SlideModel>().toMutableList()
+                val screenshotCollection = emptyList<SlideModel>().toMutableList()
                 game.screenshots.forEach { screenshot ->
                     screenshotCollection.add(SlideModel(imageUrl = screenshot.image, scaleType = ScaleTypes.FIT))
                 }

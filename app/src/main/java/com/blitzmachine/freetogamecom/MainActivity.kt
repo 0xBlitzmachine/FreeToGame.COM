@@ -13,6 +13,8 @@ import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.utils.PlatformObserver
 import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.GameViewModel
+import com.blitzmachine.freetogamecom.views.fragments.FavoriteFragmentDirections
+import com.blitzmachine.freetogamecom.views.fragments.StartFragment
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
 import com.squareup.moshi.internal.Util
@@ -33,20 +35,6 @@ class MainActivity : AppCompatActivity() {
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
 
         gameViewModel.listOfNewGame.observe(this) { games ->
-            val tags: MutableMap<String, Int> = mutableMapOf()
-
-            for (game in games) {
-                if (tags.keys.contains(game.platform)) {
-                    tags[game.platform] = tags[game.platform]!! + 1
-                } else {
-                    tags[game.platform] = 1
-                }
-            }
-
-            for ((key, value) in tags) {
-                Log.d("Tags", "$key - $value")
-            }
-
             if (gameViewModel.cachedGames.value?.isEmpty() == true) {
                 gameViewModel.cacheGames(games)
             } else {
@@ -78,7 +66,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         gameViewModel.detailsOfGame.observe(this) {
-            navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
+            if (navController.currentDestination?.id == R.id.startFragment) {
+                navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
+            } else {
+                navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment())
+            }
         }
     }
 }

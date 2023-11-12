@@ -20,7 +20,6 @@ class LiveGamesAdapter(
         fun bind(item: Game) {
             with(itemLayoutBinding) {
 
-
                 thumbnailImageView.load(item.thumbnail) {
                     this.placeholder(Utils.createCircularProgressDrawable(context))
                     this.error(R.drawable.image_not_available)
