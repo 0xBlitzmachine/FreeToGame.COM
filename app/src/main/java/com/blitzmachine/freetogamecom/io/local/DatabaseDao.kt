@@ -26,9 +26,10 @@ interface DatabaseDao {
     /*@Query("SELECT * FROM games WHERE platform IN (:platform) AND genre IN (:genre)")
     suspend fun getFilteredGames(platform: Set<String>, genre: Set<String>): List<Game>*/
 
-    @Query("SELECT * FROM games WHERE platform IN (:platform) AND (:genre OR genre IN (:genre))")
-    suspend fun getFilteredGames(platform: Set<String>, genre: Set<String>?): List<Game>
+    @Query("SELECT * FROM games WHERE platform IN (:platform)")
+    suspend fun getFilteredGames(platform: Set<String>): List<Game>
 
-
+    @Query("SELECT * FROM games WHERE platform IN (:platform) AND genre in (:genre)")
+    suspend fun getFilteredGames(platform: Set<String>, genre: Set<String>): List<Game>
 
 }

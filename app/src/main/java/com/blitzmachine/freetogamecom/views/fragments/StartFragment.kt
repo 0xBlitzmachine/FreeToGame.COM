@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -30,6 +31,18 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        gameViewModel.filteredCachedGames.observe(viewLifecycleOwner) {
+            try {
+                if (it.isEmpty()) {
+                    Toast.makeText(this.requireContext(), "No games found!", Toast.LENGTH_SHORT).show()
+                } else {
+                    liveGamesAdapter.submitList(it)
+                }
+            } catch (e: Exception) {
+                Log.d("Filter", e.message!!)
+            }
+        }
 
         with (binding) {
             scrollToBeginFAB.setOnClickListener {

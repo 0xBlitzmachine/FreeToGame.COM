@@ -56,18 +56,13 @@ class FilterDialogFragment : DialogFragment() {
             val selectedPlatform = getPlatformSelection(binding.platformChipGroup)
             val selectedGenre = getGenreSelections(binding.genreChipGroup)
 
-            if (selectedGenre.size == 0) {
+            if (selectedGenre.isEmpty()) {
                 gameViewModel.getFilteredCachedGames(selectedPlatform)
             } else {
                 gameViewModel.getFilteredCachedGames(selectedPlatform, selectedGenre)
             }
-
-
+            this.dismiss()
         }
-
-
-
-
     }
 
     private fun getPlatformSelection(chipGroup: ChipGroup): Set<String> {

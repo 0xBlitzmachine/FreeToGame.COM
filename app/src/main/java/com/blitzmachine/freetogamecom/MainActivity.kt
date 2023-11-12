@@ -3,6 +3,7 @@ package com.blitzmachine.freetogamecom
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -30,20 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
-
-        gameViewModel.filteredCachedGames.observe(this) {
-            try {
-                if (it == null) {
-                    Log.d("Filter", "Null")
-                } else {
-                    for (game in it) {
-                        Log.d("Filter", "${game.genre} - ${game.platform}")
-                    }
-                }
-            } catch (e: Exception) {
-                Log.d("Filter", e.message!!)
-            }
-        }
 
         gameViewModel.listOfNewGame.observe(this) { games ->
             val tags: MutableMap<String, Int> = mutableMapOf()
