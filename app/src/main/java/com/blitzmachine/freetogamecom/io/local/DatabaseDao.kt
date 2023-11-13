@@ -5,11 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import androidx.room.Upsert
 import com.blitzmachine.freetogamecom.io.classes.Game
-import com.blitzmachine.freetogamecom.io.classes.Genre
-import com.blitzmachine.freetogamecom.io.classes.Platform
 
 @Dao
 interface DatabaseDao {

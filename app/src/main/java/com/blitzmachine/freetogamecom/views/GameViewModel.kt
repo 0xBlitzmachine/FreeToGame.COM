@@ -2,15 +2,11 @@ package com.blitzmachine.freetogamecom.views
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blitzmachine.freetogamecom.io.Repository
 import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Game
-import com.blitzmachine.freetogamecom.io.classes.Genre
-import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import kotlinx.coroutines.Dispatchers

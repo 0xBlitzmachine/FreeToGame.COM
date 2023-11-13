@@ -2,22 +2,14 @@ package com.blitzmachine.freetogamecom
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
-import com.blitzmachine.freetogamecom.io.classes.Game
-import com.blitzmachine.freetogamecom.utils.PlatformObserver
-import com.blitzmachine.freetogamecom.utils.Utils
 import com.blitzmachine.freetogamecom.views.GameViewModel
 import com.blitzmachine.freetogamecom.views.fragments.FavoriteFragmentDirections
-import com.blitzmachine.freetogamecom.views.fragments.StartFragment
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
-import com.blitzmachine.freetogamecom.views.fragments.UiViewModel
-import com.squareup.moshi.internal.Util
 
 class MainActivity : AppCompatActivity() {
 

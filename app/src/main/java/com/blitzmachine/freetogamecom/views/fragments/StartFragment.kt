@@ -4,21 +4,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
-import coil.imageLoader
 import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.views.LiveGamesAdapter
 import com.blitzmachine.freetogamecom.databinding.FragmentStartBinding
-import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.views.GameViewModel
 
 class StartFragment : Fragment() {
@@ -74,14 +69,16 @@ class StartFragment : Fragment() {
         gameViewModel.cachedGames.observe(viewLifecycleOwner) { cachedGames ->
             if (!gameViewModel.isFiltered) {
                 liveGamesAdapter.submitList(cachedGames)
+                binding.liveGamesReyclerView.scrollToPosition(0)
             }
         }
 
-        gameViewModel.filteredCachedGames.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
+        gameViewModel.filteredCachedGames.observe(viewLifecycleOwner) { filteredCachedGames ->
+            if (filteredCachedGames.isEmpty()) {
                 Toast.makeText(this.requireContext(), "No games found!", Toast.LENGTH_SHORT).show()
             } else {
-                liveGamesAdapter.submitList(it)
+                liveGamesAdapter.submitList(filteredCachedGames)
+                binding.liveGamesReyclerView.scrollToPosition(0)
             }
         }
     }

@@ -1,19 +1,14 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.forEach
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.blitzmachine.freetogamecom.R
 import com.blitzmachine.freetogamecom.databinding.FragmentDialogFilterBinding
-import com.blitzmachine.freetogamecom.io.classes.Genre
-import com.blitzmachine.freetogamecom.io.classes.Platform
 import com.blitzmachine.freetogamecom.utils.GenreObserver
 import com.blitzmachine.freetogamecom.utils.PlatformObserver
 import com.blitzmachine.freetogamecom.views.GameViewModel
