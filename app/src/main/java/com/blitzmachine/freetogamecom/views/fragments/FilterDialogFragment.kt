@@ -1,5 +1,6 @@
 package com.blitzmachine.freetogamecom.views.fragments
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -34,10 +35,15 @@ class FilterDialogFragment : DialogFragment() {
 
         PlatformObserver(gameViewModel).observe(viewLifecycleOwner) { platformCollection ->
             platformCollection.map { platform ->
-                generateChip(platform, this.requireContext()).also { chip ->
+                generateChip(if (platform == "PC (Windows), Web Browser") {
+                    "Both"
+                } else {
+                       platform
+                }, this.requireContext()).also { chip ->
                     binding.platformChipGroup.addView(chip)
                 }
             }
+
         }
 
         GenreObserver(gameViewModel).observe(viewLifecycleOwner) { genreCollection ->
@@ -74,7 +80,7 @@ class FilterDialogFragment : DialogFragment() {
         } else if (selectedChip.text == "Web Browser") {
             selection += selectedChip.text.toString()
         } else {
-            selection += selectedChip.text.toString()
+            selection += "PC (Windows), Web Browser"
             selection += "PC (Windows)"
             selection += "Web Browser"
         }
