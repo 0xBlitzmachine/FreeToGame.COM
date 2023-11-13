@@ -32,18 +32,6 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        gameViewModel.filteredCachedGames.observe(viewLifecycleOwner) {
-            try {
-                if (it.isEmpty()) {
-                    Toast.makeText(this.requireContext(), "No games found!", Toast.LENGTH_SHORT).show()
-                } else {
-                    liveGamesAdapter.submitList(it)
-                }
-            } catch (e: Exception) {
-                Log.d("Filter", e.message!!)
-            }
-        }
-
         with (binding) {
             scrollToBeginFAB.setOnClickListener {
                 liveGamesReyclerView.scrollToPosition(0)
@@ -84,7 +72,17 @@ class StartFragment : Fragment() {
         }
 
         gameViewModel.cachedGames.observe(viewLifecycleOwner) { cachedGames ->
-            liveGamesAdapter.submitList(cachedGames)
+            if (!gameViewModel.isFiltered) {
+                liveGamesAdapter.submitList(cachedGames)
+            }
+        }
+
+        gameViewModel.filteredCachedGames.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                Toast.makeText(this.requireContext(), "No games found!", Toast.LENGTH_SHORT).show()
+            } else {
+                liveGamesAdapter.submitList(it)
+            }
         }
     }
 }

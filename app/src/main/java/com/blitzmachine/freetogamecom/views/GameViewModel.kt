@@ -25,6 +25,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val detailsOfGame: LiveData<DetailedGame> = repository.detailsOfGame
     val cachedGames: LiveData<List<Game>> = repository.cachedGames
     val filteredCachedGames: LiveData<List<Game>> = repository.filteredListOfGames
+    var isFiltered = false
 
     fun cacheGame(game: Game)  {
         viewModelScope.launch(Dispatchers.IO) {

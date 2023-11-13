@@ -43,7 +43,13 @@ class FilterDialogFragment : DialogFragment() {
                     binding.platformChipGroup.addView(chip)
                 }
             }
-
+            val chips = emptyList<Chip>().toMutableList()
+            for (i in 0 until binding.platformChipGroup.childCount) {
+                chips += binding.platformChipGroup.getChildAt(i) as Chip
+            }
+            chips.find { chip -> chip.text == "Both" }.also { foundChip ->
+                binding.platformChipGroup.check(foundChip!!.id)
+            }
         }
 
         GenreObserver(gameViewModel).observe(viewLifecycleOwner) { genreCollection ->
@@ -63,8 +69,10 @@ class FilterDialogFragment : DialogFragment() {
             val selectedGenre = getGenreSelections(binding.genreChipGroup)
 
             if (selectedGenre.isEmpty()) {
+                gameViewModel.isFiltered = true
                 gameViewModel.getFilteredCachedGames(selectedPlatform)
             } else {
+                gameViewModel.isFiltered = true
                 gameViewModel.getFilteredCachedGames(selectedPlatform, selectedGenre)
             }
             this.dismiss()
