@@ -1,5 +1,7 @@
 
 # FreeToGame.COM Android Application
+> [!IMPORTANT]
+> This app requiers a valid network connection to pull data once for offline-mode.
 
 ## Overview
 
@@ -7,12 +9,12 @@ FreeToGame is an Kotlin based Android Application which provides the user a wide
 
 This application is completely based on [FreeToGame](https://www.freetogame.com)'s API service to get the Free2Play games collection.
 
-<img src="/imageCollection/demo.gif" width="200" />
+
 
 ## Screenshots
 
 <p float="left">
-  <img src="/imageCollection/Screenshot_20231114_111327.png" width="200" />
+  <img src="/imageCollection/demo.gif" width="200" />
   <img src="/imageCollection/Screenshot_20231114_111439.png" width="200" />
   <img src="/imageCollection/Screenshot_20231114_111504.png" width="200" />
   <img src="/imageCollection/Screenshot_20231114_111551.png" width="200" />
@@ -34,9 +36,6 @@ This application is completely based on [FreeToGame](https://www.freetogame.com)
 
 
 ## Tech Usage of Android
-
-
-
 - **[MVVM Pattern](https://developer.android.com/topic/architecture)**
 - **[Fragments](https://developer.android.com/guide/fragments)**
 - **[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)**
@@ -44,8 +43,8 @@ This application is completely based on [FreeToGame](https://www.freetogame.com)
 - **[Navigation components](https://developer.android.com/guide/navigation/get-started)**
 - **[Kapt](https://kotlinlang.org/docs/kapt.html)**
 - **[RecyclerView](https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView)** with **[ListAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter)** using **[DiffUtil.ItemCallback](https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil)** for smooth list updates
-## Libraries Usage
 
+## Libraries Usage
 This app utilizes various third-party libraries and technologies:
 
 - **[Android Architecture Components](https://developer.android.com/topic/architecture)** (ViewModel, LiveData)
