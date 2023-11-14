@@ -1,7 +1,9 @@
 
 # FreeToGame.COM Android Application
+
 > [!IMPORTANT]
-> This app requiers a valid network connection to pull data once for offline-mode.
+> This app requiers a valid network connection to pull data once for offline-mode. <br>
+> Minimal [SDK version](https://apilevels.com) required to run the app: **29**
 
 ## Overview
 
@@ -67,7 +69,7 @@ This app utilizes various third-party libraries and technologies:
 2. Open the project in Android Studio
 
 3. Compile the source and run it using your physical device or the implemented Android Emulator
-    
+
 ## Contributing
 
 Contributions are always welcome!
