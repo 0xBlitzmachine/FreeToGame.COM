@@ -85,14 +85,18 @@ class FilterDialogFragment : DialogFragment() {
         val selectedChip = getSelectChip(chipGroup)
         val selection = mutableSetOf<String>()
 
-        if (selectedChip.text == "PC (Windows)") {
-            selection += selectedChip.text.toString()
-        } else if (selectedChip.text == "Web Browser") {
-            selection += selectedChip.text.toString()
-        } else {
-            selection += "PC (Windows), Web Browser"
-            selection += "PC (Windows)"
-            selection += "Web Browser"
+        when (selectedChip.text) {
+            "PC (Windows)" -> {
+                selection += selectedChip.text.toString()
+            }
+            "Web Browser" -> {
+                selection += selectedChip.text.toString()
+            }
+            else -> {
+                selection += "PC (Windows), Web Browser"
+                selection += "PC (Windows)"
+                selection += "Web Browser"
+            }
         }
         return selection
     }
