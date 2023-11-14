@@ -1,18 +1,20 @@
 
 # FreeToGame.COM Android Application
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-
-## Demo
-
-Insert gif or link to demo
-
+<img src="/imageCollection/demo.gif" width="200" />
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+<p float="left">
+  <img src="/imageCollection/Screenshot_20231114_111327.png" width="200" />
+  <img src="/imageCollection/Screenshot_20231114_111439.png" width="200" />
+  <img src="/imageCollection/Screenshot_20231114_111504.png" width="200" />
+  <img src="/imageCollection/Screenshot_20231114_111551.png" width="200" />
+  <img src="/imageCollection/Screenshot_20231114_111609.png" width="200" />
+  <img src="/imageCollection/Screenshot_20231114_111624.png" width="200" />
+  <img src="/imageCollection/Screenshot_20231114_111635.png" width="200" />
+  <img src="/imageCollection/Screenshot_20231114_111720.png" width="200" />
+</p>
 
 ## Overview
 
