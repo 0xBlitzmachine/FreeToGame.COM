@@ -1,6 +1,12 @@
 
 # FreeToGame.COM Android Application
 
+## Overview
+
+FreeToGame is an Kotlin based Android Application which provides the user a wide-range of Free2Play titles to look up.
+
+This application is completely based on [FreeToGame](https://www.freetogame.com)'s API service to get the Free2Play games collection.
+
 <img src="/imageCollection/demo.gif" width="200" />
 
 ## Screenshots
@@ -16,11 +22,7 @@
   <img src="/imageCollection/Screenshot_20231114_111720.png" width="200" />
 </p>
 
-## Overview
 
-FreeToGame is an Kotlin based Android Application which provides the user a wide-range of Free2Play titles to look up.
-
-This application is completely based on [FreeToGame](https://www.freetogame.com)'s API service to get the Free2Play games collection.
 ## Features
 
 - Wide-range of free to play titles
