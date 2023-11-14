@@ -29,12 +29,12 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     val cachedGames: LiveData<List<Game>> = database.databaseDao().getGames()
 
     init {
-        when (Utils.isOnline(context)) {
-            true -> {
-                Log.d("Repository", "isOnline - Fetching data for equality check with stored data")
+        try {
+            if (Utils.isOnline(context)) {
                 fetchNewData()
             }
-            false -> Log.d("Repository","isOffline - Loading stored data ...")
+        } catch (ex: Exception) {
+            Log.e("Repository", "Failed to fetch data on Repo init - ${ex.message}")
         }
     }
 
@@ -47,7 +47,11 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     }
 
     suspend fun cacheGames(games: List<Game>) {
-        database.databaseDao().insertGames(games)
+        try {
+            database.databaseDao().insertGames(games)
+        } catch (ex: Exception) {
+            Log.e("Repository", "Failed to cache list of games - ${ex.message}")
+        }
     }
 
     suspend fun getFilteredGames(platform: Set<String>) {

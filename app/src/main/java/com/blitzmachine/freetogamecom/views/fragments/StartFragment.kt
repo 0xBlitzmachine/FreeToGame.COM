@@ -46,22 +46,14 @@ class StartFragment : Fragment() {
                             scrollToBeginFAB.visibility = View.INVISIBLE
                         }
                     }
-
-                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                        super.onScrollStateChanged(recyclerView, newState)
-
-                        if (newState == SCROLL_STATE_DRAGGING) {
-                            Log.d("Scroll", "SCROLL_STATE_DRAGGING")
-                        }
-                    }
                 })
             }
 
             searchButton.setOnClickListener {
                 FilterDialogFragment().apply {
                     this.isCancelable = true
-                }.also {
-                    it.show((activity as MainActivity).supportFragmentManager, it.tag)
+                }.also { dialog ->
+                    dialog.show((activity as MainActivity).supportFragmentManager, dialog.tag)
                 }
             }
         }

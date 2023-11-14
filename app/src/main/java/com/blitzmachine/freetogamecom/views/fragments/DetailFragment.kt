@@ -80,13 +80,13 @@ class DetailFragment : Fragment() {
                 it.findNavController().navigateUp()
             }
 
-            val expandHandlers = listOf<ImageView> (
+            val expandHandlers = listOf(
                 descriptionExpandHandler,
                 informationExpandHandler,
                 specsExpandHandler
             )
 
-            val expandedRootLayouts = listOf<LinearLayout>(
+            val expandedRootLayouts = listOf(
                 gameDescriptionLayout,
                 gameInformationLayout,
                 gameSpecsLayout

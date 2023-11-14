@@ -2,6 +2,7 @@ package com.blitzmachine.freetogamecom.views.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,8 @@ class FilterDialogFragment : DialogFragment() {
 
         PlatformObserver(gameViewModel).observe(viewLifecycleOwner) { platformCollection ->
             platformCollection.map { platform ->
-                generateChip(if (platform == "PC (Windows), Web Browser") {
+                generateChip(
+                    if (platform == "PC (Windows), Web Browser") {
                     "Both"
                 } else {
                        platform
@@ -60,15 +62,20 @@ class FilterDialogFragment : DialogFragment() {
         }
 
         binding.filterButton.setOnClickListener {
-            val selectedPlatform = getPlatformSelection(binding.platformChipGroup)
-            val selectedGenre = getGenreSelections(binding.genreChipGroup)
+            try {
+                val selectedPlatform = getPlatformSelection(binding.platformChipGroup)
+                val selectedGenre = getGenreSelections(binding.genreChipGroup)
 
-            if (selectedGenre.isEmpty()) {
-                gameViewModel.isFiltered = true
-                gameViewModel.getFilteredCachedGames(selectedPlatform)
-            } else {
-                gameViewModel.isFiltered = true
-                gameViewModel.getFilteredCachedGames(selectedPlatform, selectedGenre)
+                if (selectedGenre.isEmpty()) {
+                    gameViewModel.isFiltered = true
+                    gameViewModel.getFilteredCachedGames(selectedPlatform)
+                } else {
+                    gameViewModel.isFiltered = true
+                    gameViewModel.getFilteredCachedGames(selectedPlatform, selectedGenre)
+                }
+            } catch (ex: Exception) {
+                Log.e("FilterDialogFragment", "OnFilterGames failed! - ${ex.message}")
+                this.dismiss()
             }
             this.dismiss()
         }
