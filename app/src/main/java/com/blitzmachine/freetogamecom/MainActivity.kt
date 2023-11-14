@@ -1,7 +1,9 @@
 package com.blitzmachine.freetogamecom
 
+import android.app.ActionBar.LayoutParams
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.LayoutDirection
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.navigation.NavController
