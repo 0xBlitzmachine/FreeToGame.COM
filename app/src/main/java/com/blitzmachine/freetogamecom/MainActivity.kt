@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.LayoutDirection
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.blitzmachine.freetogamecom.databinding.ActivityMainBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
+import com.blitzmachine.freetogamecom.views.UiViewModel
 import com.blitzmachine.freetogamecom.views.fragments.FavoriteFragmentDirections
 import com.blitzmachine.freetogamecom.views.fragments.StartFragmentDirections
 
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mainActivityLayoutBinding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by viewModels()
+    private val uiViewModel: UiViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,17 @@ class MainActivity : AppCompatActivity() {
 
         navController = (supportFragmentManager.findFragmentById(mainActivityLayoutBinding.fragmentContainerView.id) as NavHostFragment).navController
         mainActivityLayoutBinding.bottomNavigationView.setupWithNavController(navController)
+
+        gameViewModel.displayCriticalError.observe(this) { result ->
+            when (result) {
+                true -> {
+                    uiViewModel.enableErrorScreen(gameViewModel.criticalTitle.value!!, gameViewModel.criticalMessage.value!!)
+                }
+                false -> {
+                    uiViewModel.enableSuccessScreen()
+                }
+            }
+        }
 
         gameViewModel.listOfNewGame.observe(this) { games ->
             try {
@@ -64,10 +78,58 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        mainActivityLayoutBinding.errorBackButton.setOnClickListener {
+            uiViewModel.enableSuccessScreen()
+            gameViewModel.getFilteredCachedGames(
+                setOf(
+                    "PC (Windows)",
+                    "Web Browser",
+                    "PC (Windows), Web Browser"))
+        }
+
+        uiViewModel.showSuccessLayout.observe(this) { result ->
+            when (result) {
+                true -> {
+                    mainActivityLayoutBinding.successRootLayout.visibility = View.VISIBLE
+                }
+                false -> {
+                    mainActivityLayoutBinding.successRootLayout.visibility = View.INVISIBLE
+                }
+            }
+        }
+
+        uiViewModel.showErrorLayout.observe(this) { result ->
+            when (result) {
+                true -> {
+                    mainActivityLayoutBinding.errorRootLayout.visibility = View.VISIBLE
+                    mainActivityLayoutBinding.errorTitleTextView.text = uiViewModel.errorTitle.value
+                    mainActivityLayoutBinding.errorMessageTextView.text = uiViewModel.errorMessage.value
+                }
+                false -> {
+                    mainActivityLayoutBinding.errorRootLayout.visibility = View.INVISIBLE
+                    mainActivityLayoutBinding.errorTitleTextView.text = ""
+                    mainActivityLayoutBinding.errorMessageTextView.text = ""
+                }
+            }
+        }
+
+        uiViewModel.showLoadingLayout.observe(this) { result ->
+            when (result) {
+                true -> {
+                    mainActivityLayoutBinding.loadingRootLayout.visibility = View.VISIBLE
+                }
+                false -> {
+                    mainActivityLayoutBinding.loadingRootLayout.visibility = View.INVISIBLE
+                }
+            }
+        }
+
         gameViewModel.detailsOfGame.observe(this) {
             if (navController.currentDestination?.id == R.id.startFragment) {
+                uiViewModel.enableLoadingScreen()
                 navController.navigate(StartFragmentDirections.actionStartFragmentToDetailFragment())
             } else {
+                uiViewModel.enableLoadingScreen()
                 navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment())
             }
         }

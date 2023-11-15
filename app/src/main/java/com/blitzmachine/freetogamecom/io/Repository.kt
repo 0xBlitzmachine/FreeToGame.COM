@@ -1,21 +1,27 @@
 package com.blitzmachine.freetogamecom.io
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import com.blitzmachine.freetogamecom.utils.APIUtils
 import com.blitzmachine.freetogamecom.utils.Utils
+import com.blitzmachine.freetogamecom.views.UiViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.Exception
 
-class Repository(private val api: FreeToGameAPI, private val database: GameDatabase, private val context: Context) {
+class Repository(
+    private val api: FreeToGameAPI,
+    private val database: GameDatabase,
+    application: Application) {
 
     private val _listOfNewGames: MutableLiveData<List<Game>> = MutableLiveData()
     val listOfNewGame: LiveData<List<Game>> get() = _listOfNewGames
@@ -26,11 +32,21 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
     private val _filteredListOfGames: MutableLiveData<List<Game>> = MutableLiveData()
     val filteredListOfGames: LiveData<List<Game>> get() = _filteredListOfGames
 
+    private val _displayCriticalError: MutableLiveData<Boolean> = MutableLiveData()
+    val displayCriticalError: LiveData<Boolean> get() =_displayCriticalError
+
+    private val _criticalErrorTitle: MutableLiveData<String> = MutableLiveData()
+    val criticalErrorTitle: LiveData<String> get() = _criticalErrorTitle
+
+    private val _criticalErrorMessage: MutableLiveData<String> = MutableLiveData()
+    val criticalErrorMessage: LiveData<String> get() = _criticalErrorMessage
+
+
     val cachedGames: LiveData<List<Game>> = database.databaseDao().getGames()
 
     init {
         try {
-            if (Utils.isOnline(context)) {
+            if (Utils.isOnline(application)) {
                 fetchNewData()
             }
         } catch (ex: Exception) {
@@ -98,16 +114,22 @@ class Repository(private val api: FreeToGameAPI, private val database: GameDatab
                     if (response.isSuccessful) {
                         _detailsOfGame.postValue(response.body())
                     } else {
-                        Log.e(APIUtils.apiLogcatTag, "GameDetailsRequest failed. Response Code: ${response.code()}")
+                        displayCriticalError("Something went wrong!", "Response Code: ${response.code()}")
                     }
                 }
 
                 override fun onFailure(call: Call<DetailedGame>, t: Throwable) {
-                    Log.e(APIUtils.apiLogcatTag, "GameDetailsRequest failed: ${t.message}")
+                    displayCriticalError("Something went wrong!", "Failed to pull data about this game! May you do not have a valid network connection?")
                 }
             })
         } catch (ex: Exception) {
-            Log.e(APIUtils.apiLogcatTag, "GameDetailRequest Exception: ${ex.message}")
+            displayCriticalError("Something went wrong!", ex.message!!)
         }
     }
-}
+
+    private fun displayCriticalError(errorTitle: String, errorMessage: String) {
+        _criticalErrorTitle.postValue(errorTitle)
+        _criticalErrorMessage.postValue(errorMessage)
+        _displayCriticalError.postValue(true)
+    }
+ }

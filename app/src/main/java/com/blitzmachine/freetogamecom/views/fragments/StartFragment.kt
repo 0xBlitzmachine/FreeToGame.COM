@@ -15,11 +15,13 @@ import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.views.LiveGamesAdapter
 import com.blitzmachine.freetogamecom.databinding.FragmentStartBinding
 import com.blitzmachine.freetogamecom.views.GameViewModel
+import com.blitzmachine.freetogamecom.views.UiViewModel
 
 class StartFragment : Fragment() {
 
     private val binding: FragmentStartBinding by lazy { FragmentStartBinding.inflate(layoutInflater) }
     private val gameViewModel: GameViewModel by activityViewModels()
+    private val uiViewModel: UiViewModel by activityViewModels()
     private val liveGamesAdapter: LiveGamesAdapter by lazy { LiveGamesAdapter(gameViewModel, this.requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = binding.root
@@ -67,9 +69,10 @@ class StartFragment : Fragment() {
 
         gameViewModel.filteredCachedGames.observe(viewLifecycleOwner) { filteredCachedGames ->
             if (filteredCachedGames.isEmpty()) {
-                Toast.makeText(this.requireContext(), "No games found!", Toast.LENGTH_SHORT).show()
+                uiViewModel.enableErrorScreen("NO RESULT", "No information about games found. Maybe we do not own the information of a game containing your selected Genre!")
             } else {
                 liveGamesAdapter.submitList(filteredCachedGames)
+                uiViewModel.enableLoadingScreen()
                 binding.liveGamesReyclerView.scrollToPosition(0)
             }
         }
