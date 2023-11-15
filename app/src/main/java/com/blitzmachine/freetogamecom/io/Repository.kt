@@ -1,22 +1,18 @@
 package com.blitzmachine.freetogamecom.io
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.blitzmachine.freetogamecom.MainActivity
 import com.blitzmachine.freetogamecom.io.classes.DetailedGame
 import com.blitzmachine.freetogamecom.io.classes.Game
 import com.blitzmachine.freetogamecom.io.local.GameDatabase
 import com.blitzmachine.freetogamecom.io.remote.FreeToGameAPI
 import com.blitzmachine.freetogamecom.utils.APIUtils
 import com.blitzmachine.freetogamecom.utils.Utils
-import com.blitzmachine.freetogamecom.views.UiViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.Exception
 
 class Repository(
     private val api: FreeToGameAPI,
