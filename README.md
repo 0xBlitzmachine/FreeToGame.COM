@@ -2,7 +2,7 @@
 # FreeToGame.COM Android Application
 
 > [!IMPORTANT]
-> This app requiers a valid network connection to pull data once for offline-mode. <br>
+> This app requieres a valid network connection to pull data once for offline-mode. <br>
 > Minimal [SDK version](https://apilevels.com) required to run the app: **29**
 
 ## Overview
